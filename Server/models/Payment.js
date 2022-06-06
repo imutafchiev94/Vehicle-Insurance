@@ -15,7 +15,10 @@ const PaymentSchema = new mongoose.Schema({
     }, endDate: {
         type: Date,
         required: true,
+    }, insurance : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Insurance"
     }
 })
 
-module.exports = mongoose.model("Payment", PaymentSchema);
+module.exports = mongoose.model("Payments", PaymentSchema);
