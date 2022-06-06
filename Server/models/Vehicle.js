@@ -16,9 +16,10 @@ const VehicleSchema = new mongoose.Schema({
         required: true,
         min: 1930,
         max: 2022,
-    }, registrationeNumber: {
+    }, registrationNumber: {
         type: String,
         required: true,
+        unique: true,
         minlength: 6,
         maxlength: 8
     }
