@@ -3,7 +3,7 @@
     if(!checkYear(EGN, dateOfBirth.getFullYear())) {
         isValid = false;
     }
-    if (!checkMonth(EGN, dateOfBirth.getMonth() + 1)) {
+    if (!checkMonth(EGN, dateOfBirth.getMonth() + 1, dateOfBirth.getFullYear())) {
         isValid = false;
     }
     if(!checkDate(EGN, dateOfBirth.getDate())) {
@@ -14,6 +14,7 @@
     }
     if(!checkTheLastDigit(EGN))  {
         isValid = false;
+        
     }
     return isValid;
 }
@@ -26,12 +27,20 @@
     return false;
 }
 
- function checkMonth(EGN, month) {
-    if(parseInt(EGN.slice(2, 4)) == month) {
-        return true;
+ function checkMonth(EGN, month, year) {
+     if(year < 2000) {
+
+         if(parseInt(EGN.slice(2, 4)) == month) {
+             return true;
+        }
+        return false;
+    } else {
+        if(parseInt(EGN.slice(2, 4)) == month + 40) {
+            return true;
+        }
+        return false;
     }
 
-    return false;
 }
 
  function checkDate(EGN, date) {
@@ -43,12 +52,12 @@
 
  function checkTheNinthDigit(EGN, gender) {
     if(gender == 'Female') {
-        if(parseInt(EGN.slice(8, 9)) % 2 != 0) {
+        if(parseInt(EGN[8]) % 2 != 0) {
             return true;
         } 
         return false;
     } else if (gender == 'Male') {
-        if(parseInt(EGN.slice(8, 9)) % 2 == 0) {
+        if(parseInt(EGN[8]) % 2 == 0) {
             return true;
         } 
         return false;
@@ -69,8 +78,6 @@
     let sum = firstDigit + secondDigit + thirdDigit + fourthDigit + fifthDigit + sixthDigit + seventhDigit + eighthDigit + ninthDigit;
 
     let controlDigit = sum % 11;
-
-    console.log(controlDigit);
 
     if(controlDigit < 10) {
         if(parseInt(EGN[9]) == controlDigit) {
