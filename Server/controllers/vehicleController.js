@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const vehicleService = require('../services/vehicleService');
 
-router.post('/add', async (req, res) => {
+router.post('/:ownerId/add', async (req, res) => {
     try {
-        let message = await vehicleService.addVehicle(req.body);
+        let message = await vehicleService.addVehicle(req.body, req.params.ownerId);
         res.json(message);
     } catch(err) {
         res.status(400).json({Error: err.message});

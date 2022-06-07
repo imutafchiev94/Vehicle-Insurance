@@ -1,7 +1,13 @@
 const Vehicle = require("../models/Vehicle");
 const Owner = require("../models/Owner");
 
-async function addVehicle(data) {
+async function addVehicle(data, ownerId) {
+
+    let owner = await Owner.findById(ownerId);
+    if(!owner) {
+        throw {message: `Owner with ID ${ownerId} doesn't exist!`};
+    }
+
   let newVehicleData = {
     brand: data.brand,
     model: data.model,
@@ -12,6 +18,9 @@ async function addVehicle(data) {
   let newVehicle = new Vehicle(newVehicleData);
 
   await newVehicle.save();
+
+  owner.vehicles.push(newVehicle);
+  await owner.save();
 
   return { message: "Vehicle was add successfully!" };
 }
