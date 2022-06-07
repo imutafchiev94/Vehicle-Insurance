@@ -9,7 +9,7 @@ async function allPaymentsForInsurance(EGN) {
   });
 
   if(!owner) {
-    throw {message: "Owner with this EGN doesn't exist in our database"};
+    throw {message: `Owner with EGN "${EGN}" doesn't exist in our database`};
   }
   
   let searchedInsurance = await Insurance.findOne({
@@ -33,12 +33,14 @@ async function allPaidPaymentsForInsurance(EGN) {
   });
 
   if(!owner) {
-    throw {message: "Owner with this EGN doesn't exist in our database"};
+    throw {message: `Owner with EGN "${EGN}" doesn't exist in our database`};
   }
   
   let searchedInsurance = await Insurance.findOne({
     vehicleOwner: owner._id,
   });
+
+  //TODO Fix error message for Insurance
 
   if (!searchedInsurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
@@ -61,7 +63,7 @@ async function allUnpaidPaymentsForInsurance(EGN) {
   });
 
   if(!owner) {
-    throw {message: "Owner with this EGN doesn't exist in our database"};
+    throw {message: `Owner with EGN "${EGN}" doesn't exist in our database`};
   }
   
   let searchedInsurance = await Insurance.findOne({
@@ -90,7 +92,7 @@ async function firstPaymentToPayForInsurance(EGN) {
   });
 
   if(!owner) {
-    throw {message: "Owner with this EGN doesn't exist in our database"};
+    throw {message: `Owner with EGN "${EGN}" doesn't exist in our database`};
   }
   
   let searchedInsurance = await Insurance.findOne({
