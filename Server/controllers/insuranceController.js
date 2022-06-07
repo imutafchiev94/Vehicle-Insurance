@@ -8,7 +8,16 @@ router.post('/create', async (req, res) => {
     } catch(err) {
         res.status(400).json({Error: err.message})
     }
-}) 
+});
+
+router.get('/find', async (req, res) => {
+    try {
+        let insurance = await insuranceService.findInsurance(req.body.EGN);
+        res.json(insurance);
+    } catch(err) {
+        res.status(400).json({Error: err.message});
+    }
+})
 
 
 module.exports = router;

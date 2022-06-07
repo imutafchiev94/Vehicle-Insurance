@@ -42,6 +42,27 @@ async function createInsurance(data) {
     await newInsurance.save();
 }
 
+async function findInsurance(EGN) {
+    let owner = await Owner.findOne({
+        EGN: EGN
+      });
+    
+      if(!owner) {
+        throw {message: `Owner with EGN "${EGN}" doesn't exist in our database`};
+      }
+    
+      let searchedInsurance = await Insurance.findOne({
+        vehicleOwner: owner._id,
+      });
+      if (!searchedInsurance) {
+        throw { message: "Insurance with this Id doesn't exist!" };
+      }
+
+      return searchedInsurance;
+    
+}
+
 module.exports = {
-createInsurance
+createInsurance,
+findInsurance
 }
