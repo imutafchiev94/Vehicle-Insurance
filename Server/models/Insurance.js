@@ -33,7 +33,7 @@ const InsuranceSchema = new mongoose.Schema({
         }
     }, payments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Payment"
+        ref: "Payments"
     }] 
 })
 
