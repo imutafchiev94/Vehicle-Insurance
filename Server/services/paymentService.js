@@ -93,16 +93,17 @@ async function firstPaymentToPayForInsurance(EGN) {
   if(!owner) {
     throw {message: `Owner with EGN "${EGN}" doesn't exist in our database`};
   }
-  
+  console.log('here')
   let searchedInsurance = await Insurance.findOne({
     vehicleOwner: owner._id,
   }).populate('payments');
-
+  console.log('here')
   if (!searchedInsurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
   }
+  console.log(searchedInsurance);
 
-  let payment = searchedInsurance.payments.find((p) => p.isPayed == false);
+  let payment = searchedInsurance.payments.filter(p => p.isPayed == false)[0];
 
   if (payment) {
     return payment;
