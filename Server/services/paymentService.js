@@ -44,9 +44,6 @@ async function allPaidPaymentsForInsurance(EGN) {
   if (!searchedInsurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
   }
-  if (!searchedInsurance) {
-    throw { message: "Insurance with this Id doesn't exist!" };
-  }
 
   let payments = await Payment.find({
     insurance: searchedInsurance._id,
@@ -73,9 +70,6 @@ async function allUnpaidPaymentsForInsurance(EGN) {
     throw { message: "Insurance with this Id doesn't exist!" };
   }
 
-  if (!searchedInsurance) {
-    throw { message: "Insurance with this Id doesn't exist!" };
-  }
 
   let payments = await Payment.find({
     insurance: searchedInsurance._id,
