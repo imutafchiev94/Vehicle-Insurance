@@ -111,9 +111,12 @@ async function firstPaymentToPayForInsurance(EGN) {
   throw { message: "There have nothing to pay!" };
 }
 
-async function payPaymentForInsurance(insuranceId) {
-  let payment = await firstPaymentToPayForInsurance(insuranceId);
+async function payPaymentForInsurance(paymentId) {
+  let payment = await Payment.findById(paymentId);
 
+  if(!payment) {
+    throw {message:`Payment with ID ${paymentId} doesn't exist!`}
+  }
   payment.isPayed = true;
 
   await payment.save();
