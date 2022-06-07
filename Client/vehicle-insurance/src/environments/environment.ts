@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  logoUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/Navbar%20Logo.png?alt=media&token=72555c4a-d3b2-44ce-8669-58d92dbc1805',
 };
 
 /*
