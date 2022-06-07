@@ -1,10 +1,19 @@
 const Payment = require("../models/Payment");
 const Insurance = require("../models/Insurance");
+const Owner = require('../models/Owner');
 require('dotenv').config();
 
-async function allPaymentsForInsurance(insuranceId) {
-  let searchedInsurance = await Insurance.findById({
-    _id: insuranceId,
+async function allPaymentsForInsurance(EGN) {
+  let owner = await Owner.findOne({
+    EGN: EGN
+  });
+
+  if(!owner) {
+    throw {message: "Owner with this EGN doesn't exist in our database"};
+  }
+  
+  let searchedInsurance = await Insurance.findOne({
+    vehicleOwner: owner._id,
   });
 
   if (!searchedInsurance) {
@@ -18,11 +27,22 @@ async function allPaymentsForInsurance(insuranceId) {
   return payments;
 }
 
-async function allPaidPaymentsForInsurance(insuranceId) {
-  let searchedInsurance = await Insurance.findById({
-    _id: insuranceId,
+async function allPaidPaymentsForInsurance(EGN) {
+  let owner = await Owner.findOne({
+    EGN: EGN
   });
 
+  if(!owner) {
+    throw {message: "Owner with this EGN doesn't exist in our database"};
+  }
+  
+  let searchedInsurance = await Insurance.findOne({
+    vehicleOwner: owner._id,
+  });
+
+  if (!searchedInsurance) {
+    throw { message: "Insurance with this Id doesn't exist!" };
+  }
   if (!searchedInsurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
   }
@@ -35,10 +55,22 @@ async function allPaidPaymentsForInsurance(insuranceId) {
   return payments;
 }
 
-async function allNotPaidPaymentsForInsurance(insuranceId) {
-  let searchedInsurance = await Insurance.findById({
-    _id: insuranceId,
+async function allUnpaidPaymentsForInsurance(EGN) {
+  let owner = await Owner.findOne({
+    EGN: EGN
   });
+
+  if(!owner) {
+    throw {message: "Owner with this EGN doesn't exist in our database"};
+  }
+  
+  let searchedInsurance = await Insurance.findOne({
+    vehicleOwner: owner._id,
+  });
+
+  if (!searchedInsurance) {
+    throw { message: "Insurance with this Id doesn't exist!" };
+  }
 
   if (!searchedInsurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
@@ -52,10 +84,22 @@ async function allNotPaidPaymentsForInsurance(insuranceId) {
   return payments;
 }
 
-async function firstPaymentToPayForInsurance(insuranceId) {
-  let searchedInsurance = await Insurance.findById({
-    _id: insuranceId,
-  }).populate("payments");
+async function firstPaymentToPayForInsurance(EGN) {
+  let owner = await Owner.findOne({
+    EGN: EGN
+  });
+
+  if(!owner) {
+    throw {message: "Owner with this EGN doesn't exist in our database"};
+  }
+  
+  let searchedInsurance = await Insurance.findOne({
+    vehicleOwner: owner._id,
+  }).populate('payments');
+
+  if (!searchedInsurance) {
+    throw { message: "Insurance with this Id doesn't exist!" };
+  }
 
   if (!searchedInsurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
@@ -106,8 +150,8 @@ async function createPayment(amount, insuranceId, startDate) {
 
 module.exports = {
   allPaymentsForInsurance,
-  allPaymentsForInsurance,
-  allNotPaidPaymentsForInsurance,
+  allPaidPaymentsForInsurance,
+  allUnpaidPaymentsForInsurance,
   firstPaymentToPayForInsurance,
   payPaymentForInsurance,
   createPayment
