@@ -8,6 +8,24 @@ router.post('/add', async (req, res) => {
     } catch(err) {
         res.status(400).json({Error: err.message});
     }
-})
+});
+
+router.get('/find-by-owner', async (req, res) => {
+    try {
+        let vehicles = await vehicleService.findAllVehiclesOfOwner(req.body.EGN);
+        res.json(vehicles);
+    } catch(err) {
+        res.status(400).json({Error: err.message});
+    }
+});
+
+router.get('/find', async (req, res) => {
+    try {
+        let vehicle = await vehicleService.findVehicle(req.body.registrationNumber);
+        res.json(vehicle);
+    } catch(err) {
+        res.status(400).json({Error: err.message});
+    }
+});
 
 module.exports = router;
