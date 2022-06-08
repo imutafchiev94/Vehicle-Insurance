@@ -9,11 +9,18 @@ import { OwnerComponent } from './owner/owner.component';
 import { PaymentToPayComponent } from './payment/payment-to-pay/payment-to-pay.component';
 import { PaymentComponent } from './payment/payment.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
+import { CheckComponent } from './owner/check/check.component';
+import { AddOwnerComponent } from './owner/add-owner/add-owner.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'owners', component: OwnerComponent},
+  {path: 'owners', component: OwnerComponent, 
+    children: [
+      {path: 'check', component: CheckComponent},
+      {path: 'add', component: AddOwnerComponent}
+    ]
+  },
   {path: 'vehicles', component: VehicleComponent},
   {path: 'payments', component: PaymentComponent,
     children: [

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialExampleModule} from '../material.module';
 import {HttpClientModule} from '@angular/common/http';
 import { AllPaymentsComponent } from './payment/all-payments/all-payments.component';
+import { HeaderComponent } from './home/header/header.component';
+import { CheckComponent } from './owner/check/check.component';
+import { AddOwnerComponent } from './owner/add-owner/add-owner.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +37,18 @@ import { AllPaymentsComponent } from './payment/all-payments/all-payments.compon
     AllPaidPaymentsComponent,
     AllUnpaidPaymentsComponent,
     PaymentToPayComponent,
-    AllPaymentsComponent
+    AllPaymentsComponent,
+    HeaderComponent,
+    CheckComponent,
+    AddOwnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialExampleModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,7 +4,19 @@
       <img src="{{logoUrl}}" alt="Logo" class="logo">
     </button>
     <button mat-button class="navbar-link" routerLink="/home" aria-label="Link for home page">Home</button>
-    <button mat-button class="navbar-link" routerLink="/owners" aria-label="Link for owners page">Owners</button>
+    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="menu" aria-label="Menu for owners pages">
+      Owners
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/owners/check">
+        <mat-icon>how_to_reg</mat-icon>
+        <span>Check Owner</span>
+      </button>
+      <button mat-menu-item routerLink="/owners/add">
+        <mat-icon>person_add</mat-icon>
+        <span>Add Owner</span>
+      </button>
+    </mat-menu>
     <button mat-button class="navbar-link" routerLink="/vehicles" aria-label="Link for vehicles page">Vehicles</button>
     <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="menu" aria-label="Menu for payments pages">
       Payments

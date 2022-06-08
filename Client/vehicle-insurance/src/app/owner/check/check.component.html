@@ -1,0 +1,22 @@
+
+<div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Check your self
+            </mat-card-title>
+            <mat-card-subtitle>
+                Check are you in our database
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="check-form" [formGroup]="checkForm"  (ngSubmit)="onSubmit()">
+                <mat-form-field class="check-form-field" appearance="fill">
+                    <mat-label for="">Your EGN</mat-label>
+                    <input matInput formControlName="egn" placeholder="EGN">
+                    <button type="submit" mat-raised-button color="primary">Primary</button>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
