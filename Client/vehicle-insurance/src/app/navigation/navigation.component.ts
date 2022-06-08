@@ -8,11 +8,8 @@ import { environment } from '../../environments/environment';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
-
-  logoUrl = environment.logoUrl;
-
   ngOnInit(): void {
   }
 
+  logoUrl = environment.logoUrl;
 }

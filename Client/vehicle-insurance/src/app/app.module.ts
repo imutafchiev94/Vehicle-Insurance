@@ -10,13 +10,14 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { PaymentComponent } from './payment/payment.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { HomeComponent } from './home/home.component';
-import { AllPaymentsComponent } from './payment/all-payments/all-payments.component';
+
 import { AllPaidPaymentsComponent } from './payment/all-paid-payments/all-paid-payments.component';
 import { AllUnpaidPaymentsComponent } from './payment/all-unpaid-payments/all-unpaid-payments.component';
 import { PaymentToPayComponent } from './payment/payment-to-pay/payment-to-pay.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialExampleModule} from '../material.module';
 import {HttpClientModule} from '@angular/common/http';
+import { AllPaymentsComponent } from './payment/all-payments/all-payments.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +29,11 @@ import {HttpClientModule} from '@angular/common/http';
     PaymentComponent,
     InsuranceComponent,
     HomeComponent,
-    AllPaymentsComponent,
+
     AllPaidPaymentsComponent,
     AllUnpaidPaymentsComponent,
-    PaymentToPayComponent
+    PaymentToPayComponent,
+    AllPaymentsComponent
   ],
   imports: [
     BrowserModule,
