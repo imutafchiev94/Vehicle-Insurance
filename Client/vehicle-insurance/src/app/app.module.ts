@@ -22,6 +22,7 @@ import { AllPaymentsComponent } from './payment/all-payments/all-payments.compon
 import { HeaderComponent } from './home/header/header.component';
 import { CheckComponent } from './owner/check/check.component';
 import { AddOwnerComponent } from './owner/add-owner/add-owner.component';
+import { OwnerDetailsComponent } from './owner/owner-details/owner-details.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AddOwnerComponent } from './owner/add-owner/add-owner.component';
     AllPaymentsComponent,
     HeaderComponent,
     CheckComponent,
-    AddOwnerComponent
+    AddOwnerComponent,
+    OwnerDetailsComponent
   ],
   imports: [
     BrowserModule,

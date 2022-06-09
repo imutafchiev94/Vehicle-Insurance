@@ -11,6 +11,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { CheckComponent } from './owner/check/check.component';
 import { AddOwnerComponent } from './owner/add-owner/add-owner.component';
+import { OwnerDetailsComponent } from './owner/owner-details/owner-details.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'owners', component: OwnerComponent, 
     children: [
       {path: 'check', component: CheckComponent},
-      {path: 'add', component: AddOwnerComponent}
+      {path: 'add', component: AddOwnerComponent},
+      {path: ':id', component: OwnerDetailsComponent}
     ]
   },
   {path: 'vehicles', component: VehicleComponent},
@@ -31,7 +33,8 @@ const routes: Routes = [
       {path: 'to-pay', component: PaymentToPayComponent}
     ]
   },
-  {path: 'insurances', component: InsuranceComponent}
+  {path: 'insurances', component: InsuranceComponent},
+  { path: 'error', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule) }
 ];
 
 @NgModule({
