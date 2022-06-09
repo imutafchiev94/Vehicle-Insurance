@@ -22,4 +22,13 @@ router.post('/find', async (req, res) => {
     }
 });
 
+router.get ('/:id', async (req, res) => {
+    try {
+        let owner = await ownerService.findOwnerById(req.params.id);
+        res.json(owner);
+    } catch (err) {
+        res.status(400).json({Error: err.message});
+    }
+})
+
 module.exports = router;

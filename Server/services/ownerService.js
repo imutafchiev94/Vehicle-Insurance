@@ -37,14 +37,25 @@ async function findOwner(EGN) {
         EGN: EGN
     });
 
-    if(searchedOwner) {
-        return searchedOwner;
+    if(!searchedOwner) {
+        throw {message: "Owner with this EGN doesn't exist in our database!"};
     }
-    throw {message: "Owner with this EGN doesn't exist in our database"};
+    return searchedOwner;
+}
+
+async function findOwnerById(id) {
+    let owner = await Owner.findById(id);
+
+    if(!owner) {
+        throw {message: `Owner with this Id ${id} doesn't exist!`};        
+    }
+
+    return owner;
 }
 
 
 module.exports = {
     addOwner,
-    findOwner
+    findOwner,
+    findOwnerById
 }

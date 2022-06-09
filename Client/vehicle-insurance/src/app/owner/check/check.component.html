@@ -14,10 +14,10 @@
                     <mat-label>EGN</mat-label>
                     <input type="text" matInput formControlName="EGN" placeholder="1234567890">
                     <mat-hint>EGN is required. Only valid EGNs</mat-hint>
-                    <mat-error *ngIf="EGN?.touched && EGN?.errors?.['required']" class="alert alert-danger mt-2">
+                    <mat-error *ngIf="EGN?.touched && EGN?.errors?.['required']" class="mt-2">
                         This field is required!
                       </mat-error>
-                    <mat-error *ngIf="EGN?.touched && (EGN?.errors?.['minlength'] || EGN?.errors?.['maxlength'])" class="alert alert-danger mt-2">
+                    <mat-error *ngIf="EGN?.touched && (EGN?.errors?.['minlength'] || EGN?.errors?.['maxlength'])" class="mt-2">
                         EGN must be exatctly 10 symbols!
                     </mat-error>
                 </mat-form-field>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="mb-3 mt-4 text-center">
                     <h6>You can see details about this owner here:</h6>
-                    <a mat-raised-button routerLink="/owners/add" class="mt-4">Check Vehicle</a>
+                    <a mat-raised-button routerLink="/owners/{{ownerId}}" class="mt-4">Details</a>
                 </div>
             </div>
             <ng-template #elseBlock>

@@ -24,6 +24,8 @@ export class CheckComponent implements OnInit {
     return this.checkForm.get('EGN');
   }
 
+  ownerId: string = "";
+
   checkFormImageUrl = environment.checkOwnerFormImageUrl;
 
   isExists: boolean = false;
@@ -35,6 +37,7 @@ export class CheckComponent implements OnInit {
     this.ownerService.findOwner(this.checkForm.value).subscribe(res => {
       this.status = res.status;
         this.isExists = true;
+        res.body?._id ? this.ownerId = res.body._id : this.ownerId = "";
     }, error => {
       this.status = error.status;
       this.isExists = false;
