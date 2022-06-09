@@ -23,15 +23,20 @@ export class CheckComponent implements OnInit {
 
   isExists: boolean = false;
 
+  status = 0;
+
   onSubmit() {
     
     this.ownerService.findOwner(this.checkForm.value).subscribe(res => {
+      this.status = res.status;
+      console.log(res.statusText);
       if(res.status == 200) {
         this.isExists = true;
-      } else {
-        this.isExists = false;
       }
-    })
+    }, error => {
+      this.status = error.status;
+      this.isExists = false;
+    });
   }
 
 }
