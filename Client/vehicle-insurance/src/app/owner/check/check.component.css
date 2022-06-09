@@ -1,12 +1,23 @@
 .container-fluid{
         background-color: ghostwhite;
+        margin-top: -0.7%;
 }
 .card {
-    margin-top: 3.5%;
+    margin-top: 4.1%;
     margin-bottom: 4.5%;
     padding: 1%;
 }
 
+.example-full-width {
+    width: 100%;
+    border-width: 1px;
+    border-color: #ced4da;
+    border-style: solid;
+    border-radius: 5px;
+     padding: 2%; 
+    background-color: white;
+  }
+  
 
 img {
     margin-left: auto;

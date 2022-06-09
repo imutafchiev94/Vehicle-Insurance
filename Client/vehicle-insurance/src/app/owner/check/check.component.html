@@ -10,7 +10,17 @@
         </div>
         <form [formGroup]="checkForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
-                <input type="text" class="form-control" formControlName="EGN" placeholder="EGN">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>EGN</mat-label>
+                    <input type="text" matInput formControlName="EGN" placeholder="1234567890">
+                    <mat-hint>EGN is required. Only valid EGNs</mat-hint>
+                    <mat-error *ngIf="EGN?.touched && EGN?.errors?.['required']" class="alert alert-danger mt-2">
+                        This field is required!
+                      </mat-error>
+                    <mat-error *ngIf="EGN?.touched && (EGN?.errors?.['minlength'] || EGN?.errors?.['maxlength'])" class="alert alert-danger mt-2">
+                        EGN must be exatctly 10 symbols!
+                    </mat-error>
+                </mat-form-field>
             </div>
             <div class="col-auto mt-3 mb-3">
                 <button type="submit" mat-raised-button color="primary" class="mb-3">Check</button>
@@ -22,7 +32,7 @@
                     Owner with this EGN exists in our database.
                 </div>
                 <div class="mb-3 mt-4 text-center">
-                    <h6>You can check your vehicle from here:</h6>
+                    <h6>You can see details about this owner here:</h6>
                     <a mat-raised-button routerLink="/owners/add" class="mt-4">Check Vehicle</a>
                 </div>
             </div>

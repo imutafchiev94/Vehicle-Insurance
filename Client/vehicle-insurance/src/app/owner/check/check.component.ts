@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OwnerService} from '../../services/owner.service';
 import {environment} from '../../../environments/environment'
 
@@ -10,16 +10,21 @@ import {environment} from '../../../environments/environment'
 })
 export class CheckComponent implements OnInit {
 
-  constructor(private ownerService: OwnerService) { }
+  checkForm: FormGroup;
+  constructor(private fb: FormBuilder, private ownerService: OwnerService) {
+    this.checkForm = this.fb.group({
+      EGN: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+    })
+   }
 
   ngOnInit(): void {
   }
 
-  checkFormImageUrl = environment.checkOwnerFormImageUrl;
+  get EGN() {
+    return this.checkForm.get('EGN');
+  }
 
-  checkForm = new FormGroup ({
-    EGN: new FormControl('')
-  });
+  checkFormImageUrl = environment.checkOwnerFormImageUrl;
 
   isExists: boolean = false;
 
@@ -29,10 +34,7 @@ export class CheckComponent implements OnInit {
     
     this.ownerService.findOwner(this.checkForm.value).subscribe(res => {
       this.status = res.status;
-      console.log(res.statusText);
-      if(res.status == 200) {
         this.isExists = true;
-      }
     }, error => {
       this.status = error.status;
       this.isExists = false;
