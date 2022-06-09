@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
+import {OwnerService} from '../../services/owner.service';
+import {environment} from '../../../environments/environment'
 
 @Component({
   selector: 'app-check',
@@ -8,17 +10,28 @@ import {FormGroup, FormControl} from '@angular/forms';
 })
 export class CheckComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ownerService: OwnerService) { }
 
   ngOnInit(): void {
   }
 
+  checkFormImageUrl = environment.checkOwnerFormImageUrl;
+
   checkForm = new FormGroup ({
-    egn: new FormControl('')
+    EGN: new FormControl('')
   });
 
+  isExists: boolean = false;
+
   onSubmit() {
-    console.log(this.checkForm.value.egn)
+    
+    this.ownerService.findOwner(this.checkForm.value).subscribe(res => {
+      if(res.status == 200) {
+        this.isExists = true;
+      } else {
+        this.isExists = false;
+      }
+    })
   }
 
 }

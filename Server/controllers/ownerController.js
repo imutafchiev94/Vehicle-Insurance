@@ -14,8 +14,10 @@ router.post('/add', async (req, res) => {
 router.post('/find', async (req, res) => {
     try {
         let owner = await ownerService.findOwner(req.body.EGN); 
+        
         res.json(owner);
     } catch(err) {
+        console.log(req.body.egn);
         res.status(400).json({Error: err.message});
     }
 });

@@ -1,22 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="card col-lg-4">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-2">Check the owner</h5>
+        <h6 class="card-subtitle mb-4 text-muted text-center">Here you can check are you in our database</h6>
+        <div class="text-center mb-4">
+            <img src="https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/Check-Owner-Form.jpg?alt=media&token=7fed12b7-032b-4094-a413-eaa0f9b7f35c" class="img-fluid" />
+        </div>
+        <form [formGroup]="checkForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <input type="text" class="form-control" formControlName="EGN" placeholder="EGN">
+            </div>
+            <div class="col-auto mt-3 mb-3">
+                <button type="submit" mat-raised-button color="primary" class="mb-3">Check</button>
+            </div>
+        </form>
+        <div *ngIf="isExists; else elseBlock">
+            <div  class="alert alert-success mt-4" role="alert">
+                Owner with this EGN exists in our database.
+            </div>
+            <div class="mb-3 mt-4 text-center">
+                <h6>You can check your vehicle from here:</h6>
+                <a mat-raised-button routerLink="/owners/add" class="mt-4">Check Vehicle</a>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <div class="alert alert-danger mt-4" role="alert">
+                Owner with this EGN doesn't exist in our database.
+            </div>
+            <div class="mb-3 mt-4 text-center">
+                <h6>You can register as owner from here:</h6>
+                <a mat-raised-button routerLink="/owners/add" class="mt-4">Add Owner</a>
+            </div>
+        </ng-template>
+      </div>
 
-<div>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-                Check your self
-            </mat-card-title>
-            <mat-card-subtitle>
-                Check are you in our database
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <form class="check-form" [formGroup]="checkForm"  (ngSubmit)="onSubmit()">
-                <mat-form-field class="check-form-field" appearance="fill">
-                    <mat-label for="">Your EGN</mat-label>
-                    <input matInput formControlName="egn" placeholder="EGN">
-                    <button type="submit" mat-raised-button color="primary">Primary</button>
-                </mat-form-field>
-            </form>
-        </mat-card-content>
-    </mat-card>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
 </div>
