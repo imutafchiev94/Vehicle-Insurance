@@ -15,4 +15,8 @@ export class OwnerService {
   findOwner(data) : Observable<HttpResponse<Owner>> {
     return this.http.post<Owner>(this.ownerPath + '/find', data, {observe: 'response'});
   }
+
+  addOwner(data) : Observable<HttpResponse<Owner>> {
+    return this.http.post<Owner>(this.ownerPath + '/add', data, {observe: 'response'});
+  }
 }
