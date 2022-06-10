@@ -1,0 +1,15 @@
+@font-face {
+    font-family: Staley;
+    src: url("../../assets/fonts/StanleyPersonalUse-BWnRd.ttf") format("truetype");
+}
+
+p {
+    font-family: Staley;
+    text-align: center;
+    font-size: 3em;
+}
+
+
+mat-card{
+    margin-top: -1%
+}

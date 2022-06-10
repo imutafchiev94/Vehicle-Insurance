@@ -1,13 +1,12 @@
 <p>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" routerLink="/home" aria-label="Example icon-button with menu icon">
+    <button mat-icon-button class="example-icon" routerLink="/dashboard" aria-label="Example icon-button with menu icon">
       <img src="{{logoUrl}}" alt="Logo" class="logo">
     </button>
-    <button mat-button class="navbar-link" routerLink="/home" aria-label="Link for home page">Home</button>
-    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="menu" aria-label="Menu for owners pages">
+    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="owners" aria-label="Menu for owners pages">
       Owners
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #owners="matMenu">
       <button mat-menu-item routerLink="/owners/check">
         <mat-icon>how_to_reg</mat-icon>
         <span>Check Owner</span>
@@ -17,28 +16,52 @@
         <span>Add Owner</span>
       </button>
     </mat-menu>
-    <button mat-button class="navbar-link" routerLink="/vehicles" aria-label="Link for vehicles page">Vehicles</button>
-    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="menu" aria-label="Menu for payments pages">
+    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="vehicles" aria-label="Menu for vehicle pages">
+      Vehicles
+    </button>
+    <mat-menu #vehicles="matMenu">
+      <button mat-menu-item routerLink="/vehicles/check-vehicle">
+        <mat-icon>no_crash</mat-icon>
+        <span>Check Vehicle</span>
+      </button>
+      <button mat-menu-item routerLink="/vehicles/add-vehicle">
+        <mat-icon>directions_car</mat-icon>
+        <span>Add Vehicle</span>
+      </button>
+    </mat-menu>
+    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="payments" aria-label="Menu for payments pages">
       Payments
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/payments/all">
+    <mat-menu #payments="matMenu">
+      <button mat-menu-item routerLink="/payments/all-payments">
         <mat-icon>payments</mat-icon>
         <span>All Payments</span>
       </button>
-      <button mat-menu-item routerLink="/payments/all-paid">
+      <button mat-menu-item routerLink="/payments/all-paid-payments">
         <mat-icon>paid</mat-icon>
         <span>All Paid Payments</span>
       </button>
-      <button mat-menu-item routerLink="/payments/all-unpaid">
+      <button mat-menu-item routerLink="/payments/all-unpaid-payments">
         <mat-icon>money_off</mat-icon>
         <span>All Unpaid Payments</span>
       </button>
-      <button mat-menu-item routerLink="/payments/to-pay">
+      <button mat-menu-item routerLink="/payments/payment-to-pay">
         <mat-icon>credit_card</mat-icon>
         <span>Payment To Pay</span>
       </button>
     </mat-menu>
-    <button mat-button class="navbar-link" routerLink="/insurances" aria-label="Link for insureance page">Insurances</button>
+    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="insurances" aria-label="Menu for insurance pages">
+      Insurances
+    </button>
+    <mat-menu #insurances="matMenu">
+      <button mat-menu-item routerLink="/insurances/check-insurance">
+        <mat-icon>task</mat-icon>
+        <span>Check Insurances</span>
+      </button>
+      <button mat-menu-item routerLink="/insurances/add-insurance">
+        <mat-icon>history_edu</mat-icon>
+        <span>Add Insurance</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
 </p>

@@ -5,13 +5,14 @@ import { ErrorPageRoutingModule } from './error-page-routing.module';
 import { ErrorPageComponent } from './error-page.component';
 
 
+
 @NgModule({
   declarations: [
     ErrorPageComponent
   ],
   imports: [
     CommonModule,
-    ErrorPageRoutingModule
+    ErrorPageRoutingModule,
   ]
 })
 export class ErrorPageModule { }

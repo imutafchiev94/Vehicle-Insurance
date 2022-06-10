@@ -1,0 +1,119 @@
+<p>add-owner works!</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="card col-lg-4">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-2">Add Owner</h5>
+          <div *ngIf="errorMessage" class="alert alert-danger">
+              <h5 class="text-center">{{errorMessage}}</h5>
+          </div>
+          <form [formGroup]="ownerForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input type="text" matInput formControlName="firstName" placeholder="John">
+                    <mat-hint>First Name is required</mat-hint>
+                <mat-error *ngIf="firstName?.touched && firstName?.errors?.['required']" class="mt-2">
+                    This field is required!
+                  </mat-error>
+                  <mat-error *ngIf="firstName?.touched && (firstName?.errors?.['minlength'] || firstName?.errors?.['maxlength'])" class=" mt-2">
+                    First name must be between 3 and 40 symbols!
+                  </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Middle Name</mat-label>
+                    <input type="text" matInput formControlName="middleName" placeholder="Doe">
+                    <mat-hint>Middle Name is not required</mat-hint>
+                    <mat-error *ngIf="middleName?.touched && (middleName?.errors?.['minlength'] || middleName?.errors?.['maxlength'])" class="mt-2">
+                        Middle name must be between 3 and 40 symbols!
+                      </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Surname</mat-label>
+                    <input type="text" matInput formControlName="surname" placeholder="Doe">
+                    <mat-hint>Surname is required</mat-hint>
+                    <mat-error *ngIf="surname?.touched && surname?.errors?.['required']" class="mt-2">
+                        This field is required!
+                      </mat-error>
+                      <mat-error *ngIf="surname?.touched && (surname?.errors?.['minlength'] || surname?.errors?.['maxlength'])" class="mt-2">
+                        Surname name must be between 3 and 40 symbols!
+                      </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Age</mat-label>
+                    <input type="number" matInput formControlName="age" placeholder="25">
+                    <mat-hint>Age is required</mat-hint>
+                    <mat-error *ngIf="age?.touched && age?.errors?.['required']" class="mt-2">
+                        This field is required!
+                      </mat-error>
+                      <mat-error *ngIf="age?.touched && (age?.errors?.['min'] || age?.errors?.['max'])" class="mt-2">
+                        Age must be between 18 and 120 years
+                      </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Date Of Birth</mat-label>
+                  <!-- #docregion toggle -->
+                    <input matInput [matDatepicker]="picker"  formControlName="dateOfBirth">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  <!-- #enddocregion toggle -->
+                  <mat-error *ngIf="dateOfBirth?.touched && dateOfBirth?.errors?.['required']" class="mt-2">
+                      This field is required!
+                    </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Gender</mat-label>
+                    <input type="text"
+                           placeholder="Pick one"
+                           aria-label="Gender"
+                           matInput
+                           formControlName="gender"
+                           [matAutocomplete]="auto">
+                    <mat-hint>Gender is required!</mat-hint>
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of options" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="gender?.touched && gender?.errors?.['required']" class="mt-2">
+                        This field is required!
+                      </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>EGN</mat-label>
+                    <input type="text" matInput formControlName="EGN" placeholder="1234567890">
+                    <mat-hint>EGN is required. Only valid EGNs</mat-hint>
+                    <mat-error *ngIf="EGN?.touched && EGN?.errors?.['required']" class="alert alert-danger mt-2">
+                        This field is required!
+                      </mat-error>
+                    <mat-error *ngIf="EGN?.touched && (EGN?.errors?.['minlength'] || EGN?.errors?.['maxlength'])" class="alert alert-danger mt-2">
+                        EGN must be exatctly 10 symbols!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+                
+            <div class="col-auto mt-3 mb-3">
+                <button type="submit" mat-raised-button color="primary" class="mb-3">Add</button>
+            </div>
+        </form>
+       
+
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+</div>
+</div>

@@ -1,40 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllPaidPaymentsComponent } from './payment/all-paid-payments/all-paid-payments.component';
-import { AllPaymentsComponent } from './payment/all-payments/all-payments.component';
-import { AllUnpaidPaymentsComponent } from './payment/all-unpaid-payments/all-unpaid-payments.component';
-import { HomeComponent } from './home/home.component';
-import { InsuranceComponent } from './insurance/insurance.component';
-import { OwnerComponent } from './owner/owner.component';
-import { PaymentToPayComponent } from './payment/payment-to-pay/payment-to-pay.component';
-import { PaymentComponent } from './payment/payment.component';
-import { VehicleComponent } from './vehicle/vehicle.component';
-import { CheckComponent } from './owner/check/check.component';
-import { AddOwnerComponent } from './owner/add-owner/add-owner.component';
-import { OwnerDetailsComponent } from './owner/owner-details/owner-details.component';
+
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'owners', component: OwnerComponent, 
-    children: [
-      {path: 'check', component: CheckComponent},
-      {path: 'add', component: AddOwnerComponent},
-      {path: ':id', component: OwnerDetailsComponent}
-    ]
-  },
-  {path: 'vehicles', component: VehicleComponent},
-  {path: 'payments', component: PaymentComponent,
-    children: [
-      {path: '', redirectTo: 'all', pathMatch: 'full'},
-      {path: 'all', component: AllPaymentsComponent},
-      {path: 'all-paid', component: AllPaidPaymentsComponent},
-      {path: 'all-unpaid', component: AllUnpaidPaymentsComponent},
-      {path: 'to-pay', component: PaymentToPayComponent}
-    ]
-  },
-  {path: 'insurances', component: InsuranceComponent},
-  { path: 'error', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule) }
+  { path: '', redirectTo:'dashboard', pathMatch: 'full'},
+  { path: 'owners', loadChildren: () => import('./owners/owners.module').then(m => m.OwnersModule) },
+  { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule) },
+  { path: 'payments', loadChildren: () => import('./payments/payments.module').then(m => m.PaymentsModule) },
+  { path: 'insurances', loadChildren: () => import('./insurances/insurances.module').then(m => m.InsurancesModule) },
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: '**', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule) }
+ 
 ];
 
 @NgModule({
