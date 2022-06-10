@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class VehicleService {
 
-  private vehiclePath = environment.apiUrl + '/vehicle';
+  private vehiclePath = environment.apiUrl + 'vehicle';
   constructor(private http: HttpClient) { }
 
   findVehicle(data) : Observable<HttpResponse<Vehicle>> {
@@ -25,7 +25,7 @@ export class VehicleService {
   }
 
   getVehicleDetails(vehicleId): Observable<HttpResponse<Vehicle>> {
-    return this.http.get<Vehicle>(this.vehiclePath + `${vehicleId}`, {observe: 'response'});
+    return this.http.get<Vehicle>(this.vehiclePath + `/${vehicleId}`, {observe: 'response'});
   }
 
 }

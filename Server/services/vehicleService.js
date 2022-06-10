@@ -1,11 +1,11 @@
 const Vehicle = require("../models/Vehicle");
 const Owner = require("../models/Owner");
 
-async function addVehicle(data, ownerId) {
+async function addVehicle(data) {
 
-    let owner = await Owner.findById(ownerId);
+    let owner = await Owner.findById(data.ownerId);
     if(!owner) {
-        throw {message: `Owner with ID ${ownerId} doesn't exist!`};
+        throw {message: `Owner with ID ${data.ownerId} doesn't exist!`};
     }
 
   let newVehicleData = {
@@ -52,8 +52,20 @@ async function findVehicle(registrationNumber) {
     return vehicle;
 }
 
+async function getVehicle(id) {
+  let vehicle = await Vehicle.findById(id)
+  .populate('owner');
+
+  if(!vehicle) {
+    throw {message: `Vehicle with this ID ${id} doesn't exists in our database`};
+  }
+
+  return vehicle;
+}
+
 module.exports = {
   addVehicle,
   findAllVehiclesOfOwner,
-  findVehicle
+  findVehicle,
+  getVehicle
 };

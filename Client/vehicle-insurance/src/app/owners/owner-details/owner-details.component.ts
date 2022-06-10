@@ -15,7 +15,7 @@ export class OwnerDetailsComponent implements OnInit {
 
   owner: Owner;
   ownerDateOfBirth;
-  hasVehicles: Boolean;
+  hasVehicles: boolean;
   datepipe: DatePipe = new DatePipe("en-US");
   constructor(private ownerService: OwnerService,
     private route: ActivatedRoute,

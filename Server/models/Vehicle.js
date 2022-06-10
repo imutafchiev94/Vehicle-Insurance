@@ -22,6 +22,12 @@ const VehicleSchema = new mongoose.Schema({
         unique: true,
         minlength: 6,
         maxlength: 8
+    }, owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Owner'
+    }, insurance: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Insurance'
     }
 })
 

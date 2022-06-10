@@ -1,31 +1,40 @@
 const router = require('express').Router();
 const vehicleService = require('../services/vehicleService');
 
-router.post('/:ownerId/add', async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
-        let message = await vehicleService.addVehicle(req.body, req.params.ownerId);
+        let message = await vehicleService.addVehicle(req.body);
         res.json(message);
     } catch(err) {
         res.status(400).json({Error: err.message});
     }
 });
 
-router.get('/find-by-owner', async (req, res) => {
+router.post('/find-by-owner', async (req, res) => {
     try {
         let vehicles = await vehicleService.findAllVehiclesOfOwner(req.body.EGN);
         res.json(vehicles);
     } catch(err) {
-        res.status(400).json({Error: err.message});
+        res.status(404).json({Error: err.message});
     }
 });
 
-router.get('/find', async (req, res) => {
+router.post('/find', async (req, res) => {
     try {
         let vehicle = await vehicleService.findVehicle(req.body.registrationNumber);
         res.json(vehicle);
     } catch(err) {
-        res.status(400).json({Error: err.message});
+        res.status(404).json({Error: err.message});
     }
 });
+
+router.get('/:id', async (req, res) => {
+    try {
+        let vehicle = await vehicleService.getVehicle(req.params.id);
+        res.json(vehicle);
+    } catch(err) {
+        res.status(404).json({Error: err.message})
+    }
+})
 
 module.exports = router;

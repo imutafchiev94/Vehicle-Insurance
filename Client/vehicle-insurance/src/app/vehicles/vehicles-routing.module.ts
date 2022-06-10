@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'check-vehicle', component: CheckVehicleComponent },
   { path: 'add-vehicle', component: AddVehicleComponent },
   { path: ':id', component: VehicleDetailsComponent },
-  { path: '/find-vehicle-by-owner', component: FindVehicleByOwnerComponent },
+  { path: 'find-vehicle-by-owner', component: FindVehicleByOwnerComponent },
 ];
 
 @NgModule({
