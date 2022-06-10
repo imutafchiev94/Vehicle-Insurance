@@ -34,14 +34,14 @@ export class CheckOwnerComponent implements OnInit {
 
   onSubmit() {
     
-    this.ownerService.findOwner(this.checkForm.value).subscribe(res => {
+    this.ownerService.findOwner(this.checkForm.value).subscribe({next: (res) => {
       this.status = res.status;
         this.isExists = true;
         res.body?._id ? this.ownerId = res.body._id : this.ownerId = "";
-    }, error => {
+    }, error: (error) => {
       this.status = error.status;
       this.isExists = false;
-    });
+    }});
   }
 
 }

@@ -20,7 +20,7 @@ export class OwnerService {
     return this.http.post<Owner>(this.ownerPath + '/add', data, {observe: 'response'});
   }
 
-  getOwner(id) : Observable<Owner> {
-    return this.http.get<Owner>(this.ownerPath + `/${id}`);
+  getOwner(id) : Observable<HttpResponse<Owner>> {
+    return this.http.get<Owner>(this.ownerPath + `/${id}`, {observe: 'response'});
   }
 }

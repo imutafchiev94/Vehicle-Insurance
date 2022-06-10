@@ -60,11 +60,11 @@ export class AddOwnerComponent {
   errorMessage: string = '';
 
   onSubmit() {
-      this.ownerService.addOwner(this.ownerForm.value).subscribe(res => {
+      this.ownerService.addOwner(this.ownerForm.value).subscribe({next: (res) => {
         this.router.navigate(['home']);
-      }, error => {
-        this.errorMessage = error.error.Error;
+      }, error: (err) => {
+        this.errorMessage = err.error.Error;
         console.log(this.errorMessage);
-      })
+      }})
   }
 }
