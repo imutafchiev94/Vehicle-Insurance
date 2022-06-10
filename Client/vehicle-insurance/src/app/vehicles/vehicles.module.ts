@@ -6,6 +6,7 @@ import { VehiclesComponent } from './vehicles.component';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import { CheckVehicleComponent } from './check-vehicle/check-vehicle.component';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { FindVehicleByOwnerComponent } from './find-vehicle-by-owner/find-vehicle-by-owner.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
     VehiclesComponent,
     AddVehicleComponent,
     CheckVehicleComponent,
-    VehicleDetailsComponent
+    VehicleDetailsComponent,
+    FindVehicleByOwnerComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VehicleService } from '../../services/vehicle.service';
 
 @Component({
   selector: 'app-check-vehicle',
