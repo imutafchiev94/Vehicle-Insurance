@@ -9,6 +9,6 @@ export interface Owner {
     age: number;
     dateOfBirth: Date;
     gender: Gender;
-    egn: string;
+    EGN: string;
     vehicles: Array<Vehicle>;
 }

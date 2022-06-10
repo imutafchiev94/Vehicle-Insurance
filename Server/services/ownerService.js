@@ -35,7 +35,8 @@ async function addOwner(ownerData) {
 async function findOwner(EGN) {
     let searchedOwner = await Owner.findOne({
         EGN: EGN
-    });
+    })
+    .populate('vehicles');
 
     if(!searchedOwner) {
         throw {message: "Owner with this EGN doesn't exist in our database!"};
@@ -44,7 +45,8 @@ async function findOwner(EGN) {
 }
 
 async function findOwnerById(id) {
-    let owner = await Owner.findById(id);
+    let owner = await Owner.findById(id)
+    .populate('vehicles');
 
     if(!owner) {
         throw {message: `Owner with this Id ${id} doesn't exist!`};        
