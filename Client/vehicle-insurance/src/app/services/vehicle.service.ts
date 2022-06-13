@@ -20,8 +20,8 @@ export class VehicleService {
     return this.http.post<Vehicle>(this.vehiclePath + '/find-by-owner', data, {observe: 'response'});
   }
 
-  addVehicle(ownerId ,data) : Observable<HttpResponse<Vehicle>> {
-    return this.http.post<Vehicle>(this.vehiclePath + `/${ownerId}/add`, data, {observe: 'response'});
+  addVehicle(data) : Observable<HttpResponse<Vehicle>> {
+    return this.http.post<Vehicle>(this.vehiclePath + '/add', data, {observe: 'response'});
   }
 
   getVehicleDetails(vehicleId): Observable<HttpResponse<Vehicle>> {

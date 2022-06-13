@@ -7,6 +7,7 @@ import { CheckInsurancesComponent } from './check-insurances/check-insurances.co
 import { AddInsuranceComponent } from './add-insurance/add-insurance.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import { MaterialExampleModule } from 'src/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MaterialExampleModule } from 'src/material.module';
   imports: [
     CommonModule,
     InsurancesRoutingModule,
-    MaterialExampleModule
+    MaterialExampleModule,
+    ReactiveFormsModule
   ]
 })
 export class InsurancesModule { }

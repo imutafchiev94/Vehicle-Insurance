@@ -61,10 +61,9 @@ export class AddOwnerComponent {
 
   onSubmit() {
       this.ownerService.addOwner(this.ownerForm.value).subscribe({next: (res) => {
-        this.router.navigate(['home']);
+        this.router.navigate(['dashboard']);
       }, error: (err) => {
         this.errorMessage = err.error.Error;
-        console.log(this.errorMessage);
       }})
   }
 }

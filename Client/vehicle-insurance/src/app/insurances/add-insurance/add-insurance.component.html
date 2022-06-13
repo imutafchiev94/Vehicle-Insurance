@@ -1,1 +1,151 @@
-<p>add-insurance works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="card col-lg-4">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-4">Make Insurance</h5>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <h5 class="text-center">{{ errorMessage }}</h5>
+        </div>
+        <form [formGroup]="insuranceForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Start Date</mat-label>
+              <!-- #docregion toggle -->
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="startDate"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <!-- #enddocregion toggle -->
+              <mat-error
+                *ngIf="startDate?.touched && startDate?.errors?.['required']"
+                class="mt-2"
+              >
+                This field is required!
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Owner EGN</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="ownerEGN"
+                placeholder="1234567890"
+              />
+              <mat-hint>EGN is required. Only valid EGNs</mat-hint>
+              <mat-error
+                *ngIf="ownerEGN?.touched && ownerEGN?.errors?.['required']"
+                class="alert alert-danger mt-2"
+              >
+                This field is required!
+              </mat-error>
+              <mat-error
+                *ngIf="ownerEGN?.touched && (ownerEGN?.errors?.['minlength'] || ownerEGN?.errors?.['maxlength'])"
+                class="alert alert-danger mt-2"
+              >
+                EGN must be exatctly 10 symbols!
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Vehicle Registration Number</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="vehicleRegistrationNumber"
+                placeholder="PB4053CB"
+              />
+              <mat-hint>Vehicle Registration Number is required</mat-hint>
+              <mat-error
+                *ngIf="vehicleRegistrationNumber?.touched && vehicleRegistrationNumber?.errors?.['required']"
+                class="mt-2"
+              >
+                This field is required!
+              </mat-error>
+              <mat-error
+                *ngIf="vehicleRegistrationNumber?.touched && (vehicleRegistrationNumber?.errors?.['minlength'] || vehicleRegistrationNumber?.errors?.['maxlength'])"
+                class="mt-2"
+              >
+                Vehicle Registration Number must be between 6 and 8 symbols!
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-3 example-full-width">
+            <input type="file" formControlName="imageSource" (change)="readUrl($event)" />
+          </div>
+          <div class="mb-3">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Total Amount</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="totalAmount"
+                placeholder="68.90"
+              />
+              <mat-hint>Total Amount is required</mat-hint>
+              <mat-error
+                *ngIf="totalAmount?.touched && totalAmount?.errors?.['required']"
+                class="mt-2"
+              >
+                This field is required!
+              </mat-error>
+              <mat-error
+                *ngIf="totalAmount?.touched && (totalAmount?.errors?.['minlength'])"
+                class="mt-2"
+              >
+                Total Amount must be at least 50 lv.!
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Count of Payments</mat-label>
+              <input
+                type="text"
+                placeholder="Pick one"
+                aria-label="countOfPayments"
+                matInput
+                formControlName="countOfPayments"
+                [matAutocomplete]="auto"
+              />
+              <mat-hint>Count of Payments is required!</mat-hint>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of options" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error
+                *ngIf="countOfPayments?.touched && countOfPayments?.errors?.['required']"
+                class="mt-2"
+              >
+                This field is required!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-auto mt-3 mb-3">
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              class="mb-3"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>
+</div>

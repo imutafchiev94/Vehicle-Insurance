@@ -118,16 +118,16 @@ async function payPaymentForInsurance(paymentId) {
   return { message: "Payment is paid!" };
 }
 
-async function createPayment(insuranceId, startDate) {
-    let searchedInsurance = await Insurance.findById({
-        _id: insuranceId,
-    });
+async function createPayment(amount, insuranceId, startDate) {
+  
+    let searchedInsurance = await Insurance.findById(insuranceId);
 
     if (!searchedInsurance) {
         throw { message: "Insurance with this Id doesn't exist!" };
     }
     
     let currentDate = new Date(startDate);
+
     let newPaymentData = {
         isPaid: false,
         amount: amount,

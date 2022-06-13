@@ -3,9 +3,11 @@ const Owner = require("../models/Owner");
 
 async function addVehicle(data) {
 
-    let owner = await Owner.findById(data.ownerId);
+    let owner = await Owner.findOne({
+     EGN: data.ownerEGN
+    });
     if(!owner) {
-        throw {message: `Owner with ID ${data.ownerId} doesn't exist!`};
+        throw {message: `Owner with EGN ${data.ownerEGN} doesn't exist!`};
     }
 
   let newVehicleData = {
@@ -13,6 +15,7 @@ async function addVehicle(data) {
     model: data.model,
     yearOfManufacture: data.yearOfManufacture,
     registrationNumber: data.registrationNumber,
+    owner: owner,
   };
 
   let newVehicle = new Vehicle(newVehicleData);

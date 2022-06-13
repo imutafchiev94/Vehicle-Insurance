@@ -1,1 +1,87 @@
-<p>add-vehicle works!</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="card col-lg-4">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Add Vehicle</h5>
+          <div *ngIf="errorMessage" class="alert alert-danger">
+              <h5 class="text-center">{{errorMessage}}</h5>
+          </div>
+          <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Brand</mat-label>
+                    <input type="text" matInput formControlName="brand" placeholder="Audi">
+                    <mat-hint>Brand is required</mat-hint>
+                <mat-error *ngIf="brand?.touched && brand?.errors?.['required']" class="mt-2">
+                    This field is required!
+                  </mat-error>
+                  <mat-error *ngIf="brand?.touched && (brand?.errors?.['minlength'] || brand?.errors?.['maxlength'])" class=" mt-2">
+                    Brand must be between 3 and 40 symbols!
+                  </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Model</mat-label>
+                    <input type="text" matInput formControlName="model" placeholder="A3">
+                    <mat-hint>Model is required</mat-hint>
+                    <mat-error *ngIf="model?.touched && model?.errors?.['required']" class="mt-2">
+                        This field is required!
+                      </mat-error>
+                      <mat-error *ngIf="model?.touched && (model?.errors?.['minlength'] || model?.errors?.['maxlength'])" class="mt-2">
+                        Model must be between 3 and 40 symbols!
+                      </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Year of Manufacture</mat-label>
+                    <input type="number" matInput formControlName="yearOfManufacture" placeholder="2012">
+                    <mat-hint>Year of Manufacture is required</mat-hint>
+                    <mat-error *ngIf="yearOfManufacture?.touched && yearOfManufacture?.errors?.['required']" class="mt-2">
+                        This field is required!
+                      </mat-error>
+                      <mat-error *ngIf="yearOfManufacture?.touched && (yearOfManufacture?.errors?.['min'] || yearOfManufacture?.errors?.['max'])" class="mt-2">
+                        Year of Manufacture must be between year 1930 and 2022!
+                      </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Registration Number</mat-label>
+                    <input type="text" matInput formControlName="registrationNumber" placeholder="PB1234CA">
+                    <mat-hint>Registration Number is required</mat-hint>
+                    <mat-error *ngIf="registrationNumber?.touched && registrationNumber?.errors?.['required']" class="mt-2">
+                        This field is required!
+                      </mat-error>
+                      <mat-error *ngIf="registrationNumber?.touched && (registrationNumber?.errors?.['min'] || registrationNumber?.errors?.['max'])" class="mt-2">
+                        Registration Number must be between 6 and 8 symbols!
+                      </mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Owner's EGN</mat-label>
+                    <input type="text" matInput formControlName="ownerEGN" placeholder="1234567890">
+                    <mat-hint>Owner's EGN is required. Only valid EGNs</mat-hint>
+                    <mat-error *ngIf="ownerEGN?.touched && ownerEGN?.errors?.['required']" class="alert alert-danger mt-2">
+                        This field is required!
+                      </mat-error>
+                    <mat-error *ngIf="ownerEGN?.touched && (ownerEGN?.errors?.['minlength'] || ownerEGN?.errors?.['maxlength'])" class="alert alert-danger mt-2">
+                        EGN must be exatctly 10 symbols!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+                
+            <div class="col-auto mt-3 mb-3">
+                <button type="submit" mat-raised-button color="primary" class="mb-3">Add</button>
+            </div>
+        </form>
+       
+
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+</div>
+</div>

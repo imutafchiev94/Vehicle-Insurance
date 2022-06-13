@@ -1,9 +1,16 @@
+const cloudinary = require('cloudinary').v2;
+
 const Insurance = require('../models/Insurance')
 const Vehicle = require('../models/Vehicle');
 const Owner = require('../models/Owner');
 const paymentService = require('../services/paymentService');
+const cloudinaryConfig = require('../config/cloudinaryConfig');
+
+cloudinary.config(cloudinaryConfig);
+
 
 async function createInsurance(data) {
+  
     let vehicle = await Vehicle.findOne({
         registrationNumber: data.vehicleRegistrationNumber
     });
@@ -18,27 +25,37 @@ async function createInsurance(data) {
         endDate: currentDate.setFullYear(currentDate.getFullYear() + 1),
         vehicleOwner: owner,
         vehicle: vehicle,
-        imageUrl: data.imageUrl,
+        imageUrl: '',
         totalAmount: data.totalAmount,
         dueAmount: data.totalAmount,
         countOfPayments: data.countOfPayments
     }
 
+
+    await cloudinary.uploader.upload(data.imageSource, {resource_type: 'image'})
+    .then(function(file) {newInsuranceData.imageUrl = file.url})
+    .catch(function(err) {console.log(err)});
+
+   
+
     let newInsurance = new Insurance(newInsuranceData);
+
+    
 
     await newInsurance.save();
 
     let paymentsAmount = (data.totalAmount / data.countOfPayments).toFixed(2);
 
-    let currentDateForPayments = new Date(Date.now());
+
+    
     
 
     for(let i = 0; i < data.countOfPayments; i++) {
-        let startDateForPayment = currentDateForPayments.setMonth(currentDateForPayments.getMonth() + i);
+      let currentDateForPayments = new Date(Date.now());
+        let startDateForPayment =  new Date(currentDateForPayments.setMonth(currentDateForPayments.getMonth() + i));
         let payment = await paymentService.createPayment(paymentsAmount, newInsurance._id ,startDateForPayment);
         newInsurance.payments.push(payment);
     }
-
     await newInsurance.save();
 }
 
