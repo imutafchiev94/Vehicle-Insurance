@@ -25,20 +25,6 @@ async function addVehicle(data) {
   return { message: "Vehicle was add successfully!" };
 }
 
-async function findAllVehiclesOfOwner(EGN) {
-  let owner = await Owner.findOne({
-    EGN: EGN,
-  })
-  .populate('vehicles');
-
-  if (!owner) {
-    throw { message: `Owner with EGN "${EGN}" doesn't exist in our database` };
-  }
-
-  let vehicles = owner.vehicles;
-
-  return vehicles;
-};
 
 async function findVehicle(registrationNumber) {
     let vehicle = await Vehicle.findOne({
@@ -65,7 +51,6 @@ async function getVehicle(id) {
 
 module.exports = {
   addVehicle,
-  findAllVehiclesOfOwner,
   findVehicle,
   getVehicle
 };

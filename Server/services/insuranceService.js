@@ -18,7 +18,7 @@ async function createInsurance(data) {
         endDate: currentDate.setFullYear(currentDate.getFullYear() + 1),
         vehicleOwner: owner,
         vehicle: vehicle,
-        imageUrl: 'http://www.autoreview.bg/files/2013/01/28/0995146100.jpg',
+        imageUrl: data.imageUrl,
         totalAmount: data.totalAmount,
         dueAmount: data.totalAmount,
         countOfPayments: data.countOfPayments
@@ -42,17 +42,17 @@ async function createInsurance(data) {
     await newInsurance.save();
 }
 
-async function findInsurance(EGN) {
-    let owner = await Owner.findOne({
-        EGN: EGN
+async function findInsurance(registrationNumber) {
+    let vehicle = await Vehicle.findOne({
+        registrationNumber: registrationNumber
       });
     
-      if(!owner) {
-        throw {message: `Owner with EGN "${EGN}" doesn't exist in our database`};
+      if(!vehicle) {
+        throw {message: `Vehicle with registration number "${registrationNumber}" doesn't exist in our database`};
       }
     
       let searchedInsurance = await Insurance.findOne({
-        vehicleOwner: owner._id,
+        vehicle: vehicle._id,
       });
       if (!searchedInsurance) {
         throw { message: "Insurance with this Id doesn't exist!" };
@@ -62,7 +62,18 @@ async function findInsurance(EGN) {
     
 }
 
+async function getInsurance(id) {
+    let insurance = await Insurance.findById(id);
+    if (!insurance) {
+      throw { message: "Insurance with this Id doesn't exist!" };
+    }
+
+    return insurance;
+  
+}
+
 module.exports = {
 createInsurance,
-findInsurance
+findInsurance,
+getInsurance
 }

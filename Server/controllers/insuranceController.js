@@ -10,9 +10,18 @@ router.post('/create', async (req, res) => {
     }
 });
 
-router.get('/find', async (req, res) => {
+router.post('/find', async (req, res) => {
     try {
-        let insurance = await insuranceService.findInsurance(req.body.EGN);
+        let insurance = await insuranceService.findInsurance(req.body.registrationNumber);
+        res.json(insurance);
+    } catch(err) {
+        res.status(400).json({Error: err.message});
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    try {
+        let insurance = await insuranceService.getInsurance(req.params.id);
         res.json(insurance);
     } catch(err) {
         res.status(400).json({Error: err.message});
