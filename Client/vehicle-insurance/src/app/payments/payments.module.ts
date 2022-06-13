@@ -7,6 +7,8 @@ import { AllPaymentsComponent } from './all-payments/all-payments.component';
 import { AllPaidPaymentsComponent } from './all-paid-payments/all-paid-payments.component';
 import { AllUnpaidPaymentsComponent } from './all-unpaid-payments/all-unpaid-payments.component';
 import { PaymentToPayComponent } from './payment-to-pay/payment-to-pay.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialExampleModule } from 'src/material.module';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { PaymentToPayComponent } from './payment-to-pay/payment-to-pay.component
   ],
   imports: [
     CommonModule,
-    PaymentsRoutingModule
+    PaymentsRoutingModule,
+    ReactiveFormsModule,
+    MaterialExampleModule
   ]
 })
 export class PaymentsModule { }
