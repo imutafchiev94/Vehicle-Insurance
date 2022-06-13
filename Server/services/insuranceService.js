@@ -32,7 +32,7 @@ async function createInsurance(data) {
     }
 
 
-    await cloudinary.uploader.upload(data.imageSource, {resource_type: 'image'})
+    await cloudinary.uploader.upload(data.imageSource, {resource_type: 'image', folder: 'Vehicle Insurance'})
     .then(function(file) {newInsuranceData.imageUrl = file.url})
     .catch(function(err) {console.log(err)});
 
@@ -80,7 +80,9 @@ async function findInsurance(registrationNumber) {
 }
 
 async function getInsurance(id) {
-    let insurance = await Insurance.findById(id);
+    let insurance = await Insurance.findById(id)
+    .populate('vehicleOwner')
+    .populate('vehicle');
     if (!insurance) {
       throw { message: "Insurance with this Id doesn't exist!" };
     }

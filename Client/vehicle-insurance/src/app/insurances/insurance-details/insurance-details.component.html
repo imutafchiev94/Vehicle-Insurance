@@ -1,1 +1,69 @@
-<p>insurance-details works!</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="card col-lg-8">
+    <div class="card-header">
+        <h5 class="card-title text-center mb-2">Details for Insurance</h5>
+        <h6 class="card-subtitle mb-2 text-muted text-center">Insurance for {{insurance.vehicle.registrationNumber}}</h6>
+        </div>
+        <div class="card-body">
+           <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="text-center">Start Date</th>
+                        <td class="text-center">{{startDate}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">End Date</th>
+                        <td class="text-center">{{endDate}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vechile Owener's First Name</th>
+                        <td class="text-center">{{insurance.vehicleOwner.firstName}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vechile Owener's Surname</th>
+                        <td class="text-center">{{insurance.vehicleOwner.surname}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vehicle's Model</th>
+                        <td class="text-center">{{insurance.vehicle.model}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vehicle's Brand</th>
+                        <td class="text-center">{{insurance.vehicle.brand}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vehicle's Registration Number</th>
+                        <td class="text-center">{{insurance.vehicle.registrationNumber}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center align-middle">Vehicle's Image</th>
+                        <td class="text-center"><img [src]="insurance.imageUrl" class="image-fluid"></td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Total Amount</th>
+                        <td class="text-center">{{insurance.totalAmount}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Due Amount</th>
+                        <td class="text-center">{{insurance.dueAmount}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Count Of Payments</th>
+                        <td class="text-center">{{insurance.countOfPayments}}</td>
+                    </tr>
+                </tbody>
+           </table>
+        </div>
+
+        <div class="card-footer">
+            <p class="text-center">All payments details here: <a mat-raised-button color="primary" routerLink="/payments/all-payments" class="all-payments" >All Payments</a></p>
+        </div>
+    
+
+<div class="col-lg-2"></div>
+</div>
+</div>
+
+
