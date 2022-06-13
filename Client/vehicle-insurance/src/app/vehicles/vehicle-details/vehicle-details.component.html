@@ -5,35 +5,39 @@
     <div class="card-header">
         <h5 class="card-title text-center mb-2">Details for Vehicle</h5>
         <h6 class="card-subtitle mb-2 text-muted text-center">{{vehicle.brand}} {{vehicle.model}}</h6>
+
+        <div class="text-center">
+            <img src="https://wilsoncountyclerk.com/wp-content/uploads/2018/08/Clerk-icons-08.png" alt="">
+        </div>
         </div>
         <div class="card-body">
-           <table class="table table-hover">
+           <table class="table">
                 <tbody>
                     <tr>
                         <th class="text-center">Brand</th>
                         <td class="text-center">{{vehicle.brand}}</td>
                     </tr>
-                    <tr>
+                    <tr >
                         <th class="text-center">Model</th>
                         <td class="text-center">{{vehicle.model}}</td>
                     </tr>
-                    <tr>
+                    <tr >
                         <th class="text-center">Year Of Manufacture</th>
                         <td class="text-center">{{vehicle.yearOfManufacture}}</td>
                     </tr>
-                    <tr>
+                    <tr >
                         <th class="text-center">Registration Number</th>
                         <td class="text-center">{{vehicle.registrationNumber}}</td>
                     </tr>
-                    <tr>
+                    <tr >
                         <th class="text-center">Owner's First Name</th>
                         <td class="text-center">{{vehicle.owner.firstName}}</td>
                     </tr>
-                    <tr>
+                    <tr >
                         <th class="text-center">Owner's Surname</th>
                         <td class="text-center">{{vehicle.owner.surname}}</td>
                     </tr>
-                    <tr>
+                    <tr >
                         <th class="text-center">Has Insurance</th>
                         <td class="text-center text-success" *ngIf="hasInsurance; else elseBlock">Yes</td>
                         <ng-template #elseBlock>
@@ -42,6 +46,7 @@
                     </tr>
                 </tbody>
            </table>
+        </div>
 
         <div class="card-footer">
             <p class="text-center">Details about owner here: <a mat-raised-button color="primary" routerLink="/owners/{{vehicle.owner._id}}" class="owner-details" >Owner Details</a></p>
@@ -52,7 +57,6 @@
         </div>
     
 
-</div>
 <div class="col-lg-2"></div>
 </div>
 </div>
