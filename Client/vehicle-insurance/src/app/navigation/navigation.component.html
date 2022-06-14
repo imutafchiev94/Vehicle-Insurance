@@ -33,27 +33,6 @@
         <span>Find Vehicle by Owner</span>
       </button>
     </mat-menu>
-    <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="payments" aria-label="Menu for payments pages">
-      Payments
-    </button>
-    <mat-menu #payments="matMenu">
-      <button mat-menu-item routerLink="/payments/all-payments">
-        <mat-icon>payments</mat-icon>
-        <span>All Payments</span>
-      </button>
-      <button mat-menu-item routerLink="/payments/all-paid-payments">
-        <mat-icon>paid</mat-icon>
-        <span>All Paid Payments</span>
-      </button>
-      <button mat-menu-item routerLink="/payments/all-unpaid-payments">
-        <mat-icon>money_off</mat-icon>
-        <span>All Unpaid Payments</span>
-      </button>
-      <button mat-menu-item routerLink="/payments/payment-to-pay">
-        <mat-icon>credit_card</mat-icon>
-        <span>Payment To Pay</span>
-      </button>
-    </mat-menu>
     <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="insurances" aria-label="Menu for insurance pages">
       Insurances
     </button>

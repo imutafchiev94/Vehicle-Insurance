@@ -12,24 +12,16 @@ export class PaymentService {
   private paymentsUrl = environment.apiUrl + 'payment';
   constructor(private http: HttpClient) { }
 
-  getAllPayments(data): Observable<HttpResponse<Payment>> {
-    return this.http.post<Payment>(this.paymentsUrl + '/all', data, {observe: 'response'});
+  getAllPayments(id): Observable<HttpResponse<Payment>> {
+    return this.http.get<Payment>(this.paymentsUrl + `/${id}/all`, {observe: 'response'});
   }
 
-  getAllPaidPayments(data): Observable<HttpResponse<Payment>> {
-    return this.http.post<Payment>(this.paymentsUrl + '/paid', data, {observe: 'response'});
+  getPaymentToPay(id): Observable<HttpResponse<Payment>> {
+    return this.http.get<Payment>(this.paymentsUrl + `/${id}/to-pay`, {observe: 'response'});
   }
 
-  getAllUnpaidPayments(data): Observable<HttpResponse<Payment>> {
-    return this.http.post<Payment>(this.paymentsUrl + '/unpaid', data, {observe: 'response'});
-  }
-
-  getPaymentToPay(data): Observable<HttpResponse<Payment>> {
-    return this.http.post<Payment>(this.paymentsUrl + '/to-pay', data, {observe: 'response'});
-  }
-
-  payPayment(data, insuranceId): Observable<HttpResponse<Payment>> {
-    return this.http.post<Payment>(this.paymentsUrl + `/pay/${insuranceId}`, data, {observe: 'response'});
+  payPayment(insuranceId): Observable<HttpResponse<Payment>> {
+    return this.http.post<Payment>(this.paymentsUrl + `/${insuranceId}/pay`, null, {observe: 'response'});
   }
   
 }

@@ -1,103 +1,31 @@
 const Payment = require("../models/Payment");
 const Insurance = require("../models/Insurance");
-const Vehicle = require('../models/Vehicle');
 require('dotenv').config();
 
-async function allPaymentsForInsurance(registrationNumber) {
-  let vehicle = await Vehicle.findOne({
-    registrationNumber: registrationNumber
-  });
+async function allPaymentsForInsurance(id) {
+  let insurance = await Insurance.findById(id);
 
-  if(!vehicle) {
-    throw {message: `Vehicle with Registration Number "${registrationNumber}" doesn't exist in our database`};
-  }
-
-  let searchedInsurance = await Insurance.findOne({
-    vehicle: vehicle._id,
-  });
-  if (!searchedInsurance) {
-    throw { message: "Insurance with this Id doesn't exist!" };
+  if(!insurance) {
+    throw {message: `Insurance with ID "${id}" doesn't exist in our database`};
   }
 
   let payments = await Payment.find({
-    insurance: searchedInsurance._id,
-  }).populate("insurance");
+    insurance: insurance._id,
+  });
 
   return payments;
 }
 
-async function allPaidPaymentsForInsurance(registrationNumber) {
-  let vehicle = await Vehicle.findOne({
-    registrationNumber: registrationNumber
-  });
+async function firstPaymentToPayForInsurance(id) {
 
-  if(!vehicle) {
-    throw {message: `Vehicle with Registration Number "${registrationNumber}" doesn't exist in our database`};
-  }
-  
-  let searchedInsurance = await Insurance.findOne({
-    vehicle: vehicle._id,
-  });
+  let insurance = await Insurance.findById(id).populate('payments');
 
-  //TODO Fix error message for Insurance
-
-  if (!searchedInsurance) {
+  if (!insurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
   }
+  console.log(insurance);
 
-  let payments = await Payment.find({
-    insurance: searchedInsurance._id,
-    isPayed: true,
-  }).populate("insurance");
-
-  return payments;
-}
-
-async function allUnpaidPaymentsForInsurance(registrationNumber) {
-  let vehicle = await Vehicle.findOne({
-    registrationNumber: registrationNumber
-  });
-
-  if(!vehicle) {
-    throw {message: `Vehicle with Registration Number "${registrationNumber}" doesn't exist in our database`};
-  }
-  
-  let searchedInsurance = await Insurance.findOne({
-    vehicle: vehicle._id,
-  });
-
-  if (!searchedInsurance) {
-    throw { message: "Insurance with this Id doesn't exist!" };
-  }
-
-
-  let payments = await Payment.find({
-    insurance: searchedInsurance._id,
-    isPayed: false,
-  }).populate("insurance");
-
-  return payments;
-}
-
-async function firstPaymentToPayForInsurance(registrationNumber) {
-  let vehicle = await Vehicle.findOne({
-    registrationNumber: registrationNumber
-  });
-
-  if(!vehicle) {
-    throw {message: `Vehicle with Registration Number "${registrationNumber}" doesn't exist in our database`};
-  }
-
-  let searchedInsurance = await Insurance.findOne({
-    vehicle: vehicle._id,
-  }).populate('payments');
-
-  if (!searchedInsurance) {
-    throw { message: "Insurance with this Id doesn't exist!" };
-  }
-  console.log(searchedInsurance);
-
-  let payment = searchedInsurance.payments.filter(p => p.isPayed == false)[0];
+  let payment = insurance.payments.filter(p => p.isPayed == false)[0];
 
   if (payment) {
     return payment;
@@ -145,8 +73,6 @@ async function createPayment(amount, insuranceId, startDate) {
 
 module.exports = {
   allPaymentsForInsurance,
-  allPaidPaymentsForInsurance,
-  allUnpaidPaymentsForInsurance,
   firstPaymentToPayForInsurance,
   payPaymentForInsurance,
   createPayment

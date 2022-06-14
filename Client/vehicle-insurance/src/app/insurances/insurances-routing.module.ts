@@ -8,7 +8,8 @@ import { InsuranceDetailsComponent } from './insurance-details/insurance-details
 const routes: Routes = [
   { path: 'check-insurance', component: CheckInsurancesComponent },
   { path: 'add-insurance', component: AddInsuranceComponent },
-  { path: ':id', component: InsuranceDetailsComponent }
+  { path: ':id', component: InsuranceDetailsComponent },
+  { path: ':id/payments', loadChildren: () => import('./payments/payments.module').then(m => m.PaymentsModule) }
 ];
 
 @NgModule({
