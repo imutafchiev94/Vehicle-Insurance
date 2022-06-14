@@ -16,6 +16,7 @@ export class AddInsuranceComponent implements OnInit {
   errorMessage: string;
   status: string;
   imageSrc;
+  file;
   constructor(private fb: FormBuilder, private insuranceService: InsuranceService, private router: Router) {
     this.insuranceForm = this.fb.group({
       startDate: ['', Validators.required],
@@ -65,20 +66,17 @@ export class AddInsuranceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  readUrl(event:any) {
-    this.imageSrc = event.target.value;
-
-    let splitPath = this.imageSrc.split('\\');
-    let fileName = splitPath[splitPath.length - 1];
-    let trueImageSrc = `C:\\Users\\ivaylo.mutafchiev\\Downloads\\${fileName}`;
-    
-    this.insuranceForm.patchValue({imageSource: trueImageSrc});
-
-    console.log(this.insuranceForm.value);
-  }
-
-
+  onFileSelected(event) {
+    this.file = event.target.files[0]
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event) => {
+     this.imageSrc = (<FileReader>event.target).result;
+     this.insuranceForm.patchValue({imageSource: this.imageSrc});
+   }
+}
   onSubmit() {
+    
     console.log(this.insuranceForm.value);
     this.insuranceService.addInsurance(this.insuranceForm.value).subscribe({next: (res) => {
       this.router.navigate(['dashboard']);

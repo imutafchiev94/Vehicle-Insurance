@@ -6,6 +6,7 @@ router.post('/create', async (req, res) => {
         let message = await insuranceService.createInsurance(req.body);
         res.json(message);
     } catch(err) {
+        console.log(err);
         res.status(400).json({Error: err.message})
     }
 });

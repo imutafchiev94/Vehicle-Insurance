@@ -10,7 +10,7 @@ cloudinary.config(cloudinaryConfig);
 
 
 async function createInsurance(data) {
-  
+    
     let vehicle = await Vehicle.findOne({
         registrationNumber: data.vehicleRegistrationNumber
     });
@@ -31,10 +31,13 @@ async function createInsurance(data) {
         countOfPayments: data.countOfPayments
     }
 
+    let image = data.imageSource;
 
-    await cloudinary.uploader.upload(data.imageSource, {resource_type: 'image', folder: 'Vehicle Insurance'})
-    .then(function(file) {newInsuranceData.imageUrl = file.url})
-    .catch(function(err) {console.log(err)});
+    await cloudinary.uploader.upload(image, {folder: 'Vehicle Insurance'})
+    .then(function(file) {
+      console.log('here')
+      newInsuranceData.imageUrl = file.url})
+    .catch(function(err) {console.log('here')});
 
    
 
@@ -45,10 +48,6 @@ async function createInsurance(data) {
     await newInsurance.save();
 
     let paymentsAmount = (data.totalAmount / data.countOfPayments).toFixed(2);
-
-
-    
-    
 
     for(let i = 0; i < data.countOfPayments; i++) {
       let currentDateForPayments = new Date(Date.now());
