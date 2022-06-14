@@ -42,7 +42,6 @@ export class AllPaymentsComponent implements OnInit {
           this.payments[i].endDate = this.datePipe.transform(this.payments[i].endDate, 'dd-MM-YYYY');
         }
         this.haveToPay = this.payments.some(p => p.isPaid == false)
-        console.log(this.payments.filter(p => p.isPaid === false));
       }, error: (err) => {
         console.log(err);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})

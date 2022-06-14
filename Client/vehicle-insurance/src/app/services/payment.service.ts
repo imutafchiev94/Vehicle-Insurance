@@ -12,16 +12,16 @@ export class PaymentService {
   private paymentsUrl = environment.apiUrl + 'payment';
   constructor(private http: HttpClient) { }
 
-  getAllPayments(id): Observable<HttpResponse<Payment>> {
-    return this.http.get<Payment>(this.paymentsUrl + `/${id}/all`, {observe: 'response'});
+  getAllPayments(insuranceId): Observable<HttpResponse<Payment>> {
+    return this.http.get<Payment>(this.paymentsUrl + `/${insuranceId}/all`, {observe: 'response'});
   }
 
-  getPaymentToPay(id): Observable<HttpResponse<Payment>> {
-    return this.http.get<Payment>(this.paymentsUrl + `/${id}/to-pay`, {observe: 'response'});
+  getPaymentToPay(insuranceId): Observable<HttpResponse<Payment>> {
+    return this.http.get<Payment>(this.paymentsUrl + `/${insuranceId}/to-pay`, {observe: 'response'});
   }
 
-  payPayment(insuranceId): Observable<HttpResponse<Payment>> {
-    return this.http.post<Payment>(this.paymentsUrl + `/${insuranceId}/pay`, null, {observe: 'response'});
+  payPayment(paymentId): Observable<HttpResponse<Payment>> {
+    return this.http.post<Payment>(this.paymentsUrl + `/${paymentId}/pay`, null, {observe: 'response'});
   }
   
 }

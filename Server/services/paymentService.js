@@ -23,9 +23,8 @@ async function firstPaymentToPayForInsurance(id) {
   if (!insurance) {
     throw { message: "Insurance with this Id doesn't exist!" };
   }
-  console.log(insurance);
 
-  let payment = insurance.payments.filter(p => p.isPayed == false)[0];
+  let payment = insurance.payments.filter(p => p.isPaid == false)[0];
 
   if (payment) {
     return payment;
@@ -34,18 +33,20 @@ async function firstPaymentToPayForInsurance(id) {
 }
 
 async function payPaymentForInsurance(paymentId) {
-  let payment = await Payment.findById(paymentId).populate(insurance);
+  let payment = await Payment.findById(paymentId)
 
   if(!payment) {
     throw {message:`Payment with ID ${paymentId} doesn't exist!`}
   }
-  payment.isPayed = true;
+  payment.isPaid = true;
 
-  payment.insurance.dueAmount -= payment.amount;
+  let insurance = await Insurance.findById(payment.insurance);
+
+  insurance.dueAmount -= payment.amount;
 
   await payment.save();
 
-  await payment.insurance.save();
+  await insurance.save();
 
   return { message: "Payment is paid!" };
 }
