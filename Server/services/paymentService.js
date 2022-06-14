@@ -34,14 +34,18 @@ async function firstPaymentToPayForInsurance(id) {
 }
 
 async function payPaymentForInsurance(paymentId) {
-  let payment = await Payment.findById(paymentId);
+  let payment = await Payment.findById(paymentId).populate(insurance);
 
   if(!payment) {
     throw {message:`Payment with ID ${paymentId} doesn't exist!`}
   }
   payment.isPayed = true;
 
+  payment.insurance.dueAmount -= payment.amount;
+
   await payment.save();
+
+  await payment.insurance.save();
 
   return { message: "Payment is paid!" };
 }

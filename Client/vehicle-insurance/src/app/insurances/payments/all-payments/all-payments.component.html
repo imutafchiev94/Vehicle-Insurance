@@ -1,1 +1,46 @@
-<p>all-payments works!</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="card col-lg-8">
+    <div class="card-header">
+        <h5 class="card-title text-center mb-2">Payments for Insurance</h5>
+        <h6 class="card-subtitle mb-2 text-muted text-center">Insurance for {{insurance.vehicle.registrationNumber}}</h6>
+        </div>
+        <div class="card-body">
+           <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Amount</th>
+                    <th class="text-center" scope="col">Start Date</th>
+                    <th class="text-center" scope="col">End Date</th>
+                    <th class="text-center" scope="col">Is Paid</th>
+                    <th class="text-center" scope="col">Vehicle Registration Number</th>
+                    <th class="text-center" scope="col">Owner's Full Name</th>
+                </tr>
+            </thead>
+                <tbody>
+                   <tr *ngFor="let payment of payments">
+                        <td class="text-center">{{payment.amount}}</td>
+                        <td class="text-center">{{payment.startDate}}</td>
+                        <td class="text-center">{{payment.endDate}}</td>
+                        <td class="text-center text-success" *ngIf="payment.isPaid; else notPaid">Yes</td>
+                        <ng-template #notPaid>
+                            <td class="text-center text-danger">No</td>
+                        </ng-template>
+                        <td class="text-center">{{insurance.vehicle.registrationNumber}}</td>
+                        <td class="text-center">{{insurance.vehicleOwner.firstName}} {{insurance.vehicleOwner.surname}}</td>
+                   </tr>
+                </tbody>
+           </table>
+        </div>
+
+        <div class="card-footer">
+            <p class="text-center" *ngIf="haveToPay">You can pay your payment from here: <a mat-raised-button color="primary" routerLink="/insurances/{{insurance._id}}/payments/to-pay" class="all-payments">Pay</a></p>
+        </div>
+    
+
+<div class="col-lg-2"></div>
+</div>
+</div>
+
+

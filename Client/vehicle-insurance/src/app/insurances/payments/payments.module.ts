@@ -5,6 +5,7 @@ import { PaymentsRoutingModule } from './payments-routing.module';
 import { PaymentsComponent } from './payments.component';
 import { AllPaymentsComponent } from './all-payments/all-payments.component';
 import { PaymentToPayComponent } from './payment-to-pay/payment-to-pay.component';
+import { MaterialExampleModule } from 'src/material.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PaymentToPayComponent } from './payment-to-pay/payment-to-pay.component
   ],
   imports: [
     CommonModule,
-    PaymentsRoutingModule
+    PaymentsRoutingModule,
+    MaterialExampleModule
   ]
 })
 export class PaymentsModule { }

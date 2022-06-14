@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const PaymentSchema = new mongoose.Schema({
-    isPayed: {
+    isPaid: {
         type: Boolean,
         required: true,
         default: false
