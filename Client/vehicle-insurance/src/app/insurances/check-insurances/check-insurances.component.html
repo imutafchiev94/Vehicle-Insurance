@@ -8,6 +8,7 @@
           <div class="text-center mb-4">
               <img [src]="checkInsuranceFormImageUrl" class="img-fluid mb-2" />
           </div>
+          <mat-spinner *ngIf="loading"></mat-spinner>
           <form [formGroup]="checkForm" (ngSubmit)="onSubmit()">
               <div class="mb-3">
                   <mat-form-field class="example-full-width" appearance="fill">

@@ -77,3 +77,7 @@ p {
     font-size: 14px;
     font-weight: 600;
 }
+
+mat-spinner {
+    margin-left: 40%;
+}

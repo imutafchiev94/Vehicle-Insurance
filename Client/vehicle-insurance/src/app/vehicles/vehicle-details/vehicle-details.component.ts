@@ -13,10 +13,16 @@ export class VehicleDetailsComponent implements OnInit {
 
   vehicle: Vehicle;
   hasInsurance: boolean;
+  loading: boolean = false;
   constructor(private vehicleService: VehicleService, 
     private route: ActivatedRoute, 
     private router: Router) 
     {
+      
+    }
+    
+    ngOnInit(): void {
+      this.loading = true;
       this.fetchData();
     }
 
@@ -29,15 +35,13 @@ export class VehicleDetailsComponent implements OnInit {
           next: (res) => {
             res.body != null ? this.vehicle = res.body : 0;
             this.vehicle.insurance != null ? this.hasInsurance = true : this.hasInsurance = false;
+            this.loading = false;
           }, error: (err) => {
-            console.log(err);
             this.router.navigate(['error'], {relativeTo: this.route, skipLocationChange: true});
           }
         })
     }
   
 
-  ngOnInit(): void {
-  }
 
 }

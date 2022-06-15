@@ -17,14 +17,20 @@ export class OwnerDetailsComponent implements OnInit {
   ownerDateOfBirth;
   hasVehicles: boolean;
   datepipe: DatePipe = new DatePipe("en-US");
+  loading: boolean = false;
   constructor(private ownerService: OwnerService,
     private route: ActivatedRoute,
     private router: Router) { 
-      this.fetchData()
     }  
 
+    ngOnInit(): void {
+      this.loading = true;
+      this.fetchData()
+    }
 
-  fetchData() {
+
+
+    fetchData() {
     this.route.params.pipe(map(params => {
       const id = params['id'];
       return id;
@@ -38,15 +44,10 @@ export class OwnerDetailsComponent implements OnInit {
         this.hasVehicles = true;
       }
       this.ownerDateOfBirth = this.datepipe.transform(res.body?.dateOfBirth, "dd-MM-YYYY");
+      this.loading = false;
     }, error: (error) => {
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
     }});
   }
-
-
-  ngOnInit(): void {
-  }
-
-
 
 }

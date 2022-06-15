@@ -17,6 +17,7 @@ export class AddInsuranceComponent implements OnInit {
   status: string;
   imageSrc;
   file;
+  loading: boolean = false;
   constructor(private fb: FormBuilder, private insuranceService: InsuranceService, private router: Router) {
     this.insuranceForm = this.fb.group({
       startDate: ['', Validators.required],
@@ -76,10 +77,10 @@ export class AddInsuranceComponent implements OnInit {
    }
 }
   onSubmit() {
-    
+    this.loading = true;
     console.log(this.insuranceForm.value);
     this.insuranceService.addInsurance(this.insuranceForm.value).subscribe({next: (res) => {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['home']);
     }, error: (err) => {
       console.log(err);
       this.errorMessage = err.error.Error;

@@ -11,6 +11,7 @@ import {environment} from '../../../environments/environment'
 export class CheckOwnerComponent implements OnInit {
 
   checkForm: FormGroup;
+  loading: boolean = true;
   constructor(private fb: FormBuilder, private ownerService: OwnerService) {
     this.checkForm = this.fb.group({
       EGN: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
@@ -33,14 +34,16 @@ export class CheckOwnerComponent implements OnInit {
   status = 0;
 
   onSubmit() {
-    
+    this.loading = true;
     this.ownerService.findOwner(this.checkForm.value).subscribe({next: (res) => {
       this.status = res.status;
         this.isExists = true;
         res.body?._id ? this.ownerId = res.body._id : this.ownerId = "";
+        this.loading = false;
     }, error: (error) => {
       this.status = error.status;
       this.isExists = false;
+      this.loading = false;
     }});
   }
 

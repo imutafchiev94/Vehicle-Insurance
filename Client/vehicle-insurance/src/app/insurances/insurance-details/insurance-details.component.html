@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2"></div>
-      <div class="card col-lg-8">
+      <div class="card col-lg-8" *ngIf="!loading; else elseBlock">
     <div class="card-header">
         <h5 class="card-title text-center mb-2">Details for Insurance</h5>
         <h6 class="card-subtitle mb-2 text-muted text-center">Insurance for {{insurance.vehicle.registrationNumber}}</h6>
@@ -64,6 +64,9 @@
 
 <div class="col-lg-2"></div>
 </div>
+<ng-template #elseBlock>
+    <mat-spinner></mat-spinner>
+</ng-template>
 </div>
-
+</div>
 

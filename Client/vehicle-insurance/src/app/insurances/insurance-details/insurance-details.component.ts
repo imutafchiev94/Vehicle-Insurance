@@ -16,11 +16,13 @@ export class InsuranceDetailsComponent implements OnInit {
   startDate;
   endDate;
   datepipe: DatePipe = new DatePipe("en-US");
+  loading: boolean = false;
   constructor(private insuranceServie: InsuranceService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.loading = true; 
     this.fetchData();
   }
 
@@ -33,6 +35,7 @@ export class InsuranceDetailsComponent implements OnInit {
       res.body != null ? this.insurance = res.body : 0;
       this.startDate = this.datepipe.transform(res.body?.startDate, "dd-MM-YYYY");
       this.endDate = this.datepipe.transform(res.body?.endDate, "dd-MM-YYYY");
+      this.loading = false;
     }, error: (error) => {
       console.log(error);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})

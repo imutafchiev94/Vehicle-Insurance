@@ -16,23 +16,25 @@ export class PaymentToPayComponent implements OnInit {
   payment: Payment;
   paymentForm: FormGroup;
   errorMessage: string;
-  
+  loading: boolean = false;
+  httpLoading: boolean = false;
   constructor(private fb: FormBuilder, 
     private route: ActivatedRoute, 
     private router: Router, 
     private paymentService: PaymentService) {
 
-      this.fetchDataPayments();
       this.paymentForm = this.fb.group({
         creditCardHolderName: ['', Validators.required],
         creditCardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
         creditCardExpire: ['', Validators.required],
         creditCardCVC: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
       })
-
-     }
-
-  ngOnInit(): void {
+      
+    }
+    
+    ngOnInit(): void {
+      this.loading = true;
+      this.fetchDataPayments();
   }
 
   get creditCardHolderName() {
@@ -59,6 +61,7 @@ export class PaymentToPayComponent implements OnInit {
       next: (res) => {
         console.log(res);
         res.body != null ? this.payment = res.body : 0;
+        this.loading = false;
       }, error: (err) => {
         console.log(err);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
@@ -67,10 +70,12 @@ export class PaymentToPayComponent implements OnInit {
   }
 
   onSubmit() {
+    this.httpLoading = true;
     this.paymentService.payPayment(this.payment._id).subscribe({
       next: (res) => {
         this.router.navigate([`/insurances/${this.payment.insurance}`]);
       }, error: (err) => {
+        this.httpLoading = false;
         this.errorMessage = err.error.Error;
       }
     })

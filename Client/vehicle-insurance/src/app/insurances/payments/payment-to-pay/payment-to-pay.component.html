@@ -1,5 +1,5 @@
 <div class="container p-0">
-    <div class="card px-4">
+    <div class="card px-4" *ngIf="!loading; esle elseBlock">
         <p class="h8 py-3">Payment Details</p>
         <div *ngIf="errorMessage" class="alert alert-danger">
             <h5 class="text-center">{{ errorMessage }}</h5>
@@ -56,5 +56,10 @@
             </div>
         </div>
     </form>
+    <mat-spinner *ngIf="httpLoading" color="accent"></mat-spinner>
     </div>
+
+    <ng-template #elseBlock>
+        <mat-spinner></mat-spinner>
+    </ng-template>
 </div>

@@ -19,3 +19,7 @@ p {
 img {
     width: 15rem;
 }
+
+mat-spinner {
+    margin-left: 40%;
+}

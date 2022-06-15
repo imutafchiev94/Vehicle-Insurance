@@ -18,15 +18,18 @@ export class AllPaymentsComponent implements OnInit {
   insurance: Insurance;
   datePipe: DatePipe = new DatePipe('en-US');
   haveToPay: boolean = false;
+  loading: boolean = false;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private paymentService: PaymentService,
     private insuranceService: InsuranceService) { 
-      this.fetchDataPayments();
-      this.fetchDataInsurance();
+
     }
 
   ngOnInit(): void {
+    this.loading = true;
+    this.fetchDataPayments();
+    this.fetchDataInsurance();
   }
 
   fetchDataPayments() {
@@ -42,6 +45,7 @@ export class AllPaymentsComponent implements OnInit {
           this.payments[i].endDate = this.datePipe.transform(this.payments[i].endDate, 'dd-MM-YYYY');
         }
         this.haveToPay = this.payments.some(p => p.isPaid == false)
+        this.loading = false;
       }, error: (err) => {
         console.log(err);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})

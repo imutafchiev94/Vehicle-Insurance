@@ -14,6 +14,7 @@ export class CheckInsurancesComponent implements OnInit {
   status: number = 0;
   isExists: boolean;
   insuranceId: string;
+  loading: boolean = false;
   constructor(private insuranceService: InsuranceService, private fb: FormBuilder) {
     this.checkForm = this.fb.group({
       registrationNumber: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
@@ -30,14 +31,17 @@ export class CheckInsurancesComponent implements OnInit {
   checkInsuranceFormImageUrl = environment.checkInsuranceFormImageUrl;
 
   onSubmit() {
+    this.loading = true;
    this.insuranceService.findInsurance(this.checkForm.value).subscribe({
      next: (res) => {
        this.status = res.status;
        this.isExists = true;
        res.body?._id != null ? this.insuranceId = res.body._id : this.insuranceId = "";
+       this.loading = false;
      }, error: (err) => {
        this.status = err.status;
        this.isExists = false;
+       this.loading = false;
      }
    })
   }

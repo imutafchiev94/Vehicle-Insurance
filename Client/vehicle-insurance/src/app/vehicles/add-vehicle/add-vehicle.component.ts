@@ -12,6 +12,7 @@ export class AddVehicleComponent implements OnInit {
 
   vehicleForm: FormGroup;
   errorMessage: string;
+  loading: boolean = false;
   constructor(private fb: FormBuilder,
     private vehicleService: VehicleService, 
     private router: Router) { 
@@ -49,10 +50,12 @@ export class AddVehicleComponent implements OnInit {
 
 
   onSubmit() {
+    this.loading = true;
     this.vehicleService.addVehicle(this.vehicleForm.value).subscribe({
       next: (res) => {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['home']);
       }, error: (err) => {
+        this.loading = false;
         this.errorMessage = err.error.Error;
       }
     })

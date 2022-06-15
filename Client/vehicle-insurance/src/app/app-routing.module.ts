@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo:'dashboard', pathMatch: 'full'},
+  { path: '', redirectTo:'home', pathMatch: 'full'},
   { path: 'owners', loadChildren: () => import('./owners/owners.module').then(m => m.OwnersModule) },
   { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule) },
   { path: 'insurances', loadChildren: () => import('./insurances/insurances.module').then(m => m.InsurancesModule) },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: '**', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule) }
  
 ];

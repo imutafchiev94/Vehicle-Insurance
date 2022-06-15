@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class AddOwnerComponent { 
   
   ownerForm: FormGroup;
+  loading: boolean = false;
   constructor(private fb: FormBuilder, private ownerService: OwnerService, private router: Router) {  
     
     this.ownerForm = this.fb.group({
@@ -60,9 +61,11 @@ export class AddOwnerComponent {
   errorMessage: string = '';
 
   onSubmit() {
+    this.loading = true;
       this.ownerService.addOwner(this.ownerForm.value).subscribe({next: (res) => {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['home']);
       }, error: (err) => {
+        this.loading = false;
         this.errorMessage = err.error.Error;
       }})
   }

@@ -10,8 +10,6 @@ const OwnerSchema = new mongoose.Schema({
     }, middleName: {
         type: String,
         required: false,
-        minlength: 3,
-        maxlength: 50
     }, surname: {
         type: String,
         required: true,

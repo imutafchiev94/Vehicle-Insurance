@@ -1,5 +1,5 @@
 
-<mat-card>
+<mat-card *ngIf="!loading; else elseBlock">
     <mat-card-title>
         <p>Welcome to our Vehicle Insurance</p>
     </mat-card-title>
@@ -12,3 +12,7 @@
         </mat-card-title>
     </mat-card-footer>
 </mat-card>
+
+<ng-template #elseBlock>
+    <mat-spinner></mat-spinner>
+</ng-template>
