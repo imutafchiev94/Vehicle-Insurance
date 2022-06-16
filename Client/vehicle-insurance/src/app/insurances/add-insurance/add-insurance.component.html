@@ -10,30 +10,6 @@
         <form [formGroup]="insuranceForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Start Date</mat-label>
-              <!-- #docregion toggle -->
-              <input
-                matInput
-                [matDatepicker]="picker"
-                formControlName="startDate"
-              />
-              <mat-hint>MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              <!-- #enddocregion toggle -->
-              <mat-error
-                *ngIf="startDate?.touched && startDate?.errors?.['required']"
-                class="mt-2"
-              >
-                This field is required!
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="mb-3">
-            <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Owner EGN</mat-label>
               <input
                 type="text"
@@ -100,7 +76,7 @@
                 This field is required!
               </mat-error>
               <mat-error
-                *ngIf="totalAmount?.touched && (totalAmount?.errors?.['minlength'])"
+                *ngIf="totalAmount?.touched && (totalAmount?.errors?.['min'])"
                 class="mt-2"
               >
                 Total Amount must be at least 50 lv.!

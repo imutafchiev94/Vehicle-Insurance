@@ -1,0 +1,35 @@
+.container-fluid{
+    background-color: ghostwhite;
+    margin-top: -0.7%;
+}
+.card {
+margin-top: 10rem;
+margin-bottom: 10rem;
+padding: 1%;
+}
+
+.all-accidents {
+    margin-left: 1rem;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+mat-spinner {
+    margin-left: 40%;
+}
+
+.sort {
+    line-height: 0.6rem;
+    font-weight: bold;
+}
+
+mat-icon {
+    line-height: 2rem;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    }

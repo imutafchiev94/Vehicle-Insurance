@@ -7,6 +7,8 @@ import { AllAccidentsComponent } from './all-accidents/all-accidents.component';
 import { CheckAccidentComponent } from './check-accident/check-accident.component';
 import { AddAccidentComponent } from './add-accident/add-accident.component';
 import { AccidentDetailsComponent } from './accident-details/accident-details.component';
+import { MaterialExampleModule } from 'src/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { AccidentDetailsComponent } from './accident-details/accident-details.co
   ],
   imports: [
     CommonModule,
-    AccidentsRoutingModule
+    AccidentsRoutingModule,
+    MaterialExampleModule,
+    ReactiveFormsModule
   ]
 })
 export class AccidentsModule { }

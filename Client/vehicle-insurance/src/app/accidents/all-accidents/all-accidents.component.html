@@ -1,1 +1,49 @@
-<p>all-accidents works!</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="card col-lg-10" *ngIf="!loading; else elseBlock">
+    <div class="card-header">
+        <h5 class="card-title text-center mb-4">All Accidents</h5>
+        <div class="text-center mb-4">
+        <img [src]="allAccidentsImageUrl" class="img-fluid mb-2" />
+        </div>
+        </div>
+        <div class="card-body">
+           <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col"><button class="btn sort" (click)="sortByDate()">Date Of Accident
+                        <mat-icon *ngIf="!sortByDateAscending">arrow_upward</mat-icon> 
+                        <mat-icon *ngIf="sortByDateAscending">arrow_downward</mat-icon></button></th>
+                        <th class="text-center" scope="col">Vehicle Registration Number</th>
+                        <th class="text-center" scope="col">Driver's First Name</th>
+                        <th class="text-center" scope="col">Driver's Surname</th>
+                    <th class="text-center" scope="col">Actions</th>
+                </tr>
+            </thead>
+                <tbody>
+                   <tr *ngFor="let accident of accidents">
+                        <td class="text-center">{{accident.dateOfAccident}}</td>
+                        <td class="text-center">{{accident.vehicle.registrationNumber}}</td>
+                        <td class="text-center">{{accident.driverFirstName}}</td>
+                        <td class="text-center">{{accident.driverSurname}}</td>
+                        <td class="text-center">
+                            <a mat-raised-button color="primary" routerLink="/accidents/{{accident._id}}" class="all-accidents">Accident Details</a>
+                            <a mat-raised-button color="accent" routerLink="/vehicles/{{accident.vehicle._id}}" class="all-accidents">Vehicle Details</a>
+                            <a mat-raised-button color="warn" routerLink="/insurances/{{accident.insurance}}" class="all-accidents">Insurance Details</a>
+                        </td>
+                   </tr>
+                </tbody>
+           </table>
+        </div>
+    
+
+<div class="col-lg-1"></div>
+</div>
+<ng-template #elseBlock>
+    <mat-spinner></mat-spinner>
+</ng-template>
+</div>
+</div>
+
+

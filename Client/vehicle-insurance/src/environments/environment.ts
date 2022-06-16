@@ -12,6 +12,7 @@ export const environment = {
   vehicleDetailsImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/Clerk-icons-08.png?alt=media&token=9f82c954-6f51-4f2f-a4f3-ccabda7f43df',
   checkInsuranceFormImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/car-insurance-add-ons.png?alt=media&token=ae8a4915-dd14-44aa-aa33-0c11e036d4bc',
   allInsurancesImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655369343/iStock_insurancehands300_l2jjmt.png',
+  allAccidentsImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655389820/Vehicle%20Insurance/car-crash-cuate-9056_nihsv9.webp',
   apiUrl: 'http://localhost:3000/api/',
 };
 

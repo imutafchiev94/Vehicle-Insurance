@@ -1,1 +1,232 @@
-<p>add-accident works!</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="card col-lg-4">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Add Accident</h5>
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            <h5 class="text-center">{{ errorMessage }}</h5>
+          </div>
+          <form [formGroup]="accidentForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Date of Accident</mat-label>
+                <!-- #docregion toggle -->
+                <input
+                  matInput
+                  [matDatepicker]="dateOfAccidentPicker"
+                  formControlName="accidentDate"
+                />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dateOfAccidentPicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dateOfAccidentPicker></mat-datepicker>
+                <!-- #enddocregion toggle -->
+                <mat-error
+                  *ngIf="accidentDate?.touched && accidentDate?.errors?.['required']"
+                  class="mt-2"
+                >
+                  This field is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Driver First Name</mat-label>
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="driverFirstName"
+                    placeholder="John"
+                  />
+                  <mat-hint>The field is required</mat-hint>
+                  <mat-error
+                    *ngIf="driverFirstName?.touched && driverFirstName?.errors?.['required']"
+                    class="mt-2"
+                  >
+                    This field is required!
+                  </mat-error>
+                  <mat-error
+                    *ngIf="driverFirstName?.touched && (driverFirstName?.errors?.['minlength'])"
+                    class="mt-2"
+                  >
+                    First Name must be at least 3 symbols
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Driver Middle Name</mat-label>
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="driverMiddleName"
+                    placeholder="D"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Driver Surname</mat-label>
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="driverSurname"
+                    placeholder="Doe"
+                  />
+                  <mat-hint>The field is required</mat-hint>
+                  <mat-error
+                    *ngIf="driverSurname?.touched && driverSurname?.errors?.['required']"
+                    class="mt-2"
+                  >
+                    This field is required!
+                  </mat-error>
+                  <mat-error
+                    *ngIf="driverSurname?.touched && (driverSurname?.errors?.['minlength'])"
+                    class="mt-2"
+                  >
+                    Surname must be at least 3 symbols
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="mb-3">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Driver's BirthDate</mat-label>
+                <!-- #docregion toggle -->
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="driverDateOfBirth"
+                />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <!-- #enddocregion toggle -->
+                <mat-error
+                  *ngIf="accidentDate?.touched && accidentDate?.errors?.['required']"
+                  class="mt-2"
+                >
+                  This field is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Driver's Gender</mat-label>
+                  <input
+                    type="text"
+                    placeholder="Pick one"
+                    aria-label="driverGender"
+                    matInput
+                    formControlName="driverGender"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-hint>Gender is required!</mat-hint>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of options" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="driverGender?.touched && driverGender?.errors?.['required']"
+                    class="mt-2"
+                  >
+                    This field is required!
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            <div class="mb-3">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Driver EGN</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  formControlName="driverEGN"
+                  placeholder="1234567890"
+                />
+                <mat-hint>EGN is required. Only valid EGNs</mat-hint>
+                <mat-error
+                  *ngIf="driverEGN?.touched && driverEGN?.errors?.['required']"
+                  class="alert alert-danger mt-2"
+                >
+                  This field is required!
+                </mat-error>
+                <mat-error
+                  *ngIf="driverEGN?.touched && (driverEGN?.errors?.['minlength'] || driverEGN?.errors?.['maxlength'])"
+                  class="alert alert-danger mt-2"
+                >
+                  EGN must be exatctly 10 symbols!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div class="mb-3">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Vehicle Registration Number</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  formControlName="vehicleRegistrationNumber"
+                  placeholder="PB4053CB"
+                />
+                <mat-hint>Vehicle Registration Number is required</mat-hint>
+                <mat-error
+                  *ngIf="vehicleRegistrationNumber?.touched && vehicleRegistrationNumber?.errors?.['required']"
+                  class="mt-2"
+                >
+                  This field is required!
+                </mat-error>
+                <mat-error
+                  *ngIf="vehicleRegistrationNumber?.touched && (vehicleRegistrationNumber?.errors?.['minlength'] || vehicleRegistrationNumber?.errors?.['maxlength'])"
+                  class="mt-2"
+                >
+                  Vehicle Registration Number must be between 6 and 8 symbols!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mb-3 example-full-width">
+              <input type="file" formControlName="imageSource" (change)="onFileSelected($event)" />
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Accident description"></textarea>
+                    <mat-hint>Description is required</mat-hint>
+                <mat-error
+                  *ngIf="description?.touched && description?.errors?.['required']"
+                  class="mt-2"
+                >
+                  This field is required!
+                </mat-error>
+                <mat-error
+                  *ngIf="description?.touched && description?.errors?.['minlength']"
+                  class="mt-2"
+                >
+                  Description must be between 6 and 8 symbols!
+                </mat-error>
+                  </mat-form-field>
+            </div>
+  
+            <div class="col-auto mt-3 mb-3">
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                class="mb-3"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+            <mat-spinner *ngIf="loading"></mat-spinner>
+        </div>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>
+  

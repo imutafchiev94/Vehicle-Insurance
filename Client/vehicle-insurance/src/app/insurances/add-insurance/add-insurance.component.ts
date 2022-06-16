@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InsuranceService } from '../../services/insurance.service';
 import { CountOfPayments } from '../../models/enums/CountOfPayments';
 import { Router } from '@angular/router';
-import { read } from '@popperjs/core';
 
 @Component({
   selector: 'app-add-insurance',

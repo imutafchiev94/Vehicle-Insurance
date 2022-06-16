@@ -51,6 +51,7 @@ async function createInsurance(data) {
     let newInsurance = new Insurance(newInsuranceData);
 
     
+    
 
     await newInsurance.save();
 
@@ -63,6 +64,9 @@ async function createInsurance(data) {
         newInsurance.payments.push(payment);
     }
     await newInsurance.save();
+    vehicle.insurance = newInsurance;
+
+    await vehicle.save();
 }
 
 async function findInsurance(registrationNumber) {
