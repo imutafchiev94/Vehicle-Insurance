@@ -18,7 +18,7 @@ export class AddVehicleComponent implements OnInit {
     private router: Router) { 
       this.vehicleForm = this.fb.group({
         brand: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
-        model: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+        model: ['', Validators.required],
         yearOfManufacture: ['', [Validators.required, Validators.min(1930), Validators.max(2022)]],
         registrationNumber: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
         ownerEGN: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]

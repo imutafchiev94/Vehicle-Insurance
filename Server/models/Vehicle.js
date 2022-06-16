@@ -9,8 +9,6 @@ const VehicleSchema = new mongoose.Schema({
     }, model: {
         type: String,
         required: true,
-        minlength: 3,
-        maxlength: 60
     }, yearOfManufacture : {
         type: Number,
         required: true,

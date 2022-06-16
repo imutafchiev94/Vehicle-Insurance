@@ -16,7 +16,17 @@ async function createInsurance(data) {
     });
     let owner = await Owner.findOne({
         EGN: data.ownerEGN
-    })
+    });
+
+    let searchedInsurance = await Insurance.find({
+      vehicle: vehicle._id
+    });
+
+    console.log(searchedInsurance);
+
+    if(searchedInsurance.length > 0) {
+      throw {message: `Vehicle with registration number "${data.vehicleRegistrationNumber}" already have insurance!`};
+    }
 
     let currentDate = new Date(Date.now());
 
@@ -31,11 +41,14 @@ async function createInsurance(data) {
         countOfPayments: data.countOfPayments
     }
 
+    console.log(data.imageSource);
+
     let image = data.imageSource;
+
+    
 
     await cloudinary.uploader.upload(image, {folder: 'Vehicle Insurance'})
     .then(function(file) {
-      console.log('here')
       newInsuranceData.imageUrl = file.url})
     .catch(function(err) {console.log('here')});
 
@@ -90,8 +103,21 @@ async function getInsurance(id) {
   
 }
 
+async function getAllInsurances() {
+  let insurances = await Insurance.find()
+  .populate('vehicleOwner')
+  .populate('vehicle');
+
+  if(!insurances) {
+    throw {message: 'error'};
+  }
+
+  return insurances;
+}
+
 module.exports = {
 createInsurance,
 findInsurance,
-getInsurance
+getInsurance,
+getAllInsurances,
 }

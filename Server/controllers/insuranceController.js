@@ -20,6 +20,16 @@ router.post('/find', async (req, res) => {
     }
 })
 
+router.get('/', async (req, res) => {
+    try {
+        console.log('here');
+        let insurances = await insuranceService.getAllInsurances();
+        res.json(insurances);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+})
 router.get('/:id', async (req, res) => {
     try {
         let insurance = await insuranceService.getInsurance(req.params.id);
@@ -28,6 +38,7 @@ router.get('/:id', async (req, res) => {
         res.status(400).json({Error: err.message});
     }
 })
+
 
 
 module.exports = router;

@@ -37,7 +37,7 @@ export class InsuranceDetailsComponent implements OnInit {
       this.endDate = this.datepipe.transform(res.body?.endDate, "dd-MM-YYYY");
       this.loading = false;
     }, error: (error) => {
-      console.log(error);
+      
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
     }});
   }

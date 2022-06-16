@@ -23,4 +23,8 @@ export class InsuranceService {
   findInsurance(data): Observable<HttpResponse<Insurance>> {
     return this.http.post<Insurance>(this.insurancePath + '/find', data, {observe: 'response'});
   }
+
+  getAllInsurances(): Observable<HttpResponse<Array<Insurance>>> {
+    return this.http.get<Array<Insurance>>(this.insurancePath + '/', {observe: 'response'});
+  }
 }

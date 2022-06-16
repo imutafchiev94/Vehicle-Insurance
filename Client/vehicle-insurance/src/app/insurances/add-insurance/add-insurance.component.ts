@@ -69,13 +69,60 @@ export class AddInsuranceComponent implements OnInit {
 
   onFileSelected(event) {
     this.file = event.target.files[0]
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (event) => {
-     this.imageSrc = (<FileReader>event.target).result;
-     this.insuranceForm.patchValue({imageSource: this.imageSrc});
+    this.resizeImage(this.file, 350, 250).then(blob => {
+      const reader = new FileReader();
+      reader.onload = () => {
+          this.imageSrc = reader.result.toString();
+          this.insuranceForm.patchValue({imageSource: this.imageSrc});
+      };
+
+      reader.readAsDataURL(blob);
+      this.insuranceForm.patchValue({imageSource: this.imageSrc});
+
+    }, error => {
+        console.log("Photo error!", error);
+    });
+     
    }
+
+resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.src = URL.createObjectURL(file);
+      image.onload = () => {
+          const width = image.width;
+          const height = image.height;
+
+          if (width <= maxWidth && height <= maxHeight) {
+              resolve(file);
+          }
+
+          let newWidth;
+          let newHeight;
+
+          if (width > height) {
+              newHeight = height * (maxWidth / width);
+              newWidth = maxWidth;
+          } else {
+              newWidth = width * (maxHeight / height);
+              newHeight = maxHeight;
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = newWidth;
+          canvas.height = newHeight;
+
+          const context = canvas.getContext('2d');
+
+          context?.drawImage(image, 0, 0, newWidth, newHeight);
+
+          canvas.toBlob(resolve, file.type);
+      };
+      image.onerror = reject;
+  });
 }
+
+
   onSubmit() {
     this.loading = true;
     console.log(this.insuranceForm.value);

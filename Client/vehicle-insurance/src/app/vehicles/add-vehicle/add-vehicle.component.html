@@ -29,9 +29,6 @@
                     <mat-error *ngIf="model?.touched && model?.errors?.['required']" class="mt-2">
                         This field is required!
                       </mat-error>
-                      <mat-error *ngIf="model?.touched && (model?.errors?.['minlength'] || model?.errors?.['maxlength'])" class="mt-2">
-                        Model must be between 3 and 40 symbols!
-                      </mat-error>
                   </mat-form-field>
             </div>
             <div class="mb-3">

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddInsuranceComponent } from './add-insurance/add-insurance.component';
+import { AllInsurancesComponent } from './all-insurances/all-insurances.component';
 import { CheckInsurancesComponent } from './check-insurances/check-insurances.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 
@@ -8,6 +9,7 @@ import { InsuranceDetailsComponent } from './insurance-details/insurance-details
 const routes: Routes = [
   { path: 'check-insurance', component: CheckInsurancesComponent },
   { path: 'add-insurance', component: AddInsuranceComponent },
+  { path: 'all', component: AllInsurancesComponent },
   { path: ':id', component: InsuranceDetailsComponent },
   { path: ':id/payments', loadChildren: () => import('./payments/payments.module').then(m => m.PaymentsModule) }
 ];
