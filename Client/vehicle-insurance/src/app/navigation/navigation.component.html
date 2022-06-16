@@ -28,18 +28,18 @@
         <mat-icon>directions_car</mat-icon>
         <span>Add Vehicle</span>
       </button>
-      <button mat-menu-item routerLink="/vehicles/find-vehicle-by-owner">
-        <mat-icon>contact_emergency</mat-icon>
-        <span>Find Vehicle by Owner</span>
-      </button>
     </mat-menu>
     <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="insurances" aria-label="Menu for insurance pages">
       Insurances
     </button>
     <mat-menu #insurances="matMenu">
+      <button mat-menu-item routerLink="/insurances/all">
+        <mat-icon>collections_bookmark</mat-icon>
+        <span>All Insurances</span>
+      </button>
       <button mat-menu-item routerLink="/insurances/check-insurance">
         <mat-icon>task</mat-icon>
-        <span>Check Insurances</span>
+        <span>Check Insurance</span>
       </button>
       <button mat-menu-item routerLink="/insurances/add-insurance">
         <mat-icon>history_edu</mat-icon>

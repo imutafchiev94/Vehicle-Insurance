@@ -1,16 +1,23 @@
 <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="card col-lg-8" *ngIf="!loading; else elseBlock">
+      <div class="col-lg-1"></div>
+      <div class="card col-lg-10" *ngIf="!loading; else elseBlock">
     <div class="card-header">
-        <h5 class="card-title text-center mb-2">All Insurances</h5>
+        <h5 class="card-title text-center mb-4">All Insurances</h5>
+        <div class="text-center mb-4">
+        <img [src]="allInsurancesImageUrl" class="img-fluid mb-2" />
+        </div>
         </div>
         <div class="card-body">
            <table class="table">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col">Start Date</th>
-                    <th class="text-center" (click)="sort()" scope="col">End Date</th>
+                    <th class="text-center" scope="col"><button class="btn sort" (click)="sortByStartDate()">Start Date 
+                        <mat-icon *ngIf="!sortStartDateAscending">arrow_upward</mat-icon> 
+                        <mat-icon *ngIf="sortStartDateAscending">arrow_downward</mat-icon></button></th>
+                    <th class="text-center" scope="col"><button class="btn sort" (click)="sortByEndDate()">End Date 
+                        <mat-icon *ngIf="!sortEndDateAscending">arrow_upward</mat-icon> 
+                        <mat-icon *ngIf="sortEndDateAscending">arrow_downward</mat-icon></button></th>
                     <th class="text-center" scope="col">Total Amount</th>
                     <th class="text-center" scope="col">Due Amount</th>
                     <th class="text-center" scope="col">Vehicle Registration Number</th>
@@ -37,7 +44,7 @@
         </div>
     
 
-<div class="col-lg-2"></div>
+<div class="col-lg-1"></div>
 </div>
 <ng-template #elseBlock>
     <mat-spinner></mat-spinner>
