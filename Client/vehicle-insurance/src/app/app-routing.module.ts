@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule) },
   { path: 'insurances', loadChildren: () => import('./insurances/insurances.module').then(m => m.InsurancesModule) },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'accidents', loadChildren: () => import('./accidents/accidents.module').then(m => m.AccidentsModule) },
   { path: '**', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule) }
  
 ];

@@ -50,7 +50,7 @@ async function payPaymentForInsurance(paymentId) {
   if(currentDate > payment.endDate) {
     insurance.isInvalid = true;
   }
-  
+
   insurance.dueAmount -= payment.amount;
 
   await payment.save();
