@@ -18,6 +18,9 @@ const PaymentSchema = new mongoose.Schema({
     }, insurance : {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Insurance"
+    }, dateOfPay: {
+        type: Date,
+        required: false
     }
 })
 

@@ -38,10 +38,19 @@ async function payPaymentForInsurance(paymentId) {
   if(!payment) {
     throw {message:`Payment with ID ${paymentId} doesn't exist!`}
   }
+  
+  let currentDate = new Date(Date.now());
+  
   payment.isPaid = true;
+
+  payment.dateOfPay = currentDate;
 
   let insurance = await Insurance.findById(payment.insurance);
 
+  if(currentDate > payment.endDate) {
+    insurance.isInvalid = true;
+  }
+  
   insurance.dueAmount -= payment.amount;
 
   await payment.save();

@@ -34,7 +34,12 @@ const InsuranceSchema = new mongoose.Schema({
     }, payments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Payments"
-    }] 
+    }], 
+    isInvalid: {
+        type: Boolean,
+        required: true,
+        default: false
+    }
 })
 
 module.exports = mongoose.model('Insurance', InsuranceSchema);

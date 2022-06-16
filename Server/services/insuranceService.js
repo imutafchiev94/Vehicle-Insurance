@@ -22,8 +22,6 @@ async function createInsurance(data) {
       vehicle: vehicle._id
     });
 
-    console.log(searchedInsurance);
-
     if(searchedInsurance.length > 0) {
       throw {message: `Vehicle with registration number "${data.vehicleRegistrationNumber}" already have insurance!`};
     }
@@ -41,16 +39,12 @@ async function createInsurance(data) {
         countOfPayments: data.countOfPayments
     }
 
-    console.log(data.imageSource);
-
     let image = data.imageSource;
-
-    
 
     await cloudinary.uploader.upload(image, {folder: 'Vehicle Insurance'})
     .then(function(file) {
       newInsuranceData.imageUrl = file.url})
-    .catch(function(err) {console.log('here')});
+    .catch(function(err) {throw {message: err[0].Error}});
 
    
 
