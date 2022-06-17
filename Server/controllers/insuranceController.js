@@ -6,7 +6,7 @@ router.post('/create', async (req, res) => {
         let message = await insuranceService.createInsurance(req.body);
         res.json(message);
     } catch(err) {
-        console.log(err);
+        
         res.status(400).json({Error: err.message})
     }
 });
@@ -22,11 +22,11 @@ router.post('/find', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        console.log('here');
+        
         let insurances = await insuranceService.getAllInsurances();
         res.json(insurances);
     } catch (err) {
-        console.log(err);
+        
         res.status(400).json(err);
     }
 })

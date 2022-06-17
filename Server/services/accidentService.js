@@ -9,7 +9,6 @@ const cloudinaryConfig = require('../config/cloudinaryConfig');
 cloudinary.config(cloudinaryConfig);
 
 async function addAccident(data) {
-    console.log(data);
     let vehicle = await Vehicle.findOne({
         registrationNumber: data.vehicleRegistrationNumber
     });
