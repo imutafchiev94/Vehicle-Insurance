@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         let accidents = await accidentService.getAllAccidents();
         res.json(accidents);
     } catch(err) {
-        res.status(400).json({Error: err.message});
+        res.status(404).json({Error: err.message});
     }
 })
 

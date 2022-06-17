@@ -16,7 +16,7 @@ router.post('/find', async (req, res) => {
         let insurance = await insuranceService.findInsurance(req.body.registrationNumber);
         res.json(insurance);
     } catch(err) {
-        res.status(400).json({Error: err.message});
+        res.status(404).json({Error: err.message});
     }
 })
 
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
         res.json(insurances);
     } catch (err) {
         
-        res.status(400).json(err);
+        res.status(404).json(err);
     }
 })
 router.get('/:id', async (req, res) => {
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
         let insurance = await insuranceService.getInsurance(req.params.id);
         res.json(insurance);
     } catch(err) {
-        res.status(400).json({Error: err.message});
+        res.status(404).json({Error: err.message});
     }
 })
 

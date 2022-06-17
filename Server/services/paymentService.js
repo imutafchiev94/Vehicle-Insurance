@@ -6,7 +6,7 @@ async function allPaymentsForInsurance(id) {
   let insurance = await Insurance.findById(id);
 
   if(!insurance) {
-    throw {message: `Insurance with ID "${id}" doesn't exist in our database`};
+    throw {message: `Insurance with Id "${id}" doesn't exist in our database`};
   }
 
   let payments = await Payment.find({
@@ -21,7 +21,7 @@ async function firstPaymentToPayForInsurance(id) {
   let insurance = await Insurance.findById(id).populate('payments');
 
   if (!insurance) {
-    throw { message: "Insurance with this Id doesn't exist!" };
+    throw { message: `Insurance with Id ${id} doesn't exist!` };
   }
 
   let payment = insurance.payments.filter(p => p.isPaid == false)[0];
@@ -65,7 +65,7 @@ async function createPayment(amount, insuranceId, startDate) {
     let searchedInsurance = await Insurance.findById(insuranceId);
 
     if (!searchedInsurance) {
-        throw { message: "Insurance with this Id doesn't exist!" };
+        throw { message: `Insurance with Id ${insuranceId} doesn't exist!` };
     }
     
     let currentDate = new Date(startDate);

@@ -46,6 +46,7 @@ export class OwnerDetailsComponent implements OnInit {
       this.ownerDateOfBirth = this.datepipe.transform(res.body?.dateOfBirth, "dd-MM-YYYY");
       this.loading = false;
     }, error: (error) => {
+      console.log(error);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
     }});
   }

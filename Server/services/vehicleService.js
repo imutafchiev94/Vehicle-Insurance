@@ -25,7 +25,7 @@ async function addVehicle(data) {
   owner.vehicles.push(newVehicle);
   await owner.save();
 
-  return { message: "Vehicle was add successfully!" };
+  return { message: "Vehicle was added successfully!" };
 }
 
 
@@ -35,7 +35,7 @@ async function findVehicle(registrationNumber) {
     });
 
     if(!vehicle) {
-        throw { message: `Vehicle with this registration number "${registrationNumber}" doesn't exist in our database` };
+        throw { message: `Vehicle with registration number ${registrationNumber} doesn't exist in our database!` };
     }
 
     return vehicle;
@@ -46,7 +46,7 @@ async function getVehicle(id) {
   .populate('owner');
 
   if(!vehicle) {
-    throw {message: `Vehicle with this ID ${id} doesn't exists in our database`};
+    throw {message: `Vehicle with Id ${id} doesn't exist in our database!`};
   }
 
   return vehicle;

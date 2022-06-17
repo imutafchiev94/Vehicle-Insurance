@@ -12,7 +12,7 @@ async function addOwner(ownerData) {
     })
 
     if(searchedOwner) {
-        throw {message: 'Owner with this EGN alredy exists!'};
+        throw {message: `Owner with EGN ${ownerData.EGN} alredy exists in our database!`};
     }
 
     let newOwnerData = {
@@ -39,7 +39,7 @@ async function findOwner(EGN) {
     .populate('vehicles');
 
     if(!searchedOwner) {
-        throw {message: "Owner with this EGN doesn't exist in our database!"};
+        throw {message: `Owner with EGN ${EGN} doesn't exist in our database!`};
     }
     return searchedOwner;
 }
@@ -49,7 +49,7 @@ async function findOwnerById(id) {
     .populate('vehicles');
 
     if(!owner) {
-        throw {message: `Owner with this Id ${id} doesn't exist!`};        
+        throw {message: `Owner with Id ${id} doesn't exist in our database!`};        
     }
 
     return owner;

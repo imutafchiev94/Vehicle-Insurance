@@ -6,7 +6,7 @@ router.get('/:id/all', async (req, res) => {
         let payments = await paymentService.allPaymentsForInsurance(req.params.id);
         res.json(payments);
     } catch (err) {
-        res.status(400).json({Error: err.message});
+        res.status(404).json({Error: err.message});
     }
 });
 
@@ -15,7 +15,7 @@ router.get('/:id/to-pay', async (req, res) => {
         let payment = await paymentService.firstPaymentToPayForInsurance(req.params.id);
         res.json(payment);
     } catch (err) {
-        res.status(400).json({Error: err.message});
+        res.status(404).json({Error: err.message});
     }
 });
 

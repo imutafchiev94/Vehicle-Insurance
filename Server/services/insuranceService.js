@@ -50,9 +50,6 @@ async function createInsurance(data) {
 
     let newInsurance = new Insurance(newInsuranceData);
 
-    
-    
-
     await newInsurance.save();
 
     let paymentsAmount = (data.totalAmount / data.countOfPayments).toFixed(2);
@@ -75,17 +72,17 @@ async function findInsurance(registrationNumber) {
       });
     
       if(!vehicle) {
-        throw {message: `Vehicle with registration number "${registrationNumber}" doesn't exist in our database`};
+        throw {message: `Vehicle with registration number "${registrationNumber}" doesn't exist in our database!`};
       }
     
       let searchedInsurance = await Insurance.findOne({
         vehicle: vehicle._id,
       });
       if (!searchedInsurance) {
-        throw { message: "Insurance with this Id doesn't exist!" };
+        throw { message: `Insurance with Id ${searchedInsurance._id} doesn't exist!` };
       }
 
-      return searchedInsurance;
+      return {message: 'Insurance was added successfully!'};
     
 }
 
@@ -94,7 +91,7 @@ async function getInsurance(id) {
     .populate('vehicleOwner')
     .populate('vehicle');
     if (!insurance) {
-      throw { message: "Insurance with this Id doesn't exist!" };
+      throw { message: `Insurance with Id ${insurance._id} doesn't exist!` };
     }
 
     return insurance;
@@ -107,7 +104,7 @@ async function getAllInsurances() {
   .populate('vehicle');
 
   if(!insurances) {
-    throw {message: 'error'};
+    throw {message: 'There have no insurances!'};
   }
 
   return insurances;

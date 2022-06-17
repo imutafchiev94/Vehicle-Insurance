@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const config = require('./config/config');
 const router = require('./routes');
@@ -12,3 +13,5 @@ require('./config/mongooseConfig')(app);
 app.use('/api', router);
 
 app.listen(config.PORT, () => console.log(`Server is listening on ${config.PORT}`));
+
+module.exports = app;

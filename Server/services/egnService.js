@@ -84,6 +84,11 @@
             return true;
         }
         return false;
+    } else if(controlDigit == 10) {
+        if(parseInt(EGN[9]) == 0) {
+            return true;
+        }
+        return false;
     }
 }
 
