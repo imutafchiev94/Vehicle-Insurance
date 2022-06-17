@@ -38,7 +38,6 @@ export class AllPaymentsComponent implements OnInit {
       return id;
     }), mergeMap(id => this.paymentService.getAllPayments(id))).subscribe({
       next: (res) => {
-        console.log(res);
         res.body != null ? this.payments = res.body : 0;
         for (let i = 0; i < this.payments.length; i++) {
           this.payments[i].startDate = this.datePipe.transform(this.payments[i].startDate, 'dd-MM-YYYY');
@@ -47,7 +46,6 @@ export class AllPaymentsComponent implements OnInit {
         this.haveToPay = this.payments.some(p => p.isPaid == false)
         this.loading = false;
       }, error: (err) => {
-        console.log(err);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
       }
     })

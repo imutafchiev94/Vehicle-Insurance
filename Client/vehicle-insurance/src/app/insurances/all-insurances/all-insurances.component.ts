@@ -23,7 +23,7 @@ export class AllInsurancesComponent implements OnInit {
     private insuranceService: InsuranceService) { }
 
   ngOnInit(): void {
-    console.log("here");
+
     this.loading = true;
     this.fetchDataInsurance();
   }
@@ -31,7 +31,6 @@ export class AllInsurancesComponent implements OnInit {
   fetchDataInsurance() {
     this.insuranceService.getAllInsurances().subscribe({
       next: (res) => {
-        console.log("here");
         res.body != null ? this.insurances = res.body : 0;
         for (let i = 0; i < this.insurances.length; i++) {
           this.insurances[i].startDate = this.datePipe.transform(this.insurances[i].startDate, 'dd-MM-YYYY');
@@ -39,7 +38,6 @@ export class AllInsurancesComponent implements OnInit {
         }
         this.loading = false;
       }, error: (err) => {
-        console.log(err);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
       }
     })
@@ -51,7 +49,6 @@ export class AllInsurancesComponent implements OnInit {
       this.insurances.sort(function (a, b) {
         return a.endDate > b.endDate ? 1 : a.endDate < b.endDate ? -1 : 0
       })
-      console.log(this.insurances);
   } else {
     this.sortEndDateAscending = false;
       this.insurances.sort(function (a, b) {
@@ -66,7 +63,6 @@ sortByStartDate() {
     this.insurances.sort(function (a, b) {
       return a.startDate > b.startDate ? 1 : a.startDate < b.startDate ? -1 : 0
     })
-    console.log(this.insurances);
 } else {
   this.sortStartDateAscending = false;
     this.insurances.sort(function (a, b) {

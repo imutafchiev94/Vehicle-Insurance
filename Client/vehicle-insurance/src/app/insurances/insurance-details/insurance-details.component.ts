@@ -31,7 +31,6 @@ export class InsuranceDetailsComponent implements OnInit {
       const id = params['id'];
       return id;
     }), mergeMap(id => this.insuranceServie.getInsurance(id))).subscribe({next: (res) => {
-      console.log(res);
       res.body != null ? this.insurance = res.body : 0;
       this.startDate = this.datepipe.transform(res.body?.startDate, "dd-MM-YYYY");
       this.endDate = this.datepipe.transform(res.body?.endDate, "dd-MM-YYYY");

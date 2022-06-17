@@ -1,1 +1,80 @@
-<p>accident-details works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-1"></div>
+      <div class="card col-lg-10" *ngIf="!loading; else elseBlock">
+    <div class="card-header">
+        <h5 class="card-title text-center mb-2">Details for Accident</h5>
+        <h6 class="card-subtitle mb-2 text-muted text-center">Accident for {{accident.vehicle.registrationNumber}}</h6>
+        </div>
+        <div class="card-body">
+           <table class="table row" >
+                <tbody>
+                    <tr>
+                        <th class="text-center col-2">Date of Accident</th>
+                        <td class="text-center">{{accidentDate}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Driver's First Name</th>
+                        <td class="text-center">{{accident.driverFirstName}}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Driver's Middle Name</th>
+                        <td class="text-center" *ngIf="accident.driverMiddleName; else middleName">{{accident.driverMiddleName}}</td>
+                        <ng-template #middleName>
+                            <td class="text-center text-danger">Missing</td>
+                        </ng-template>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Driver's Surname</th>
+                        <td class="text-center">{{accident.driverSurname}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Driver's EGN</th>
+                        <td class="text-center">{{accident.driverEGN}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vehicle's Model</th>
+                        <td class="text-center">{{accident.vehicle.model}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vehicle's Brand</th>
+                        <td class="text-center">{{accident.vehicle.brand}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Vehicle's Registration Number</th>
+                        <td class="text-center">{{accident.vehicle.registrationNumber}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center align-middle">Accident's Image</th>
+                        <td class="text-center"><img [src]="accident.imageUrl" class="image-fluid"></td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Insurance Start Date</th>
+                        <td class="text-center">{{startDate}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Insurance End Date</th>
+                        <td class="text-center">{{endDate}}</td>
+                    </tr>
+                    <tr >
+                        <th class="text-center">Is Insurance Valid</th>
+                        <td class="text-center text-success" *ngIf="!accident.insurance.isInvalid; else invalidInsurance">Yes</td>
+                        <ng-template #invalidInsurance>
+                            <td class="text-center text-danger">No</td>
+                        </ng-template>
+                    </tr>
+                    <tr >
+                        <th class="text-center align-middle">Description</th>
+                        <td class="text-center">{{accident.description}}</td>
+                    </tr>
+                </tbody>
+           </table>
+        </div>
+        <div class="col-lg-1"></div>
+</div>
+<ng-template #elseBlock>
+    <mat-spinner></mat-spinner>
+</ng-template>
+</div>
+</div>
+

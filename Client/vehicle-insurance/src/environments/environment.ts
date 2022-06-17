@@ -4,15 +4,16 @@
 
 export const environment = {
   production: false,
-  logoUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/Navbar%20Logo.png?alt=media&token=72555c4a-d3b2-44ce-8669-58d92dbc1805',
-  headerImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/Vehicle%20Insuranace.jpg?alt=media&token=b234e78e-5ce6-4879-b060-3172ff9bbe92',
-  checkOwnerFormImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/Check-Owner-Form.jpg?alt=media&token=7fed12b7-032b-4094-a413-eaa0f9b7f35c',
-  checkVehicleFormImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/images.png?alt=media&token=3cc190fd-2afd-4251-a076-1c29e9adb13a',
-  errorPageImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/error-404-design-vector-17847180.jpg?alt=media&token=8cd6fc3b-ed18-4177-b881-863e3429077a',
-  vehicleDetailsImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/Clerk-icons-08.png?alt=media&token=9f82c954-6f51-4f2f-a4f3-ccabda7f43df',
-  checkInsuranceFormImageUrl: 'https://firebasestorage.googleapis.com/v0/b/vehicle-insurance-8f447.appspot.com/o/car-insurance-add-ons.png?alt=media&token=ae8a4915-dd14-44aa-aa33-0c11e036d4bc',
+  logoUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655452898/Vehicle%20Insurance/Navbar_Logo_autzw6.png',
+  headerImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655452961/Vehicle%20Insurance/Vehicle_Insuranace_dxe2hr.jpg',
+  checkOwnerFormImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655453003/Vehicle%20Insurance/Check-Owner-Form_hgh3qc.jpg',
+  checkVehicleFormImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655453034/Vehicle%20Insurance/images_ud0yh9.png',
+  errorPageImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655453062/Vehicle%20Insurance/error-404-design-vector-17847180_ffyfg2.jpg',
+  vehicleDetailsImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655453093/Vehicle%20Insurance/Clerk-icons-08_a4wko7.png',
+  checkInsuranceFormImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655453122/Vehicle%20Insurance/car-insurance-add-ons_krt4nm.png',
   allInsurancesImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655369343/iStock_insurancehands300_l2jjmt.png',
   allAccidentsImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655389820/Vehicle%20Insurance/car-crash-cuate-9056_nihsv9.webp',
+  checkAccidentFormImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655449269/Vehicle%20Insurance/MVC_Black_wtfvir.png',
   apiUrl: 'http://localhost:3000/api/',
 };
 

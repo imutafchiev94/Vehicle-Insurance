@@ -11,7 +11,7 @@ import {environment} from '../../../environments/environment'
 export class CheckOwnerComponent implements OnInit {
 
   checkForm: FormGroup;
-  loading: boolean = true;
+  loading: boolean = false;
   constructor(private fb: FormBuilder, private ownerService: OwnerService) {
     this.checkForm = this.fb.group({
       EGN: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]

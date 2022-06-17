@@ -24,7 +24,6 @@ export class AddOwnerComponent {
       'gender': ['', Validators.required],
       'EGN': ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
     })
-    console.log(this.ownerForm.get('firstName'))
   }
 
   options: string[] = [Gender.Female, Gender.Male];

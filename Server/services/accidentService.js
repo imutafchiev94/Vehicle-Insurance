@@ -82,7 +82,8 @@ async function getAllAccidents() {
 
 async function getAccident(id) {
     let accident = await Accident.findById(id)
-    .populate('vehicle');
+    .populate('vehicle')
+    .populate('insurance');
 
     if(!accident) {
         throw {message: `Accident with Id ${id} doesn't exists in our database!`}

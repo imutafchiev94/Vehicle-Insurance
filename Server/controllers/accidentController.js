@@ -30,6 +30,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/find', async (req, res) => {
     try {
+        
         let accident = await accidentService.findAccident(req.body.vehicleRegistrationNumber);
         res.json(accident);
     } catch(err) {

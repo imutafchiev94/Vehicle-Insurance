@@ -28,14 +28,12 @@ export class AllAccidentsComponent implements OnInit {
   fetchDataAccidents() {
     this.accidentService.getAllAccidents().subscribe({
       next: (res) => {
-        console.log("here");
         res.body != null ? this.accidents = res.body : 0;
         for (let i = 0; i < this.accidents.length; i++) {
           this.accidents[i].dateOfAccident = this.datePipe.transform(this.accidents[i].dateOfAccident, 'dd-MM-YYYY');
         }
         this.loading = false;
       }, error: (err) => {
-        console.log(err);
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
       }
     })
@@ -47,7 +45,6 @@ export class AllAccidentsComponent implements OnInit {
       this.accidents.sort(function (a, b) {
         return a.dateOfAccident > b.dateOfAccident ? 1 : a.dateOfAccident < b.dateOfAccident ? -1 : 0
       })
-      console.log(this.accidents);
   } else {
     this.sortByDateAscending = false;
       this.accidents.sort(function (a, b) {
