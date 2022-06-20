@@ -14,9 +14,19 @@ async function createInsurance(data) {
     let vehicle = await Vehicle.findOne({
         registrationNumber: data.vehicleRegistrationNumber
     });
+
+    if(!vehicle) {
+      throw { message: `Vehicle with registration number ${data.vehicleRegistrationNumber} doesn't exist in our database!` };
+  }
+
     let owner = await Owner.findOne({
         EGN: data.ownerEGN
     });
+
+    if(!owner) {
+      throw {message: `Owner with EGN ${data.ownerEGN} doesn't exist in our database!`};
+  }
+
 
     let searchedInsurance = await Insurance.find({
       vehicle: vehicle._id
@@ -64,6 +74,8 @@ async function createInsurance(data) {
     vehicle.insurance = newInsurance;
 
     await vehicle.save();
+
+    return {message: 'Insurance was added successfully!'};
 }
 
 async function findInsurance(registrationNumber) {
@@ -72,7 +84,7 @@ async function findInsurance(registrationNumber) {
       });
     
       if(!vehicle) {
-        throw {message: `Vehicle with registration number "${registrationNumber}" doesn't exist in our database!`};
+        throw {message: `Vehicle with registration number ${registrationNumber} doesn't exist in our database!`};
       }
     
       let searchedInsurance = await Insurance.findOne({
@@ -82,8 +94,7 @@ async function findInsurance(registrationNumber) {
         throw { message: `Insurance with Id ${searchedInsurance._id} doesn't exist!` };
       }
 
-      return {message: 'Insurance was added successfully!'};
-    
+      return searchedInsurance;
 }
 
 async function getInsurance(id) {
@@ -91,7 +102,8 @@ async function getInsurance(id) {
     .populate('vehicleOwner')
     .populate('vehicle');
     if (!insurance) {
-      throw { message: `Insurance with Id ${insurance._id} doesn't exist!` };
+
+      throw { message: `Insurance with Id ${id} doesn't exist in our database!` };
     }
 
     return insurance;

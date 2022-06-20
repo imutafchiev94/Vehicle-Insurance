@@ -93,7 +93,7 @@ describe("Vehicle workflow tests", () => {
       .end((err, res) => {
         expect(res.status).to.equal(400);
         expect(res.error.text).to.contain(
-            `Owner with EGN ${invalidVehicle.ownerEGN} doesn't exist!`
+            `Owner with EGN ${invalidVehicle.ownerEGN} doesn't exist in our database!`
         );
         done();
       });

@@ -7,7 +7,7 @@ async function addVehicle(data) {
      EGN: data.ownerEGN
     });
     if(!owner) {
-        throw {message: `Owner with EGN ${data.ownerEGN} doesn't exist!`};
+        throw {message: `Owner with EGN ${data.ownerEGN} doesn't exist in our database!`};
     }
 
   let newVehicleData = {
