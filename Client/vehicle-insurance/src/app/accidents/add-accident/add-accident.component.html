@@ -152,13 +152,13 @@
                 <mat-hint>EGN is required. Only valid EGNs</mat-hint>
                 <mat-error
                   *ngIf="driverEGN?.touched && driverEGN?.errors?.['required']"
-                  class="alert alert-danger mt-2"
+                  class=" mt-2"
                 >
                   This field is required!
                 </mat-error>
                 <mat-error
                   *ngIf="driverEGN?.touched && (driverEGN?.errors?.['minlength'] || driverEGN?.errors?.['maxlength'])"
-                  class="alert alert-danger mt-2"
+                  class="mt-2"
                 >
                   EGN must be exatctly 10 symbols!
                 </mat-error>

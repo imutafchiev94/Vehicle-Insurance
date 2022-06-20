@@ -46,5 +46,22 @@
         <span>Add Insurance</span>
       </button>
     </mat-menu>
-  </mat-toolbar>
+  <button mat-icon-button class="navbar-menu" [matMenuTriggerFor]="accidents" aria-label="Menu for accidents pages">
+    Accidents
+  </button>
+  <mat-menu #accidents="matMenu">
+    <button mat-menu-item routerLink="/accidents/all">
+      <mat-icon>minor_crash</mat-icon>
+      <span>All Accidents</span>
+    </button>
+    <button mat-menu-item routerLink="/accidents/check-accident">
+      <mat-icon>no_crash</mat-icon>
+      <span>Check Accident</span>
+    </button>
+    <button mat-menu-item routerLink="/accidents/add-accident">
+      <mat-icon>car_crash</mat-icon>
+      <span>Add Accident</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
 </p>

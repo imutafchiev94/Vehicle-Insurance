@@ -24,4 +24,16 @@ const PaymentSchema = new mongoose.Schema({
     }
 })
 
+PaymentSchema.pre('remove', function (next) {
+    let payment = this;
+    payment.model('Insurance').update(
+        {
+            payments: {$in: payments.insurances}
+        }, {
+            $pull: {payment: payment._id}
+        }, {multy: true},
+        next
+    );
+});
+
 module.exports = mongoose.model("Payments", PaymentSchema);

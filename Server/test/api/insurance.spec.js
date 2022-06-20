@@ -5,11 +5,14 @@ const expect = chai.expect;
 const Owner = require("../../models/Owner");
 const Vehicle = require("../../models/Vehicle");
 const Insurance = require("../../models/Insurance");
+const Payment = require("../../models/Payment");
+const { $where } = require("../../models/Payment");
 
 chai.use(chaiHttp);
 
-describe("Vehicle workflow tests", () => {
+describe("Insurance workflow tests", () => {
 
+    let insuranceId = '';
     
     before((done) => {
         Owner.create({
@@ -31,11 +34,13 @@ describe("Vehicle workflow tests", () => {
           done();
     })
 
-  after((done) => {
+  after(async () => {
+    let owner = await Owner.findById('62b00fb59f1b0048c1a5aad3').exec();
+    let insurance = await Insurance.findOne({vehicleOwner: owner._id}).exec();
+    Payment.deleteMany({insurance: insurance._id}, function (err) {});
     Owner.deleteOne({ EGN: "9004301890" }, function (err) {});
     Vehicle.deleteOne({registrationNumber: "PB3570ET"}, function (err) {});
     Insurance.deleteOne({vehicleOwner: '62b00fb59f1b0048c1a5aad3'}, function (err) {});
-    done();
   });
 
   const insurance = {

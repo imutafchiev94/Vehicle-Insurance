@@ -84,6 +84,7 @@ export class AddAccidentComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
           this.imageSrc = reader.result.toString();
+          this.accidentForm.patchValue({imageSource: this.imageSrc});
       };
 
       reader.readAsDataURL(blob);
@@ -134,6 +135,7 @@ resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
 
 onSubmit() {
   this.loading = true;
+  console.log(this.accidentForm.value);
   this.accidentService.addAccident(this.accidentForm.value).subscribe({next: (res) => {
     this.router.navigate(['accidents/all']);
   }, error: (err) => {

@@ -14,7 +14,7 @@ async function addAccident(data) {
     });
 
     if(!vehicle) {
-        throw {message: `Vehicle with this registration number ${data.vehicleRegistrationNumber}" doesn't exist in our database`}
+        throw {message: `Vehicle with registration number ${data.vehicleRegistrationNumber} doesn't exist in our database!`}
     }
 
     let insurance = await Insurance.findOne({
@@ -22,7 +22,7 @@ async function addAccident(data) {
     }).populate('payments');
 
     if(!insurance) {
-        throw {message: `Vehicle with this registration number ${data.vehicleRegistrationNumber} doesn't have insurance`}
+        throw {message: `Vehicle with registration number ${data.vehicleRegistrationNumber} doesn't have insurance!`}
     }
 
     let lastPaymentToPay = await paymentService.firstPaymentToPayForInsurance(insurance._id);
@@ -37,7 +37,7 @@ async function addAccident(data) {
 
     let isValidEGN = egnService.checkEgn(data.driverEGN, new Date(data.driverDateOfBirth), data.driverGender);
     if(!isValidEGN) {
-        throw {message: 'Drivers\'s EGN is not valid!'}
+        throw {message: "Drivers's EGN is not valid!"}
     }
 
 
@@ -59,7 +59,7 @@ async function addAccident(data) {
     await cloudinary.uploader.upload(image, {folder: 'Vehicle Insurance'})
     .then(function(file) {
       newAccidentData.imageUrl = file.url})
-    .catch(function(err) {throw {message: err[0].Error}});
+    .catch(function(err) {throw err});
 
     let newAccident = new Accident(newAccidentData);
 
@@ -85,7 +85,7 @@ async function getAccident(id) {
     .populate('insurance');
 
     if(!accident) {
-        throw {message: `Accident with Id ${id} doesn't exists in our database!`}
+        throw {message: `Accident with Id ${id} doesn't exist in our database!`}
     }
 
     return accident;
@@ -97,7 +97,7 @@ async function findAccident(registrationNumber) {
     });
 
     if(!vehicle) {
-        throw {message: `Vehicle with this registration number ${registrationNumber} doesn't exist in our database!`}
+        throw {message: `Vehicle with registration number ${registrationNumber} doesn't exist in our database!`}
     }
 
     let accident = await Accident.findOne({
