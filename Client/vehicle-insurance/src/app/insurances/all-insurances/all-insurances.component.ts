@@ -31,7 +31,7 @@ export class AllInsurancesComponent implements OnInit {
   fetchDataInsurance() {
     this.insuranceService.getAllInsurances().subscribe({
       next: (res) => {
-        res.body != null ? this.insurances = res.body : 0;
+        res != null ? this.insurances = res : 0;
         for (let i = 0; i < this.insurances.length; i++) {
           this.insurances[i].startDate = this.datePipe.transform(this.insurances[i].startDate, 'dd-MM-YYYY');
           this.insurances[i].endDate = this.datePipe.transform(this.insurances[i].endDate, 'dd-MM-YYYY');

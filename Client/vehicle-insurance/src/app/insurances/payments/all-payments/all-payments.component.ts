@@ -38,7 +38,7 @@ export class AllPaymentsComponent implements OnInit {
       return id;
     }), mergeMap(id => this.paymentService.getAllPayments(id))).subscribe({
       next: (res) => {
-        res.body != null ? this.payments = res.body : 0;
+        res != null ? this.payments = res : 0;
         for (let i = 0; i < this.payments.length; i++) {
           this.payments[i].startDate = this.datePipe.transform(this.payments[i].startDate, 'dd-MM-YYYY');
           this.payments[i].endDate = this.datePipe.transform(this.payments[i].endDate, 'dd-MM-YYYY');
@@ -57,7 +57,7 @@ export class AllPaymentsComponent implements OnInit {
       return id;
     }), mergeMap(id => this.insuranceService.getInsurance(id))).subscribe({
       next: (res) => {
-        res.body != null ? this.insurance = res.body : 0;
+        res != null ? this.insurance = res : 0;
       }, error: (err) => {
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
       }

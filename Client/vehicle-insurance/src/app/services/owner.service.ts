@@ -12,15 +12,15 @@ export class OwnerService {
   private ownerPath = environment.apiUrl + 'owner';
   constructor(private http: HttpClient) { }
 
-  findOwner(data) : Observable<HttpResponse<Owner>> {
-    return this.http.post<Owner>(this.ownerPath + '/find', data, {observe: 'response'});
+  findOwner(data) : Observable<Owner> {
+    return this.http.post<Owner>(this.ownerPath + '/find', data);
   }
 
-  addOwner(data) : Observable<HttpResponse<Owner>> {
-    return this.http.post<Owner>(this.ownerPath + '/add', data, {observe: 'response'});
+  addOwner(data) : Observable<Owner> {
+    return this.http.post<Owner>(this.ownerPath + '/add', data);
   }
 
-  getOwner(id) : Observable<HttpResponse<Owner>> {
-    return this.http.get<Owner>(this.ownerPath + `/${id}`, {observe: 'response'});
+  getOwner(id) : Observable<Owner> {
+    return this.http.get<Owner>(this.ownerPath + `/${id}`);
   }
 }

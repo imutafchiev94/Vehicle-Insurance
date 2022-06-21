@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   
   fetchData() {
    this.homeService.getDashboardImage().subscribe({next: (res) => {
-      res.body != null ? this.headerImageUrl = res.body.imageUrl : 0;
+      res != null ? this.headerImageUrl = res.imageUrl : 0;
       this.loading = false;
     }, error: (error) => {
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})

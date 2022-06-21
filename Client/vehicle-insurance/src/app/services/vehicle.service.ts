@@ -12,20 +12,20 @@ export class VehicleService {
   private vehiclePath = environment.apiUrl + 'vehicle';
   constructor(private http: HttpClient) { }
 
-  findVehicle(data) : Observable<HttpResponse<Vehicle>> {
-    return this.http.post<Vehicle>(this.vehiclePath + '/find', data, {observe: 'response'});
+  findVehicle(data) : Observable<Vehicle> {
+    return this.http.post<Vehicle>(this.vehiclePath + '/find', data,);
   }
 
-  findVehicleByOwner(data) : Observable<HttpResponse<Vehicle>> {
-    return this.http.post<Vehicle>(this.vehiclePath + '/find-by-owner', data, {observe: 'response'});
+  findVehicleByOwner(data) : Observable<Vehicle> {
+    return this.http.post<Vehicle>(this.vehiclePath + '/find-by-owner', data,);
   }
 
-  addVehicle(data) : Observable<HttpResponse<Vehicle>> {
-    return this.http.post<Vehicle>(this.vehiclePath + '/add', data, {observe: 'response'});
+  addVehicle(data) : Observable<Vehicle> {
+    return this.http.post<Vehicle>(this.vehiclePath + '/add', data,);
   }
 
-  getVehicleDetails(vehicleId): Observable<HttpResponse<Vehicle>> {
-    return this.http.get<Vehicle>(this.vehiclePath + `/${vehicleId}`, {observe: 'response'});
+  getVehicleDetails(vehicleId): Observable<Vehicle> {
+    return this.http.get<Vehicle>(this.vehiclePath + `/${vehicleId}`);
   }
 
 }

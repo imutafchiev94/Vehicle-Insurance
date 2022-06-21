@@ -33,7 +33,7 @@ export class VehicleDetailsComponent implements OnInit {
       }), mergeMap(id => 
         this.vehicleService.getVehicleDetails(id))).subscribe({
           next: (res) => {
-            res.body != null ? this.vehicle = res.body : 0;
+            res != null ? this.vehicle = res : 0;
             this.vehicle.insurance != null ? this.hasInsurance = true : this.hasInsurance = false;
             this.loading = false;
           }, error: (err) => {

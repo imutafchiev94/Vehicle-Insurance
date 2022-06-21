@@ -31,9 +31,9 @@ export class CheckVehicleComponent implements OnInit {
     this.loading = true;
     this.vehicelService.findVehicle(this.checkForm.value).subscribe({
       next: (res) => {
-        this.status = res.status;
+        this.status = 200;
         this.isExists = true;
-        res.body?._id != null ? this.vehicleId = res.body._id : this.vehicleId = "";
+        res?._id != null ? this.vehicleId = res._id : this.vehicleId = "";
         this.loading = false;
       }, error: (err) => {
         this.status = err.status;

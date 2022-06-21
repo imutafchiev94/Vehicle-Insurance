@@ -39,7 +39,6 @@ export class CheckAccidentComponent implements OnInit {
        res._id != null ? this.accidentId = res._id : this.accidentId = "";
        this.loading = false;
      }, error: (err) => {
-      console.log(err);
        this.status = err.status;
        this.isExists = false;
        this.loading = false;

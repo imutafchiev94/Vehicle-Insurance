@@ -35,7 +35,7 @@ export class OwnerDetailsComponent implements OnInit {
       const id = params['id'];
       return id;
     }), mergeMap(id => this.ownerService.getOwner(id))).subscribe({next: (res) => {
-      res.body != null ? this.owner = res.body : 0;
+      res != null ? this.owner = res : 0;
       if(this.owner.vehicles.length < 1) 
       {
         this.hasVehicles = false;
@@ -43,7 +43,7 @@ export class OwnerDetailsComponent implements OnInit {
       else {
         this.hasVehicles = true;
       }
-      this.ownerDateOfBirth = this.datepipe.transform(res.body?.dateOfBirth, "dd-MM-YYYY");
+      this.ownerDateOfBirth = this.datepipe.transform(res?.dateOfBirth, "dd-MM-YYYY");
       this.loading = false;
     }, error: (error) => {
       console.log(error);

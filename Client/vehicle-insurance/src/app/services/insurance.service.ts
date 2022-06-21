@@ -12,19 +12,19 @@ export class InsuranceService {
   private insurancePath = environment.apiUrl + 'insurance';
   constructor(private http: HttpClient) { }
 
-  addInsurance(data): Observable<HttpResponse<Insurance>> {
-    return this.http.post<Insurance>(this.insurancePath + '/create', data, {observe: 'response'});
+  addInsurance(data): Observable<Insurance> {
+    return this.http.post<Insurance>(this.insurancePath + '/create', data);
   }
 
-  getInsurance(id): Observable<HttpResponse<Insurance>> {
-    return this.http.get<Insurance>(this.insurancePath + `/${id}`, {observe: 'response'});
+  getInsurance(id): Observable<Insurance> {
+    return this.http.get<Insurance>(this.insurancePath + `/${id}`);
   }
 
-  findInsurance(data): Observable<HttpResponse<Insurance>> {
-    return this.http.post<Insurance>(this.insurancePath + '/find', data, {observe: 'response'});
+  findInsurance(data): Observable<Insurance> {
+    return this.http.post<Insurance>(this.insurancePath + '/find', data);
   }
 
-  getAllInsurances(): Observable<HttpResponse<Array<Insurance>>> {
-    return this.http.get<Array<Insurance>>(this.insurancePath + '/', {observe: 'response'});
+  getAllInsurances(): Observable<Array<Insurance>> {
+    return this.http.get<Array<Insurance>>(this.insurancePath + '/');
   }
 }

@@ -59,7 +59,7 @@ export class PaymentToPayComponent implements OnInit {
       return id;
     }), mergeMap(id => this.paymentService.getPaymentToPay(id))).subscribe({
       next: (res) => {
-        res.body != null ? this.payment = res.body : 0;
+        res != null ? this.payment = res : 0;
         this.loading = false;
       }, error: (err) => {
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})

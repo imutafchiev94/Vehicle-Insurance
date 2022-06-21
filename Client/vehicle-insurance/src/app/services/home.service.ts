@@ -13,7 +13,7 @@ export class HomeService {
 
   constructor(private http: HttpClient) { }
 
-  getDashboardImage() : Observable<HttpResponse<Home>> {
-    return this.http.get<Home>(this.homePath, {observe: 'response'});
+  getDashboardImage() : Observable<Home> {
+    return this.http.get<Home>(this.homePath);
   }
 }

@@ -34,9 +34,9 @@ export class CheckInsurancesComponent implements OnInit {
     this.loading = true;
    this.insuranceService.findInsurance(this.checkForm.value).subscribe({
      next: (res) => {
-       this.status = res.status;
+       this.status = 200;
        this.isExists = true;
-       res.body?._id != null ? this.insuranceId = res.body._id : this.insuranceId = "";
+       res?._id != null ? this.insuranceId = res._id : this.insuranceId = "";
        this.loading = false;
      }, error: (err) => {
        this.status = err.status;
