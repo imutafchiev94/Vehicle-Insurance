@@ -34,11 +34,12 @@ export class CheckAccidentComponent implements OnInit {
     this.loading = true;
    this.accidentService.findAccident(this.checkForm.value).subscribe({
      next: (res) => {
-       this.status = res.status;
+       this.status = 1;
        this.isExists = true;
-       res.body?._id != null ? this.accidentId = res.body._id : this.accidentId = "";
+       res._id != null ? this.accidentId = res._id : this.accidentId = "";
        this.loading = false;
      }, error: (err) => {
+      console.log(err);
        this.status = err.status;
        this.isExists = false;
        this.loading = false;

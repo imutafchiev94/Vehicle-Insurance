@@ -11,7 +11,8 @@ export class AppComponent {
   
   isLoaded: boolean = false;
 
+  title = 'vehicle-insurance';
   ngOnInit() {
-    
+
   }
 }

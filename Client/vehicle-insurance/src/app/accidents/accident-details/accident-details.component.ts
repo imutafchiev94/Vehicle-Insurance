@@ -32,10 +32,10 @@ export class AccidentDetailsComponent implements OnInit {
       const id = params['id'];
       return id;
     }), mergeMap(id => this.accidentService.getAccident(id))).subscribe({next: (res) => {
-      res.body != null ? this.accident = res.body : 0;
-      this.accidentDate = this.datepipe.transform(res.body?.dateOfAccident, "dd-MM-YYYY");
-      this.startDate = this.datepipe.transform(res.body?.insurance.startDate, "dd-MM-YYYY");
-      this.endDate = this.datepipe.transform(res.body?.insurance.endDate, "dd-MM-YYYY");
+      res != null ? this.accident = res : 0;
+      this.accidentDate = this.datepipe.transform(res?.dateOfAccident, "dd-MM-YYYY");
+      // this.startDate = this.datepipe.transform(res?.insurance.startDate, "dd-MM-YYYY");
+      // this.endDate = this.datepipe.transform(res?.insurance.endDate, "dd-MM-YYYY");
       this.loading = false;
     }, error: (error) => {
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})

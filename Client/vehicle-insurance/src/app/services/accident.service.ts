@@ -12,19 +12,19 @@ export class AccidentService {
   accidentPath = environment.apiUrl + 'accident';
   constructor(private http: HttpClient) { }
 
-  getAllAccidents(): Observable<HttpResponse<Array<Accident>>> {
-    return this.http.get<Array<Accident>>(this.accidentPath, {observe: 'response'});
+  getAllAccidents(): Observable<Array<Accident>> {
+    return this.http.get<Array<Accident>>(this.accidentPath);
   }
 
-  getAccident(id): Observable<HttpResponse<Accident>> {
-    return this.http.get<Accident>(this.accidentPath + `/${id}`, {observe: 'response'});
+  getAccident(id): Observable<Accident> {
+    return this.http.get<Accident>(this.accidentPath + `/${id}`);
   }
 
-  findAccident(data): Observable<HttpResponse<Accident>> {
-    return this.http.post<Accident>(this.accidentPath + '/find', data, {observe: 'response'});
+  findAccident(data): Observable<Accident> {
+    return this.http.post<Accident>(this.accidentPath + '/find', data);
   }
 
-  addAccident(data): Observable<HttpResponse<Accident>> {
-    return this.http.post<Accident>(this.accidentPath + '/add', data, {observe: 'response'});
+  addAccident(data): Observable<string> {
+    return this.http.post<string>(this.accidentPath + '/add', data);
   }
 }

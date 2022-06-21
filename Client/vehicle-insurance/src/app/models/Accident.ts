@@ -9,7 +9,7 @@ export interface Accident {
     driverMiddleName: string,
     driverSurname: string,
     driverEGN: string,
-    dateOfAccident: Date,
+    dateOfAccident: string,
     imageUrl: string,
     description: string
 }
