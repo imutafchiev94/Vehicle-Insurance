@@ -15,11 +15,14 @@ async function addOwner(ownerData) {
         throw {message: `Owner with EGN ${ownerData.EGN} alredy exists in our database!`};
     }
 
+    let ownerBirthDate = new Date(ownerData.dateOfBirth);
+    ownerBirthDate.setDate(ownerBirthDate.getDate() + 1);
+
     let newOwnerData = {
         firstName: ownerData.firstName,
         middleName: ownerData.middleName,
         surname: ownerData.surname,
-        dateOfBirth: ownerData.dateOfBirth,
+        dateOfBirth: ownerBirthDate,
         age: ownerData.age,
         EGN: ownerData.EGN,
         gender: ownerData.gender
