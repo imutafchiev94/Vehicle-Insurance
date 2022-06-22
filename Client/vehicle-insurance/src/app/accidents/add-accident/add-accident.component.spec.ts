@@ -71,7 +71,7 @@ fdescribe('AddAccidentComponent', () => {
     httpClientSpy.post.and.returnValue(of('Accident was added successfully!'));
     service.addAccident(component.accidentForm.value).subscribe({
       next: (res) => {
-        console.log(res);
+       
         expect(res).toContain('Accident was added successfully!');
       },
       error: () => {}

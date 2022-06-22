@@ -102,7 +102,7 @@ fdescribe('CheckAccidentComponent', () => {
     httpClientSpy.post.and.returnValue(of(accident));
     service.findAccident(component.checkForm.value).subscribe({
       next: (res) => {
-        console.log(res);
+        
         expect(res).toEqual(accident);
       },
       error: () => {}

@@ -87,7 +87,7 @@ fdescribe('CheckInsurancesComponent', () => {
     httpClientSpy.post.and.returnValue(of(insurance));
     service.findInsurance(component.checkForm.value).subscribe({
       next: (res) => {
-        console.log(res);
+        
         expect(res).toEqual(insurance);
       },
       error: () => {}

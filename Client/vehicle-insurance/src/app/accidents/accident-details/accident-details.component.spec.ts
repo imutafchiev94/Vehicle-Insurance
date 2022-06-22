@@ -88,7 +88,7 @@ fdescribe('AccidentDetailsComponent', () => {
     const service = fixture.debugElement.injector.get(AccidentService);
     spyOn(service, "getAccident").and.returnValue(of(accident))
     component.fetchData();
-    console.log(component);
+    
     expect(component.accident).toEqual(accident);
   });
 });

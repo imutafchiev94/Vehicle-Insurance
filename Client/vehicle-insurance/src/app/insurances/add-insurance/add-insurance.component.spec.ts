@@ -52,7 +52,7 @@ fdescribe('AddInsuranceComponent', () => {
   });
 
   
-  it('Add accident and get message', () => {
+  it('Add insurance and get message', () => {
     component.insuranceForm.patchValue({'ownerEGN': insuranceForm.ownerEGN})
     component.insuranceForm.patchValue({'imageSource': insuranceForm.imageSource})
     component.insuranceForm.patchValue({'countOfPayments': insuranceForm.countOfPayments})
@@ -62,7 +62,7 @@ fdescribe('AddInsuranceComponent', () => {
     httpClientSpy.post.and.returnValue(of('Insurance was added successfully!'));
     service.addInsurance(component.insuranceForm.value).subscribe({
       next: (res) => {
-        console.log(res);
+        
         expect(res).toContain('Insurance was added successfully!');
       },
       error: () => {}

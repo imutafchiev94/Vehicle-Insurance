@@ -73,7 +73,7 @@ fdescribe('InsuranceDetailsComponent', () => {
     const service = fixture.debugElement.injector.get(InsuranceService);
     spyOn(service, "getInsurance").and.returnValue(of(insurance))
     component.fetchData();
-    console.log(component);
+    
     expect(component.insurance).toEqual(insurance);
   });
 });
