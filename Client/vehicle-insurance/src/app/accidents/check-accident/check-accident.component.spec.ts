@@ -4,16 +4,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Accident } from 'src/app/models/Accident';
-import { Insurance } from 'src/app/models/Insurance';
-import { Owner } from 'src/app/models/Owner';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { AccidentService } from 'src/app/services/accident.service';
-import { MaterialExampleModule } from 'src/material.module';
+import { Accident } from '../../models/Accident';
+import { Insurance } from '../../models/Insurance';
+import { Owner } from '../../models/Owner';
+import { Vehicle } from '../../models/Vehicle';
+import { AccidentService } from '../../services/accident.service';
+import { MaterialExampleModule } from '../../../material.module';
 import { of } from 'rxjs';
 import { CheckAccidentComponent } from './check-accident.component';
 
-fdescribe('CheckAccidentComponent', () => {
+describe('CheckAccidentComponent', () => {
   let component: CheckAccidentComponent;
   let fixture: ComponentFixture<CheckAccidentComponent>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;

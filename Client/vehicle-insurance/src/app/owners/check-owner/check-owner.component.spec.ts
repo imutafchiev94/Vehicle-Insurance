@@ -2,16 +2,16 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Owner } from 'src/app/models/Owner';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { MaterialExampleModule } from 'src/material.module';
+import { Owner } from '../../models/Owner';
+import { Vehicle } from '../../models/Vehicle';
+import { MaterialExampleModule } from '../../../material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { CheckOwnerComponent } from './check-owner.component';
-import { OwnerService } from 'src/app/services/owner.service';
+import { OwnerService } from '../../services/owner.service';
 import { HttpClient } from '@angular/common/http';
 
-fdescribe('CheckOwnerComponent', () => {
+describe('CheckOwnerComponent', () => {
   let component: CheckOwnerComponent;
   let fixture: ComponentFixture<CheckOwnerComponent>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;

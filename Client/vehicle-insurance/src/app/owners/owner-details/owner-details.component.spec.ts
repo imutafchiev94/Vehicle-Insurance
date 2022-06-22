@@ -1,13 +1,13 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Owner } from 'src/app/models/Owner';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { OwnerService } from 'src/app/services/owner.service';
+import { Owner } from '../../models/Owner';
+import { Vehicle } from '../../models/Vehicle';
+import { OwnerService } from '../../services/owner.service';
 import { of } from 'rxjs';
 import { OwnerDetailsComponent } from './owner-details.component';
 
-fdescribe('OwnerDetailsComponent', () => {
+describe('OwnerDetailsComponent', () => {
   let component: OwnerDetailsComponent;
   let fixture: ComponentFixture<OwnerDetailsComponent>;
 

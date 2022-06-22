@@ -3,13 +3,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialExampleModule } from 'src/material.module';
+import { MaterialExampleModule } from '../../../material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { AddOwnerComponent } from './add-owner.component';
-import { OwnerService } from 'src/app/services/owner.service';
+import { OwnerService } from '../../services/owner.service';
 
-fdescribe('AddOwnerComponent', () => {
+describe('AddOwnerComponent', () => {
   let component: AddOwnerComponent;
   let fixture: ComponentFixture<AddOwnerComponent>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
@@ -21,7 +21,6 @@ fdescribe('AddOwnerComponent', () => {
     dateOfBirth: new Date('1995-07-15T07:49:08.990+00:00'),
     gender: 'Male',
     EGN:'9507150033'
-
   }
 
   beforeEach(async () => {

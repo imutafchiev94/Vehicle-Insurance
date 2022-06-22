@@ -1,14 +1,14 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Insurance } from 'src/app/models/Insurance';
-import { Owner } from 'src/app/models/Owner';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { InsuranceService } from 'src/app/services/insurance.service';
+import { Insurance } from '../../models/Insurance';
+import { Owner } from '../../models/Owner';
+import { Vehicle } from '../../models/Vehicle';
+import { InsuranceService } from '../../services/insurance.service';
 import { of } from 'rxjs';
 import { InsuranceDetailsComponent } from './insurance-details.component';
 
-fdescribe('InsuranceDetailsComponent', () => {
+describe('InsuranceDetailsComponent', () => {
   let component: InsuranceDetailsComponent;
   let fixture: ComponentFixture<InsuranceDetailsComponent>;
 

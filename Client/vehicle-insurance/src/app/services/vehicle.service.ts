@@ -16,10 +16,6 @@ export class VehicleService {
     return this.http.post<Vehicle>(this.vehiclePath + '/find', data,);
   }
 
-  findVehicleByOwner(data) : Observable<Vehicle> {
-    return this.http.post<Vehicle>(this.vehiclePath + '/find-by-owner', data,);
-  }
-
   addVehicle(data) : Observable<Vehicle> {
     return this.http.post<Vehicle>(this.vehiclePath + '/add', data,);
   }

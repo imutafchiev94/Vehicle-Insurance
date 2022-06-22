@@ -4,13 +4,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { InsuranceService } from 'src/app/services/insurance.service';
-import { MaterialExampleModule } from 'src/material.module';
+import { InsuranceService } from '../../services/insurance.service';
+import { MaterialExampleModule } from '../../../material.module';
 import { of } from 'rxjs';
 
 import { AddInsuranceComponent } from './add-insurance.component';
 
-fdescribe('AddInsuranceComponent', () => {
+describe('AddInsuranceComponent', () => {
   let component: AddInsuranceComponent;
   let fixture: ComponentFixture<AddInsuranceComponent>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;

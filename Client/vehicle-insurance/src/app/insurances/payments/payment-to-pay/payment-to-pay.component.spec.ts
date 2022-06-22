@@ -1,17 +1,17 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Insurance } from 'src/app/models/Insurance';
-import { Owner } from 'src/app/models/Owner';
-import { Payment } from 'src/app/models/Payment';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { PaymentService } from 'src/app/services/payment.service';
+import { Insurance } from '../../../models/Insurance';
+import { Owner } from '../../../models/Owner';
+import { Payment } from '../../../models/Payment';
+import { Vehicle } from '../../../models/Vehicle';
+import { PaymentService } from '../../../services/payment.service';
 import { of } from 'rxjs';
 
 import { PaymentToPayComponent } from './payment-to-pay.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-fdescribe('PaymentToPayComponent', () => {
+describe('PaymentToPayComponent', () => {
   let component: PaymentToPayComponent;
   let fixture: ComponentFixture<PaymentToPayComponent>;
 

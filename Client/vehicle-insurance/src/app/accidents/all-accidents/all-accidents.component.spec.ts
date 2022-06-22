@@ -4,12 +4,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AccidentService } from '../../services/accident.service';
 import { of } from 'rxjs';
 import { AllAccidentsComponent } from './all-accidents.component';
-import { Accident } from 'src/app/models/Accident';
-import { Owner } from 'src/app/models/Owner';
-import { Insurance } from 'src/app/models/Insurance';
-import { Vehicle } from 'src/app/models/Vehicle';
+import { Accident } from '../../models/Accident';
+import { Owner } from '../../models/Owner';
+import { Insurance } from '../../models/Insurance';
+import { Vehicle } from '../../models/Vehicle';
 
-fdescribe('AllAccidentsComponent', () => {
+describe('AllAccidentsComponent', () => {
   let component: AllAccidentsComponent;
   let fixture: ComponentFixture<AllAccidentsComponent>;
   let vehicle = {

@@ -6,13 +6,13 @@ import { MaterialExampleModule } from 'src/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { CheckInsurancesComponent } from './check-insurances.component';
-import { Insurance } from 'src/app/models/Insurance';
-import { Owner } from 'src/app/models/Owner';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { InsuranceService } from 'src/app/services/insurance.service';
+import { Insurance } from '../../models/Insurance';
+import { Owner } from '../../models/Owner';
+import { Vehicle } from '../../models/Vehicle';
+import { InsuranceService } from '../../services/insurance.service';
 import { HttpClient } from '@angular/common/http';
 
-fdescribe('CheckInsurancesComponent', () => {
+describe('CheckInsurancesComponent', () => {
   let component: CheckInsurancesComponent;
   let fixture: ComponentFixture<CheckInsurancesComponent>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;

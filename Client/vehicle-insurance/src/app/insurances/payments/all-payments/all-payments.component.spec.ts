@@ -2,14 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AllPaymentsComponent } from './all-payments.component';
-import { PaymentService } from 'src/app/services/payment.service';
+import { PaymentService } from '../../../services/payment.service';
 import { of } from 'rxjs';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { Owner } from 'src/app/models/Owner';
-import { Insurance } from 'src/app/models/Insurance';
-import { Payment } from 'src/app/models/Payment';
+import { Vehicle } from '../../../models/Vehicle';
+import { Owner } from '../../../models/Owner';
+import { Insurance } from '../../../models/Insurance';
+import { Payment } from '../../../models/Payment';
 
-fdescribe('AllPaymentsComponent', () => {
+describe('AllPaymentsComponent', () => {
   let component: AllPaymentsComponent;
   let fixture: ComponentFixture<AllPaymentsComponent>;
 

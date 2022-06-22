@@ -1,12 +1,12 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { InsuranceService } from 'src/app/services/insurance.service';
+import { InsuranceService } from '../../services/insurance.service';
 import { Insurance } from '../../models/Insurance';
 import { of } from 'rxjs';
 import { AllInsurancesComponent } from './all-insurances.component';
-import { Vehicle } from 'src/app/models/Vehicle';
-import { Owner } from 'src/app/models/Owner';
+import { Vehicle } from '../../models/Vehicle';
+import { Owner } from '../../models/Owner';
 
 describe('AllInsurancesComponent', () => {
   let component: AllInsurancesComponent;
