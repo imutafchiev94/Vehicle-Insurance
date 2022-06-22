@@ -15,4 +15,5 @@ export interface Insurance {
     dueAmount: number;
     countOfPayments: CountOfPayments;
     payments: Array<Payment>;
+    isInvalid: boolean;
 }

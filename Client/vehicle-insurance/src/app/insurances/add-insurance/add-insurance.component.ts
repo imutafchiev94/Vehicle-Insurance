@@ -22,7 +22,6 @@ export class AddInsuranceComponent implements OnInit {
     private router: Router
   ) {
     this.insuranceForm = this.fb.group({
-      startDate: ['', Validators.required],
       ownerEGN: [
         '',
         [
