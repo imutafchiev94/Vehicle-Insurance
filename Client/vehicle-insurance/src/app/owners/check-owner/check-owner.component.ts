@@ -36,7 +36,6 @@ export class CheckOwnerComponent implements OnInit {
   onSubmit() {
     this.loading = true;
     this.ownerService.findOwner(this.checkForm.value).subscribe({next: (res) => {
-      console.log(res);
       this.status = 200;
         this.isExists = true;
         res?._id ? this.ownerId = res._id : this.ownerId = "";

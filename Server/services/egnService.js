@@ -2,19 +2,24 @@
     let isValid = true;
     if(!checkYear(EGN, dateOfBirth.getFullYear())) {
         isValid = false;
+
+        console.log(1);
     }
     if (!checkMonth(EGN, dateOfBirth.getMonth() + 1, dateOfBirth.getFullYear())) {
         isValid = false;
+        console.log(2);
     }
     if(!checkDate(EGN, dateOfBirth.getDate())) {
         isValid = false;
+        console.log(3);
     }
     if(!checkTheNinthDigit(EGN, gender)) {
         isValid = false;
+        console.log(4);
     }
     if(!checkTheLastDigit(EGN))  {
         isValid = false;
-        
+        console.log(5);
     }
     return isValid;
 }

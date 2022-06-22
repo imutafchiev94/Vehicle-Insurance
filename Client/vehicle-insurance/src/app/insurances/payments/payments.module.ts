@@ -21,7 +21,6 @@ import { RouterTestingModule } from '@angular/router/testing';
     PaymentsRoutingModule,
     MaterialExampleModule,
     ReactiveFormsModule,
-    RouterTestingModule,
   ]
 })
 export class PaymentsModule { }

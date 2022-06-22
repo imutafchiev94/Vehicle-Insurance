@@ -96,10 +96,10 @@
                     <mat-label>EGN</mat-label>
                     <input type="text" matInput formControlName="EGN" placeholder="1234567890">
                     <mat-hint>EGN is required. Only valid EGNs</mat-hint>
-                    <mat-error *ngIf="EGN?.touched && EGN?.errors?.['required']" class="alert alert-danger mt-2">
+                    <mat-error *ngIf="EGN?.touched && EGN?.errors?.['required']" class="mt-2">
                         This field is required!
                       </mat-error>
-                    <mat-error *ngIf="EGN?.touched && (EGN?.errors?.['minlength'] || EGN?.errors?.['maxlength'])" class="alert alert-danger mt-2">
+                    <mat-error *ngIf="EGN?.touched && (EGN?.errors?.['minlength'] || EGN?.errors?.['maxlength'])" class="mt-2">
                         EGN must be exatctly 10 symbols!
                     </mat-error>
                 </mat-form-field>

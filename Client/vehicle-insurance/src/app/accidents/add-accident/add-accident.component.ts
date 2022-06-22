@@ -135,13 +135,10 @@ resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
 
 onSubmit() {
   this.loading = true;
-  
-  console.log(this.accidentForm.value);
   this.accidentService.addAccident(this.accidentForm.value).subscribe({next: (res) => {
     this.status = "Hello";
     this.router.navigate(['accidents/all']);
   }, error: (err) => {
-    console.log(err);
     this.errorMessage = err.error.Error;
   }})
 }
