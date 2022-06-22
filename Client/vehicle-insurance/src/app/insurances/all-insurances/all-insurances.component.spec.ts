@@ -12,7 +12,7 @@ describe('AllInsurancesComponent', () => {
   let component: AllInsurancesComponent;
   let fixture: ComponentFixture<AllInsurancesComponent>;
 
-  let insurance = [{
+  let insurances = [{
   _id: '62ab3cd0efa5ca78a7bab405',
   startDate: new Date('2022-06-16T14:23:10.859+00:00'),
   endDate: new Date('2023-06-16T14:23:10.859+00:00'),
@@ -106,9 +106,9 @@ describe('AllInsurancesComponent', () => {
 
   it('Get all insurances', () => {
     const service = fixture.debugElement.injector.get(InsuranceService);
-    spyOn(service, "getAllInsurances").and.returnValue(of(insurance));
+    spyOn(service, "getAllInsurances").and.returnValue(of(insurances));
     component.fetchDataInsurance();
-    expect(component.insurances).toEqual(insurance);
+    expect(component.insurances).toEqual(insurances);
     expect(component.insurances.length).toEqual(2);
   });
 });

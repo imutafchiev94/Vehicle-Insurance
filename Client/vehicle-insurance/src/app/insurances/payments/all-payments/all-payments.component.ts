@@ -7,6 +7,7 @@ import { InsuranceService } from '../../../services/insurance.service';
 import { Insurance } from '../../../models/Insurance';
 
 
+
 @Component({
   selector: 'app-all-payments',
   templateUrl: './all-payments.component.html',
@@ -14,7 +15,7 @@ import { Insurance } from '../../../models/Insurance';
 })
 export class AllPaymentsComponent implements OnInit {
 
-  payments;
+  payments: any = [];
   insurance: Insurance;
   datePipe: DatePipe = new DatePipe('en-US');
   haveToPay: boolean = false;
