@@ -41,6 +41,11 @@
                    </tr>
                 </tbody>
            </table>
+           <mat-paginator [length]="allInsurances.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[10, 25, 100]"
+             (page)="OnPageChange($event)">
+            </mat-paginator>
         </div>
     
 

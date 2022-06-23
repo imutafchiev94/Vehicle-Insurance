@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { InsuranceService } from '../../services/insurance.service';
 import { environment } from '../../../environments/environment';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-all-insurances',
@@ -11,13 +13,16 @@ import { environment } from '../../../environments/environment';
 })
 export class AllInsurancesComponent implements OnInit {
 
-  insurances;
+  insurances: any = [];
+  allInsurances: any = [];
   datePipe: DatePipe = new DatePipe('en-US');
   haveToPay: boolean = false;
   loading: boolean = false;
   sortStartDateAscending: boolean = true;
   sortEndDateAscending: boolean = true;
   allInsurancesImageUrl = environment.allInsurancesImageUrl;
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private insuranceService: InsuranceService) { }
@@ -31,11 +36,12 @@ export class AllInsurancesComponent implements OnInit {
   fetchDataInsurance() {
     this.insuranceService.getAllInsurances().subscribe({
       next: (res) => {
-        res != null ? this.insurances = res : 0;
+        res != null ? this.allInsurances = res : 0;
         for (let i = 0; i < this.insurances.length; i++) {
           this.insurances[i].startDate = this.datePipe.transform(this.insurances[i].startDate, 'dd-MM-YYYY');
           this.insurances[i].endDate = this.datePipe.transform(this.insurances[i].endDate, 'dd-MM-YYYY');
         }
+        this.insurances = this.allInsurances.slice(0, 10);
         this.loading = false;
       }, error: (err) => {
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
@@ -69,6 +75,16 @@ sortByStartDate() {
       return b.startDate > a.startDate ? 1 : b.startDate < a.startDate ? -1 : 0
     })
 }
+}
+
+OnPageChange(event: PageEvent) {
+  const startIndex = event.pageIndex * event.pageSize;
+  let endIndex = startIndex + event.pageSize;
+  if(endIndex > this.allInsurances.length) {
+    endIndex = this.allInsurances.length;
+  }
+
+  this.insurances = this.allInsurances.slice(startIndex, endIndex);
 }
 
 }

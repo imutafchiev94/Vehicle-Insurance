@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { AccidentService } from '../../services/accident.service';
 import { environment } from '../../../environments/environment';
 import { Accident } from '../../models/Accident';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-all-accidents',
@@ -12,6 +13,7 @@ import { Accident } from '../../models/Accident';
 })
 export class AllAccidentsComponent implements OnInit {
 
+  allAccidents: any = [];
   accidents : Array<Accident> = [];
   datePipe: DatePipe = new DatePipe('en-US');
   loading: boolean = false;
@@ -29,10 +31,11 @@ export class AllAccidentsComponent implements OnInit {
   fetchDataAccidents() {
     this.accidentService.getAllAccidents().subscribe({
       next: (res) => {
-        res != null ? this.accidents = res : 0;
+        res != null ? this.allAccidents = res : 0;
         for (let i = 0; i < this.accidents.length; i++) {
           this.accidents[i].dateOfAccident = this.datePipe.transform(this.accidents[i].dateOfAccident, 'dd-MM-YYYY');
         }
+        this.accidents = this.allAccidents.slice(0, 10);
         this.loading = false;
       }, error: (err) => {
       this.router.navigate(['/error'], {relativeTo: this.route, skipLocationChange: true})
@@ -52,6 +55,16 @@ export class AllAccidentsComponent implements OnInit {
         return b.dateOfAccident > a.dateOfAccident ? 1 : b.dateOfAccident < a.dateOfAccident ? -1 : 0
       })
   }
+}
+
+OnPageChange(event: PageEvent) {
+  const startIndex = event.pageIndex * event.pageSize;
+  let endIndex = startIndex + event.pageSize;
+  if(endIndex > this.allAccidents.length) {
+    endIndex = this.allAccidents.length;
+  }
+
+  this.accidents = this.allAccidents.slice(startIndex, endIndex);
 }
 
 }
