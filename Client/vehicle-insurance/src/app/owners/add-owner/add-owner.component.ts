@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {OwnerService} from '../../services/owner.service';
 import {Gender} from '../../models/enums/Gender';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-owner',
@@ -58,7 +58,8 @@ export class AddOwnerComponent {
   onSubmit() {
     this.loading = true;
       this.ownerService.addOwner(this.ownerForm.value).subscribe({next: (res) => {
-        this.router.navigate(['home']);
+        const navigationExtras: NavigationExtras = {state: {data: res}};
+        this.router.navigate(['home'], navigationExtras);
       }, error: (err) => {
         console.log(err);
         this.loading = false;

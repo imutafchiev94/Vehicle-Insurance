@@ -17,7 +17,6 @@ describe('AddOwnerComponent', () => {
   let ownerForm = {
     firstName: 'John',
     surname: 'Doe',
-    age: 26,
     dateOfBirth: new Date('1995-07-15T07:49:08.990+00:00'),
     gender: 'Male',
     EGN:'9507150033'

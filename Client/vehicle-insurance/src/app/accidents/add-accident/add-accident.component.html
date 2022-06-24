@@ -10,6 +10,31 @@
           <form [formGroup]="accidentForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Vehicle Registration Number</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  formControlName="vehicleRegistrationNumber"
+                  placeholder="PB4053CB"
+                  (focusout)="checkRegistrationNumber($event)"
+                />
+                <mat-hint>Vehicle Registration Number is required</mat-hint>
+                <mat-error
+                  *ngIf="vehicleRegistrationNumber?.touched && vehicleRegistrationNumber?.errors?.['required']"
+                  class="mt-2"
+                >
+                  This field is required!
+                </mat-error>
+                <mat-error
+                  *ngIf="vehicleRegistrationNumber?.touched && (vehicleRegistrationNumber?.errors?.['minlength'] || vehicleRegistrationNumber?.errors?.['maxlength'])"
+                  class="mt-2"
+                >
+                  Vehicle Registration Number must be between 6 and 8 symbols!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mb-3">
+              <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Date of Accident</mat-label>
                 <!-- #docregion toggle -->
                 <input
@@ -165,30 +190,6 @@
               </mat-form-field>
             </div>
             
-            <div class="mb-3">
-              <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Vehicle Registration Number</mat-label>
-                <input
-                  type="text"
-                  matInput
-                  formControlName="vehicleRegistrationNumber"
-                  placeholder="PB4053CB"
-                />
-                <mat-hint>Vehicle Registration Number is required</mat-hint>
-                <mat-error
-                  *ngIf="vehicleRegistrationNumber?.touched && vehicleRegistrationNumber?.errors?.['required']"
-                  class="mt-2"
-                >
-                  This field is required!
-                </mat-error>
-                <mat-error
-                  *ngIf="vehicleRegistrationNumber?.touched && (vehicleRegistrationNumber?.errors?.['minlength'] || vehicleRegistrationNumber?.errors?.['maxlength'])"
-                  class="mt-2"
-                >
-                  Vehicle Registration Number must be between 6 and 8 symbols!
-                </mat-error>
-              </mat-form-field>
-            </div>
             <div class="mb-3 example-full-width">
               <input type="file" (change)="onFileSelected($event)" />
             </div>

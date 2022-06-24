@@ -54,12 +54,14 @@
             : index == 6 ? x * 7
             : index == 7 ? x * 3
             : index == 8 ? x * 6
-            : x
+            : 0
     })
 
+    console.log(multiplayedEGN);
     let sum = multiplayedEGN.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+    console.log(sum);
     let controlDigit = sum % 11;
-
+    console.log(controlDigit);
     if(controlDigit < 10) {
         return parseInt(EGN[9]) == controlDigit
     } else if(controlDigit == 10) {

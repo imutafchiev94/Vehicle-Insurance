@@ -13,6 +13,7 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class AllAccidentsComponent implements OnInit {
 
+  data: string;
   allAccidents: any = [];
   accidents : Array<Accident> = [];
   datePipe: DatePipe = new DatePipe('en-US');
@@ -21,7 +22,11 @@ export class AllAccidentsComponent implements OnInit {
   allAccidentsImageUrl = environment.allAccidentsImageUrl;
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private accidentService: AccidentService) { }
+    private accidentService: AccidentService) { 
+      const navigation = this.router.getCurrentNavigation();
+      const state = navigation.extras.state as {data: string};
+      state !== undefined ? this.data = state.data : this.data = "";
+    }
 
   ngOnInit(): void {
     this.fetchDataAccidents();

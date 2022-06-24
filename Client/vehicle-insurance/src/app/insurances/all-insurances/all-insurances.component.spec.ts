@@ -20,7 +20,6 @@ describe('AllInsurancesComponent', () => {
     firstName: "Gosho",
     middleName: "",
     surname: "Kueilio",
-    age: 25,
     dateOfBirth:  new Date('2000-05-14T21:00:00.000+00:00'),
     gender: "Female",
     EGN: "0045155956",
@@ -53,7 +52,7 @@ describe('AllInsurancesComponent', () => {
     firstName: "Gosho",
     middleName: "",
     surname: "Kueilio",
-    age: 25,
+
     dateOfBirth:  new Date('2000-05-14T21:00:00.000+00:00'),
     gender: "Female",
     EGN: "0045155956",

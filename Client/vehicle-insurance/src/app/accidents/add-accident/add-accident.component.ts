@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccidentService } from '../../services/accident.service';
 import { Gender } from '../../models/enums/Gender';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { VehicleService } from '../../services/vehicle.service';
 
 @Component({
   selector: 'app-add-accident',
@@ -17,7 +18,12 @@ export class AddAccidentComponent implements OnInit {
   imageSrc;
   file;
   loading: boolean = false;
-  constructor(private fb: FormBuilder, private accidentService: AccidentService, private router: Router) { 
+  constructor(
+    private fb: FormBuilder, 
+    private accidentService: AccidentService, 
+    private router: Router,
+    private vehicleService: VehicleService
+    ) { 
     this.accidentForm = this.fb.group({
       vehicleRegistrationNumber: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
       accidentDate: ['', Validators.required],
@@ -137,10 +143,23 @@ onSubmit() {
   this.loading = true;
   this.accidentService.addAccident(this.accidentForm.value).subscribe({next: (res) => {
     this.status = "Hello";
-    this.router.navigate(['accidents/all']);
+    const navigationExtras: NavigationExtras = {state: {data: res}};
+    this.router.navigate(['accidents/all'], navigationExtras);
   }, error: (err) => {
     this.errorMessage = err.error.Error;
   }})
+}
+
+checkRegistrationNumber(event) {
+  if(event.target.value) {
+    this.vehicleService.findVehicle({registrationNumber: event.target.value}).subscribe({
+      next: (res) => {
+        this.errorMessage = "";
+      }, error: (err) => {
+        this.errorMessage = "Vehicle with this registration number doesn't exist in our database!"
+      }
+    })
+  }
 }
 
 }

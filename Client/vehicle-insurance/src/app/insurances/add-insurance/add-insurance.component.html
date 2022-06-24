@@ -16,6 +16,7 @@
                 matInput
                 formControlName="ownerEGN"
                 placeholder="1234567890"
+                (focusout)="checkEGN($event)"
               />
               <mat-hint>EGN is required. Only valid EGNs</mat-hint>
               <mat-error
@@ -40,6 +41,7 @@
                 matInput
                 formControlName="vehicleRegistrationNumber"
                 placeholder="PB4053CB"
+                (focusout)="checkRegistrationNumber($event)"
               />
               <mat-hint>Vehicle Registration Number is required</mat-hint>
               <mat-error

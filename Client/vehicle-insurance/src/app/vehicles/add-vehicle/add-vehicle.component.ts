@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
-import { Router } from '@angular/router';
+import { OwnerService } from '../../services/owner.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -15,7 +16,8 @@ export class AddVehicleComponent implements OnInit {
   loading: boolean = false;
   constructor(private fb: FormBuilder,
     private vehicleService: VehicleService, 
-    private router: Router) { 
+    private router: Router,
+    private ownerService: OwnerService) { 
       this.vehicleForm = this.fb.group({
         brand: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
         model: ['', Validators.required],
@@ -48,12 +50,26 @@ export class AddVehicleComponent implements OnInit {
     return this.vehicleForm.get('ownerEGN');
   }
 
+  checkEGN(event) {
+    if(event.target.value) {
+
+      this.ownerService.findOwner({EGN: event.target.value}).subscribe({
+        next: (res) => {
+          this.errorMessage = "";
+        }, error: (err) => {
+          this.errorMessage = "Owner with this EGN doesn't exist in our database!"
+        }
+      })
+    }
+  }
+
 
   onSubmit() {
     this.loading = true;
     this.vehicleService.addVehicle(this.vehicleForm.value).subscribe({
       next: (res) => {
-        this.router.navigate(['home']);
+        const navigationExtras: NavigationExtras = {state: {data: res}};
+        this.router.navigate(['home'], navigationExtras);
       }, error: (err) => {
         this.loading = false;
         this.errorMessage = err.error.Error;

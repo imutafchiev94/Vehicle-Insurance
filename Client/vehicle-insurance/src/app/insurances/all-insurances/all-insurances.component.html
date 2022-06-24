@@ -3,6 +3,10 @@
       <div class="col-lg-1"></div>
       <div class="card col-lg-10" *ngIf="!loading; else elseBlock">
     <div class="card-header">
+        <div *ngIf="data" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="text-center h5">{{data.message}}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         <h5 class="card-title text-center mb-4">All Insurances</h5>
         <div class="text-center mb-4">
         <img [src]="allInsurancesImageUrl" class="img-fluid mb-2" />

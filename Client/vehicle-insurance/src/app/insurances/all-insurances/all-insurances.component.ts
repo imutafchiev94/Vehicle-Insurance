@@ -14,6 +14,7 @@ import { tap } from 'rxjs';
 export class AllInsurancesComponent implements OnInit {
 
   insurances: any = [];
+  data: string;
   allInsurances: any = [];
   datePipe: DatePipe = new DatePipe('en-US');
   haveToPay: boolean = false;
@@ -25,7 +26,11 @@ export class AllInsurancesComponent implements OnInit {
   paginator: MatPaginator;
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private insuranceService: InsuranceService) { }
+    private insuranceService: InsuranceService) {
+      const navigation = this.router.getCurrentNavigation();
+      const state = navigation.extras.state as {data: string};
+      state !== undefined ? this.data = state.data : this.data = "";
+     }
 
   ngOnInit(): void {
 

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InsuranceService } from '../../services/insurance.service';
 import { CountOfPayments } from '../../models/enums/CountOfPayments';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { OwnerService } from '../../services/owner.service';
+import { VehicleService } from '../../services/vehicle.service';
 
 @Component({
   selector: 'app-add-insurance',
@@ -19,7 +21,9 @@ export class AddInsuranceComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private insuranceService: InsuranceService,
-    private router: Router
+    private router: Router,
+    private ownerService: OwnerService,
+    private vehicleService: VehicleService
   ) {
     this.insuranceForm = this.fb.group({
       ownerEGN: [
@@ -135,11 +139,37 @@ export class AddInsuranceComponent implements OnInit {
     this.loading = true;
     this.insuranceService.addInsurance(this.insuranceForm.value).subscribe({
       next: (res) => {
-        this.router.navigate(['home']);
+        const navigationExtras: NavigationExtras = {state: {data: res}};
+        this.router.navigate(['insurances/all'], navigationExtras);
       },
       error: (err) => {
         this.errorMessage = err.error.Error;
       },
     });
+  }
+
+  checkEGN(event) {
+    if(event.target.value) {
+
+      this.ownerService.findOwner({EGN: event.target.value}).subscribe({
+        next: (res) => {
+          this.errorMessage = "";
+        }, error: (err) => {
+          this.errorMessage = "Owner with this EGN doesn't exist in our database!"
+        }
+      })
+    }
+  }
+
+  checkRegistrationNumber(event) {
+    if(event.target.value) {
+      this.vehicleService.findVehicle({registrationNumber: event.target.value}).subscribe({
+        next: (res) => {
+          this.errorMessage = "";
+        }, error: (err) => {
+          this.errorMessage = "Vehicle with this registration number doesn't exist in our database!"
+        }
+      })
+    }
   }
 }

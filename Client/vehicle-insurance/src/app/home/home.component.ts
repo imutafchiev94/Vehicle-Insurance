@@ -12,10 +12,14 @@ import { HomeService } from '../services/home.service';
 export class HomeComponent implements OnInit {
 
   headerImageUrl;
+  data: string;
   loading: boolean = false;
   constructor(private homeService: HomeService,
     private route: ActivatedRoute,
     private router: Router) { 
+      const navigation = this.router.getCurrentNavigation();
+      const state = navigation.extras.state as {data: string};
+      state !== undefined ? this.data = state.data : this.data = "";
     }
     
     ngOnInit(): void {
