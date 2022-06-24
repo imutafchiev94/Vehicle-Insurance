@@ -1,99 +1,69 @@
  function checkEgn(EGN, dateOfBirth, gender) {
-    let isValid = true;
     if(!checkYear(EGN, dateOfBirth.getFullYear())) {
-        isValid = false;
-
-        console.log(1);
+        return {isValid: false, message: "Date of Birth and EGN doesn't match!"};    
     }
     if (!checkMonth(EGN, dateOfBirth.getMonth() + 1, dateOfBirth.getFullYear())) {
-        isValid = false;
-        console.log(2);
+        return {isValid: false, message: "Date of Birth and EGN doesn't match!"};    
     }
     if(!checkDate(EGN, dateOfBirth.getDate())) {
-        isValid = false;
-        console.log(3);
+        return {isValid: false, message: "Date of Birth and EGN doesn't match!"};    
     }
     if(!checkTheNinthDigit(EGN, gender)) {
-        isValid = false;
-        console.log(4);
+        return {isValid: false, message: "Gender and EGN doesn't match!"};    
     }
     if(!checkTheLastDigit(EGN))  {
-        isValid = false;
-        console.log(5);
+        return {isValid: false, message: "EGN is invalid!"};    
     }
-    return isValid;
+    return {isValid: true, message: "EGN is valid!"};
 }
 
  function checkYear(EGN, year) {
-    if(EGN.slice(0, 2) == year.toString().slice(2, 4)) {
-        return true;
-    }
-    
-    return false;
+    return EGN.slice(0, 2) == year.toString().slice(2, 4)
 }
 
  function checkMonth(EGN, month, year) {
      if(year < 2000) {
-
-         if(parseInt(EGN.slice(2, 4)) == month) {
-             return true;
-        }
-        return false;
+         return parseInt(EGN.slice(2, 4)) == month
     } else {
-        if(parseInt(EGN.slice(2, 4)) == month + 40) {
-            return true;
-        }
-        return false;
+        return parseInt(EGN.slice(2, 4)) == month + 40
     }
 
 }
 
  function checkDate(EGN, date) {
-    if(parseInt(EGN.slice(4, 6)) == date) {
-        return true;
-    }
-    return false;
-}
+    return parseInt(EGN.slice(4, 6)) == date;
+ }
 
  function checkTheNinthDigit(EGN, gender) {
     if(gender == 'Female') {
-        if(parseInt(EGN[8]) % 2 != 0) {
-            return true;
-        } 
-        return false;
+        return parseInt(EGN[8]) % 2 != 0
     } else if (gender == 'Male') {
-        if(parseInt(EGN[8]) % 2 == 0) {
-            return true;
-        } 
-        return false;
+        return parseInt(EGN[8]) % 2 == 0
     } 
 }
 
  function checkTheLastDigit(EGN) {
-    let firstDigit = parseInt(EGN[0]) * 2;
-    let secondDigit = parseInt(EGN[1]) * 4;
-    let thirdDigit = parseInt(EGN[2]) * 8;
-    let fourthDigit = parseInt(EGN[3]) * 5;
-    let fifthDigit = parseInt(EGN[4]) * 10
-    let sixthDigit = parseInt(EGN[5]) * 9;
-    let seventhDigit = parseInt(EGN[6]) * 7;
-    let eighthDigit = parseInt(EGN[7]) * 3;
-    let ninthDigit = parseInt(EGN[8]) * 6;
-    
-    let sum = firstDigit + secondDigit + thirdDigit + fourthDigit + fifthDigit + sixthDigit + seventhDigit + eighthDigit + ninthDigit;
+    let splitEGN = EGN.split('').map(x => parseInt(x));
+    let multiplayedEGN = splitEGN.map((x, index) => {
+        return index == 0 ? x * 2
+            : index == 1 ? x * 4
+            : index == 2 ? x * 8
+            : index == 3 ? x * 5
+            : index == 4 ? x * 10
+            : index == 5 ? x * 9
+            : index == 6 ? x * 7
+            : index == 7 ? x * 3
+            : index == 8 ? x * 6
+            : x
+    })
 
+    let sum = multiplayedEGN.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
     let controlDigit = sum % 11;
 
     if(controlDigit < 10) {
-        if(parseInt(EGN[9]) == controlDigit) {
-            return true;
-        }
-        return false;
+        return parseInt(EGN[9]) == controlDigit
     } else if(controlDigit == 10) {
-        if(parseInt(EGN[9]) == 0) {
-            return true;
-        }
-        return false;
+        return parseInt(EGN[9]) == 0
     }
 }
 

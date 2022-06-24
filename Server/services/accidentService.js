@@ -36,8 +36,8 @@ async function addAccident(data) {
     }
 
     let isValidEGN = egnService.checkEgn(data.driverEGN, new Date(data.driverDateOfBirth), data.driverGender);
-    if(!isValidEGN) {
-        throw {message: "Drivers's EGN is not valid!"}
+    if(!isValidEGN.isValid) {
+        throw {message: isValidEGN.message}
     }
 
 

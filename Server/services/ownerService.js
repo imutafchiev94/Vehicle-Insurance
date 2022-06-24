@@ -3,8 +3,8 @@ const egnService = require('./egnService');
 
 async function addOwner(ownerData) {
     let isValidEGN = egnService.checkEgn(ownerData.EGN, new Date(ownerData.dateOfBirth), ownerData.gender);
-    if(!isValidEGN) {
-        throw {message: 'Owner\'s EGN is not valid!'}
+    if(!isValidEGN.isValid) {
+        throw {message: isValidEGN.message}
     }
 
     let searchedOwner = await Owner.findOne({
