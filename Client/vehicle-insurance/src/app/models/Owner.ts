@@ -6,7 +6,6 @@ export interface Owner {
     firstName: string;
     middleName: string;
     surname: string;
-    age: number;
     dateOfBirth: Date;
     gender: Gender;
     EGN: string;

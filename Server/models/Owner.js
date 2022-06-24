@@ -15,11 +15,6 @@ const OwnerSchema = new mongoose.Schema({
         required: true,
         minlength: 3,
         maxlength: 40
-    }, age: {
-        type: Number,
-        required: true,
-        min: 18,
-        max: 120
     }, dateOfBirth: {
         type: Date,
         required: true,

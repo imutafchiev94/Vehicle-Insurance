@@ -23,7 +23,6 @@ async function addOwner(ownerData) {
         middleName: ownerData.middleName,
         surname: ownerData.surname,
         dateOfBirth: ownerBirthDate,
-        age: ownerData.age,
         EGN: ownerData.EGN,
         gender: ownerData.gender
     };

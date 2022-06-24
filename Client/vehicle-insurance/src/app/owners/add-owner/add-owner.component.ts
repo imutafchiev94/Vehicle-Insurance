@@ -19,7 +19,6 @@ export class AddOwnerComponent {
       'firstName': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
       'middleName': ['', [Validators.minLength(3), Validators.maxLength(40)]],
       'surname': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
-      'age': ['', [Validators.required, Validators.min(18), Validators.max(120)]],
       'dateOfBirth': ['',Validators.required],
       'gender': ['', Validators.required],
       'EGN': ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
@@ -41,9 +40,6 @@ export class AddOwnerComponent {
     return this.ownerForm.get('surname');
   }
 
-  get age() {
-    return this.ownerForm.get('age');
-  }
 
   get dateOfBirth() {
     return this.ownerForm.get('dateOfBirth');
@@ -64,8 +60,9 @@ export class AddOwnerComponent {
       this.ownerService.addOwner(this.ownerForm.value).subscribe({next: (res) => {
         this.router.navigate(['home']);
       }, error: (err) => {
+        console.log(err);
         this.loading = false;
-        this.errorMessage = err.error.Error;
+        this.errorMessage = err.error.error;
       }})
   }
 }
