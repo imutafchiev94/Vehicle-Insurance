@@ -6,12 +6,13 @@
   "scripts": {
     "start": "node index.js",
     "dev": "SET NODE_ENV=development && nodemon index.js",
-    "test": "mocha test/api/*.spec.js --exit --recursive --timeout 10000ms"
+    "test": "mocha test/api/*.spec.js --exit --recursive --timeout 120000ms"
   },
   "author": "Ivaylo Mutafchiev",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.3.6",
+    "flush-cache": "^1.0.1",
     "nodemon": "^2.0.16",
     "supertest": "^6.2.3"
   },
@@ -26,6 +27,9 @@
     "heroku": "^7.60.2",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^10.0.0",
-    "mongoose": "^6.3.5"
+    "mockgoose": "^8.0.4",
+    "mongoose": "^6.3.5",
+    "nock": "^13.2.7",
+    "sinon": "^14.0.0"
   }
 }

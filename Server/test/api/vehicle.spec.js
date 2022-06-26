@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test'
+
 const chaiHttp = require("chai-http");
 const app = require("../../index");
 const chai = require("chai");
@@ -22,17 +24,12 @@ describe("Vehicle workflow tests", () => {
           done();
     })
 
-  after((done) => {
-    Owner.deleteOne({ EGN: "9004301890" }, function (err) {});
-    Vehicle.deleteOne({registrationNumber: "PB3570ET"}, function (err) {});
-    done();
-  });
 
   const vehicle = {
     brand: "BMW",
     model: "Q5",
     yearOfManufacture: 2015,
-    registrationNumber: 'PB3570ET',
+    registrationNumber: 'PB3578ET',
     ownerEGN: '9004301890',
   };
 
@@ -44,32 +41,6 @@ describe("Vehicle workflow tests", () => {
     ownerEGN: '9004301892',
   };
 
-  it("Should get vehicle details by vehicle's id with correct Id", (done) => {
-    chai
-      .request(app)
-      .get("/api/vehicle/62a73b15c13f8d0680bc5006")
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body)
-          .to.have.property("_id")
-          .to.equal("62a73b15c13f8d0680bc5006");
-        expect(res.body).to.have.property("registrationNumber").to.equal("PB4054CA");
-        done();
-      });
-  });
-
-  it("Should get error on vehicle details by vehicle's id with incorrect Id", (done) => {
-    chai
-      .request(app)
-      .get("/api/vehicle/62a73b15c13f8d0680bc5004")
-      .end((err, res) => {
-        expect(res.status).to.equal(404);
-        expect(res.error.text).to.contain(
-          "Vehicle with Id 62a73b15c13f8d0680bc5004 doesn't exist in our database!"
-        );
-        done();
-      });
-  });
 
   it("Should add vehicle and return response OK", (done) => {
     chai
@@ -85,6 +56,21 @@ describe("Vehicle workflow tests", () => {
       });
   });
 
+
+  it("Should get error on vehicle details by vehicle's id with incorrect Id", (done) => {
+    chai
+      .request(app)
+      .get("/api/vehicle/62a73b15c13f8d0680bc5004")
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.error.text).to.contain(
+          "Vehicle with Id 62a73b15c13f8d0680bc5004 doesn't exist in our database!"
+        );
+        done();
+      });
+  });
+
+ 
   it("Should get error on add vehicle with invalid owner's EGN", (done) => {
     chai
       .request(app)
@@ -131,3 +117,24 @@ describe("Vehicle workflow tests", () => {
       });
   });
 });
+
+describe('Get vehicle details', () => {
+    let vehicle;
+    before(async() => {
+        vehicle = await Vehicle.findOne({ registrationNumber: 'PB3578ET' });
+    })
+
+    it("Should get vehicle details by vehicle's id with correct Id", (done) => {
+        chai
+          .request(app)
+          .get(`/api/vehicle/${vehicle._id}`)
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body)
+              .to.have.property("_id")
+              .to.equal(`${vehicle._id}`);
+            expect(res.body).to.have.property("registrationNumber").to.equal(`${vehicle.registrationNumber}`);
+            done();
+          });
+      });
+})

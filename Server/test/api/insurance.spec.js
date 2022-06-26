@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test'
+
 const chaiHttp = require("chai-http");
 const app = require("../../index");
 const chai = require("chai");
@@ -11,8 +13,6 @@ const { $where } = require("../../models/Payment");
 chai.use(chaiHttp);
 
 describe("Insurance workflow tests", () => {
-
-    let insuranceId = '';
     
     before((done) => {
         Owner.create({
@@ -25,6 +25,7 @@ describe("Insurance workflow tests", () => {
             EGN: "9004301890",
           }, function err() {});
         Vehicle.create({
+            _id: '62aae08975d551ef5c0e7161',
             brand: "BMW",
             model: "Q5",
             yearOfManufacture: 2015,
@@ -34,14 +35,14 @@ describe("Insurance workflow tests", () => {
           done();
     })
 
-  after(async () => {
-    let owner = await Owner.findById('62b00fb59f1b0048c1a5aad3').exec();
-    let insurance = await Insurance.findOne({vehicleOwner: owner._id}).exec();
-    Payment.deleteMany({insurance: insurance._id}, function (err) {});
-    Owner.deleteOne({ EGN: "9004301890" }, function (err) {});
-    Vehicle.deleteOne({registrationNumber: "PB3570ET"}, function (err) {});
-    Insurance.deleteOne({vehicleOwner: '62b00fb59f1b0048c1a5aad3'}, function (err) {});
-  });
+  // after(async () => {
+  //   let owner = await Owner.findById('62b00fb59f1b0048c1a5aad3').exec();
+  //   let insurance = await Insurance.findOne({vehicleOwner: owner._id}).exec();
+  //   Payment.deleteMany({insurance: insurance._id}, function (err) {});
+  //   Owner.deleteOne({ EGN: "9004301890" }, function (err) {});
+  //   Vehicle.deleteOne({registrationNumber: "PB3570ET"}, function (err) {});
+  //   Insurance.deleteOne({vehicleOwner: '62b00fb59f1b0048c1a5aad3'}, function (err) {});
+  // });
 
   const insurance = {
     vehicleRegistrationNumber: "PB3570ET",
@@ -59,6 +60,20 @@ describe("Insurance workflow tests", () => {
     countOfPayments: 6,
   };
 
+  it("Should add insurance and return response OK", (done) => {
+    chai
+      .request(app)
+      .post("/api/insurance/create")
+      .send(insurance)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body)
+          .to.have.property("message")
+          .to.equal("Insurance was added successfully!");
+        done();
+      });
+  });
+
   it("Should get all insurances", (done) => {
     chai
       .request(app)
@@ -67,21 +82,6 @@ describe("Insurance workflow tests", () => {
         expect(res.status).to.equal(200);
         expect(res.body)
         .to.be.an('array');
-        done();
-      });
-  });
-
-  it("Should get insurance details by insurance's id with correct Id", (done) => {
-    chai
-      .request(app)
-      .get("/api/insurance/62ab3cd0efa5ca78a7bab405")
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body)
-          .to.have.property("_id")
-          .to.equal("62ab3cd0efa5ca78a7bab405");
-        expect(res.body).to.have.property("vehicleOwner").to.have.property('_id').to.be.equal("62a98cfea674918b84cb16c9");
-        expect(res.body).to.have.property("vehicle").to.have.property('_id').to.be.equal("62aae08975d551ef5c0e7161");
         done();
       });
   });
@@ -99,19 +99,7 @@ describe("Insurance workflow tests", () => {
       });
   });
 
-  it("Should add insurance and return response OK", (done) => {
-    chai
-      .request(app)
-      .post("/api/insurance/create")
-      .send(insurance)
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body)
-          .to.have.property("message")
-          .to.equal("Insurance was added successfully!");
-        done();
-      });
-  });
+ 
 
   it("Should get error on add incurance with invalid vehicle's registration number", (done) => {
     chai
@@ -158,3 +146,25 @@ describe("Insurance workflow tests", () => {
       });
   });
 });
+
+describe("Get Insurance Details", () => {
+  let insurance;
+  before(async () => {
+    insurance = await Insurance.findOne({Vehicle: '62aae08975d551ef5c0e7161'});
+  })
+
+  it("Should get insurance details by insurance's id with correct Id", (done) => {
+    chai
+      .request(app)
+      .get(`/api/insurance/${insurance._id}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body)
+          .to.have.property("_id")
+          .to.equal(`${insurance._id}`);
+        expect(res.body).to.have.property("vehicleOwner").to.have.property('_id').to.be.equal("62b00fb59f1b0048c1a5aad3");
+        expect(res.body).to.have.property("vehicle").to.have.property('_id').to.be.equal("62aae08975d551ef5c0e7161");
+        done();
+      });
+  });
+})

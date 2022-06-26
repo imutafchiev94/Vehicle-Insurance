@@ -3,7 +3,6 @@ const ownerService = require('../services/OwnerService');
 
 router.post('/add', async (req, res) => {
     try {
-        
         let message = await ownerService.addOwner(req.body); 
         res.json(message);
     } catch(err) {
