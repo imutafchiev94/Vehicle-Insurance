@@ -9,9 +9,10 @@ export class VehicleRegistrationNumberValidator {
     AsyncValidatorFn {
         return (control: AbstractControl):
         Observable<ValidationErrors> | null => {
-            return vehicleService.isExists(control.value)
+            return vehicleService.isExists({ registrationNumber: control.value })
             .pipe(
                 map((result: boolean) => {
+                    console.log(result);
                 return result ? null : {VehicleDoesntExists: true};
             }),catchError((err) => err)
         )}

@@ -9,7 +9,7 @@ export class OwnerEGNValidator {
     AsyncValidatorFn {
         return (control: AbstractControl):
         Observable<ValidationErrors> | null => {
-            return ownerService.isExists(control.value)
+            return ownerService.isExists({ EGN: control.value })
             .pipe(
                 map((result: boolean) => {
                 return result ? null : {OwnerDoesntExists: true};
