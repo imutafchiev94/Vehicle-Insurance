@@ -14,7 +14,7 @@ export const environment = {
   allInsurancesImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655369343/iStock_insurancehands300_l2jjmt.png',
   allAccidentsImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655389820/Vehicle%20Insurance/car-crash-cuate-9056_nihsv9.webp',
   checkAccidentFormImageUrl: 'https://res.cloudinary.com/hellios94/image/upload/v1655449269/Vehicle%20Insurance/MVC_Black_wtfvir.png',
-  apiUrl: 'http://localhost:3000/api/',
+  apiUrl: 'https://vehicle-insurances.herokuapp.com/api/',
 };
 
 /*
