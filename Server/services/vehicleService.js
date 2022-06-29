@@ -52,8 +52,17 @@ async function getVehicle(id) {
   return vehicle;
 }
 
+async function isExists(registrationNumber) {
+  let vehicle = await Vehicle.findOne({registrationNumber: registrationNumber});
+  if(!vehicle) {
+      return false;
+  }
+  return true;
+}
+
 module.exports = {
   addVehicle,
   findVehicle,
-  getVehicle
+  getVehicle,
+  isExists
 };

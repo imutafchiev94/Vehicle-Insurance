@@ -11,7 +11,7 @@
             <div class="mb-3">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Owner's EGN</mat-label>
-                    <input type="text" matInput formControlName="ownerEGN" (focusout)="checkEGN($event)" placeholder="1234567890">
+                    <input type="text" matInput formControlName="ownerEGN" placeholder="1234567890">
                     <mat-hint>Owner's EGN is required. Only valid EGNs</mat-hint>
                     <mat-error *ngIf="ownerEGN?.touched && ownerEGN?.errors?.['required']" class="mt-2">
                         This field is required!
@@ -19,6 +19,9 @@
                     <mat-error *ngIf="ownerEGN?.touched && (ownerEGN?.errors?.['minlength'] || ownerEGN?.errors?.['maxlength'])" class="mt-2">
                         EGN must be exatctly 10 symbols!
                     </mat-error>
+                    <mat-error *ngIf="vehicleForm.get('ownerEGN').hasError('OwnerDoesntExists')" class="mt-2">
+                      Owner with this EGN doesn't exist in our database!
+                  </mat-error>
                 </mat-form-field>
             </div>
             <div class="mb-3">

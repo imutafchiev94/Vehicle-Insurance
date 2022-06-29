@@ -4,28 +4,36 @@ import { AccidentService } from '../../services/accident.service';
 import { Gender } from '../../models/enums/Gender';
 import { NavigationExtras, Router } from '@angular/router';
 import { VehicleService } from '../../services/vehicle.service';
+import { VehicleRegistrationNumberValidator } from '../../vehicles/vehicleRegistrationNumber.validator';
 
 @Component({
   selector: 'app-add-accident',
   templateUrl: './add-accident.component.html',
-  styleUrls: ['./add-accident.component.css']
+  styleUrls: ['./add-accident.component.css'],
 })
 export class AddAccidentComponent implements OnInit {
-
   accidentForm: FormGroup;
   errorMessage: string;
-  status: string = "";
+  status: string = '';
   imageSrc;
   file;
   loading: boolean = false;
   constructor(
-    private fb: FormBuilder, 
-    private accidentService: AccidentService, 
+    private fb: FormBuilder,
+    private accidentService: AccidentService,
     private router: Router,
     private vehicleService: VehicleService
-    ) { 
+  ) {
     this.accidentForm = this.fb.group({
-      vehicleRegistrationNumber: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
+      vehicleRegistrationNumber: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(8)],
+        [
+          VehicleRegistrationNumberValidator.createValidator(
+            this.vehicleService
+          ),
+        ],
+      ],
       accidentDate: ['', Validators.required],
       driverFirstName: ['', [Validators.required, Validators.minLength(3)]],
       driverMiddleName: [''],
@@ -33,13 +41,19 @@ export class AddAccidentComponent implements OnInit {
       driverGender: ['', Validators.required],
       imageSource: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(50)]],
-      driverEGN: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      driverDateOfBirth: ['', Validators.required]
-    })
+      driverEGN: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
+      driverDateOfBirth: ['', Validators.required],
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get vehicleRegistrationNumber() {
     return this.accidentForm.get('vehicleRegistrationNumber');
@@ -81,85 +95,75 @@ export class AddAccidentComponent implements OnInit {
     return this.accidentForm.get('driverDateOfBirth');
   }
 
-  options: string[] = [Gender.Female, Gender.Male]; 
-
+  options: string[] = [Gender.Female, Gender.Male];
 
   onFileSelected(event) {
-    this.file = event.target.files[0]
-    this.resizeImage(this.file, 350, 250).then(blob => {
-      const reader = new FileReader();
-      reader.onload = () => {
+    this.file = event.target.files[0];
+    this.resizeImage(this.file, 350, 250).then(
+      (blob) => {
+        const reader = new FileReader();
+        reader.onload = () => {
           this.imageSrc = reader.result.toString();
-          this.accidentForm.patchValue({imageSource: this.imageSrc});
-      };
+          this.accidentForm.patchValue({ imageSource: this.imageSrc });
+        };
 
-      reader.readAsDataURL(blob);
-      this.accidentForm.patchValue({imageSource: this.imageSrc});
+        reader.readAsDataURL(blob);
+        this.accidentForm.patchValue({ imageSource: this.imageSrc });
+      },
+      (error) => {
+        console.log('Photo error!', error);
+      }
+    );
+  }
 
-    }, error => {
-        console.log("Photo error!", error);
-    });
-     
-   }
-
-resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
-  return new Promise((resolve, reject) => {
+  resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
+    return new Promise((resolve, reject) => {
       const image = new Image();
       image.src = URL.createObjectURL(file);
       image.onload = () => {
-          const width = image.width;
-          const height = image.height;
+        const width = image.width;
+        const height = image.height;
 
-          if (width <= maxWidth && height <= maxHeight) {
-              resolve(file);
-          }
+        if (width <= maxWidth && height <= maxHeight) {
+          resolve(file);
+        }
 
-          let newWidth;
-          let newHeight;
+        let newWidth;
+        let newHeight;
 
-          if (width > height) {
-              newHeight = height * (maxWidth / width);
-              newWidth = maxWidth;
-          } else {
-              newWidth = width * (maxHeight / height);
-              newHeight = maxHeight;
-          }
+        if (width > height) {
+          newHeight = height * (maxWidth / width);
+          newWidth = maxWidth;
+        } else {
+          newWidth = width * (maxHeight / height);
+          newHeight = maxHeight;
+        }
 
-          const canvas = document.createElement('canvas');
-          canvas.width = newWidth;
-          canvas.height = newHeight;
+        const canvas = document.createElement('canvas');
+        canvas.width = newWidth;
+        canvas.height = newHeight;
 
-          const context = canvas.getContext('2d');
+        const context = canvas.getContext('2d');
 
-          context?.drawImage(image, 0, 0, newWidth, newHeight);
+        context?.drawImage(image, 0, 0, newWidth, newHeight);
 
-          canvas.toBlob(resolve, file.type);
+        canvas.toBlob(resolve, file.type);
       };
       image.onerror = reject;
-  });
-}
-
-onSubmit() {
-  this.loading = true;
-  this.accidentService.addAccident(this.accidentForm.value).subscribe({next: (res) => {
-    this.status = "Hello";
-    const navigationExtras: NavigationExtras = {state: {data: res}};
-    this.router.navigate(['accidents/all'], navigationExtras);
-  }, error: (err) => {
-    this.errorMessage = err.error.Error;
-  }})
-}
-
-checkRegistrationNumber(event) {
-  if(event.target.value) {
-    this.vehicleService.findVehicle({registrationNumber: event.target.value}).subscribe({
-      next: (res) => {
-        this.errorMessage = "";
-      }, error: (err) => {
-        this.errorMessage = "Vehicle with this registration number doesn't exist in our database!"
-      }
-    })
+    });
   }
-}
 
+  onSubmit() {
+    this.loading = true;
+    this.accidentService.addAccident(this.accidentForm.value).subscribe({
+      next: (res) => {
+        this.status = 'Hello';
+        const navigationExtras: NavigationExtras = { state: { data: res } };
+        this.router.navigate(['accidents/all'], navigationExtras);
+      },
+      error: (err) => {
+        this.errorMessage = err.error.Error;
+      },
+    });
+  }
 }

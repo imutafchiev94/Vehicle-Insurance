@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Owner} from '../models/Owner';
-import {Observable} from 'rxjs';
+import {Observable, of, delay} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,9 @@ export class OwnerService {
 
   getOwner(id) : Observable<Owner> {
     return this.http.get<Owner>(this.ownerPath + `/${id}`);
+  }
+
+  isExists(EGN) : Observable<Boolean> {
+    return this.http.post<Boolean>(this.ownerPath + '/is-exists', EGN);
   }
 }

@@ -5,6 +5,8 @@ import { CountOfPayments } from '../../models/enums/CountOfPayments';
 import { NavigationExtras, Router } from '@angular/router';
 import { OwnerService } from '../../services/owner.service';
 import { VehicleService } from '../../services/vehicle.service';
+import { OwnerEGNValidator } from '../../owners/ownerEGN.validator';
+import { VehicleRegistrationNumberValidator } from 'src/app/vehicles/vehicleRegistrationNumber.validator';
 
 @Component({
   selector: 'app-add-insurance',
@@ -33,10 +35,12 @@ export class AddInsuranceComponent implements OnInit {
           Validators.minLength(10),
           Validators.maxLength(10),
         ],
+        [OwnerEGNValidator.createValidator(this.ownerService)]
       ],
       vehicleRegistrationNumber: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(8)],
+        [VehicleRegistrationNumberValidator.createValidator(this.vehicleService)]
       ],
       imageSource: ['', Validators.required],
       totalAmount: ['', [Validators.required, Validators.min(50)]],
@@ -146,30 +150,5 @@ export class AddInsuranceComponent implements OnInit {
         this.errorMessage = err.error.Error;
       },
     });
-  }
-
-  checkEGN(event) {
-    if(event.target.value) {
-
-      this.ownerService.findOwner({EGN: event.target.value}).subscribe({
-        next: (res) => {
-          this.errorMessage = "";
-        }, error: (err) => {
-          this.errorMessage = "Owner with this EGN doesn't exist in our database!"
-        }
-      })
-    }
-  }
-
-  checkRegistrationNumber(event) {
-    if(event.target.value) {
-      this.vehicleService.findVehicle({registrationNumber: event.target.value}).subscribe({
-        next: (res) => {
-          this.errorMessage = "";
-        }, error: (err) => {
-          this.errorMessage = "Vehicle with this registration number doesn't exist in our database!"
-        }
-      })
-    }
   }
 }

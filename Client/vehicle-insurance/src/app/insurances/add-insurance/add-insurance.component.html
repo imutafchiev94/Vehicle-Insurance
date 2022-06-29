@@ -16,7 +16,6 @@
                 matInput
                 formControlName="ownerEGN"
                 placeholder="1234567890"
-                (focusout)="checkEGN($event)"
               />
               <mat-hint>EGN is required. Only valid EGNs</mat-hint>
               <mat-error
@@ -31,6 +30,9 @@
               >
                 EGN must be exatctly 10 symbols!
               </mat-error>
+              <mat-error *ngIf="insuranceForm.get('ownerEGN').hasError('OwnerDoesntExists')" class="mt-2">
+                Owner with this EGN doesn't exist in our database!
+            </mat-error>
             </mat-form-field>
           </div>
           <div class="mb-3">
@@ -41,7 +43,6 @@
                 matInput
                 formControlName="vehicleRegistrationNumber"
                 placeholder="PB4053CB"
-                (focusout)="checkRegistrationNumber($event)"
               />
               <mat-hint>Vehicle Registration Number is required</mat-hint>
               <mat-error
@@ -56,6 +57,9 @@
               >
                 Vehicle Registration Number must be between 6 and 8 symbols!
               </mat-error>
+              <mat-error *ngIf="insuranceForm.get('vehicleRegistrationNumber').hasError('VehicleDoesntExists')" class="mt-2">
+                Vehicle with this registration number doesn't exist in our database!
+            </mat-error>
             </mat-form-field>
           </div>
           <div class="mb-3 example-full-width">

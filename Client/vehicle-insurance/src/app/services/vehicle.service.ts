@@ -24,4 +24,7 @@ export class VehicleService {
     return this.http.get<Vehicle>(this.vehiclePath + `/${vehicleId}`);
   }
 
+  isExists(EGN) : Observable<Boolean> {
+    return this.http.post<Boolean>(this.vehiclePath + '/is-exists', EGN);
+  }
 }

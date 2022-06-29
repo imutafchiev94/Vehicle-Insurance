@@ -57,9 +57,18 @@ async function findOwnerById(id) {
     return owner;
 }
 
+async function isExists(EGN) {
+    let owner = await Owner.findOne({EGN: EGN});
+    if(!owner) {
+        return false;
+    }
+    return true;
+}
+
 
 module.exports = {
     addOwner,
     findOwner,
-    findOwnerById
+    findOwnerById,
+    isExists
 }

@@ -29,4 +29,15 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.post('/is-exists', async (req, res) => {
+    try {
+        let isExists = await vehicleService.isExists(req.body.registrationNumber); 
+        
+        res.json(isExists);
+    } catch(err) {
+        
+        res.status(404).json({Error: err.message});
+    }
+});
+
 module.exports = router;

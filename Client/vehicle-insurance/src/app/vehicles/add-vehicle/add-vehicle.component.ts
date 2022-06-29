@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { OwnerService } from '../../services/owner.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { OwnerEGNValidator } from '../../owners/ownerEGN.validator';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -23,7 +24,7 @@ export class AddVehicleComponent implements OnInit {
         model: ['', Validators.required],
         yearOfManufacture: ['', [Validators.required, Validators.min(1930), Validators.max(2022)]],
         registrationNumber: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
-        ownerEGN: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+        ownerEGN: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)], [OwnerEGNValidator.createValidator(this.ownerService)]]
       });
     }
 
@@ -49,20 +50,6 @@ export class AddVehicleComponent implements OnInit {
   get ownerEGN() {
     return this.vehicleForm.get('ownerEGN');
   }
-
-  checkEGN(event) {
-    if(event.target.value) {
-
-      this.ownerService.findOwner({EGN: event.target.value}).subscribe({
-        next: (res) => {
-          this.errorMessage = "";
-        }, error: (err) => {
-          this.errorMessage = "Owner with this EGN doesn't exist in our database!"
-        }
-      })
-    }
-  }
-
 
   onSubmit() {
     this.loading = true;

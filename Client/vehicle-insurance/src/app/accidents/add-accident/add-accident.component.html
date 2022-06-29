@@ -16,7 +16,6 @@
                   matInput
                   formControlName="vehicleRegistrationNumber"
                   placeholder="PB4053CB"
-                  (focusout)="checkRegistrationNumber($event)"
                 />
                 <mat-hint>Vehicle Registration Number is required</mat-hint>
                 <mat-error
@@ -31,6 +30,9 @@
                 >
                   Vehicle Registration Number must be between 6 and 8 symbols!
                 </mat-error>
+                <mat-error *ngIf="accidentForm.get('vehicleRegistrationNumber').hasError('VehicleDoesntExists')" class="mt-2">
+                  Vehicle with this registration number doesn't exist in our database!
+              </mat-error>
               </mat-form-field>
             </div>
             <div class="mb-3">
